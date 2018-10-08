@@ -10,6 +10,8 @@ class ClassifyPage extends StatefulWidget {
 class _ClassifyPageState extends State<ClassifyPage> {
   @override
   Widget build(BuildContext context) {
-    return new Text("This is Page 2");
+    return new Center(
+      child: new Text("类别"),
+    );
   }
 }
