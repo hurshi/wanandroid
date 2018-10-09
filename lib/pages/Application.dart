@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/pages/home/HomePage.dart';
-import 'package:wanandroid/pages/classify/ClassifyPage.dart';
+import 'package:wanandroid/pages/tree/TreePage.dart';
 import 'package:wanandroid/pages/mine/MinePage.dart';
+import 'package:wanandroid/pages/project/ProjectPage.dart';
+import 'package:wanandroid/widget/SearchBar.dart';
 
 class ApplicationPage extends StatefulWidget {
   @override
@@ -13,21 +15,26 @@ class ApplicationPage extends StatefulWidget {
 
 class _ApplicationPageState extends State<ApplicationPage>
     with SingleTickerProviderStateMixin {
-  int page = 0;
-  String title = GloableConfig.homeTab;
-  PageController pageController;
+  int _page = 0;
+  String _titleTxt = GloableConfig.homeTab;
+  SearchBar _searchbar;
+  PageController _pageController;
 
   final List<BottomNavigationBarItem> _bottomTabs = <BottomNavigationBarItem>[
     new BottomNavigationBarItem(
-        icon: Icon(Icons.home),
+        icon: Icon(Icons.assignment),
         title: Text(GloableConfig.homeTab),
         backgroundColor: GloableConfig.colorPrimary),
     new BottomNavigationBarItem(
-        icon: Icon(Icons.tune),
-        title: Text(GloableConfig.classyTab),
+        icon: Icon(Icons.branding_watermark),
+        title: Text(GloableConfig.projectTab),
         backgroundColor: GloableConfig.colorPrimary),
     new BottomNavigationBarItem(
-        icon: Icon(Icons.person),
+        icon: Icon(Icons.color_lens),
+        title: Text(GloableConfig.treeTab),
+        backgroundColor: GloableConfig.colorPrimary),
+    new BottomNavigationBarItem(
+        icon: Icon(Icons.assignment_ind),
         title: Text(GloableConfig.mineTab),
         backgroundColor: GloableConfig.colorPrimary),
   ];
@@ -35,12 +42,26 @@ class _ApplicationPageState extends State<ApplicationPage>
   @override
   void initState() {
     super.initState();
-    pageController = new PageController(initialPage: this.page);
+    _pageController = new PageController(initialPage: this._page);
+    _searchbar = SearchBar(
+      setState: setState,
+      onSubmitted: print,
+      inBar: true,
+      showClearButton: true,
+      buildDefaultAppBar: buildAppBar,
+    );
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      title: new Text(_titleTxt),
+      actions: <Widget>[_searchbar.getSearchAction(context)],
+    );
   }
 
   @override
   void dispose() {
-    pageController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -49,18 +70,16 @@ class _ApplicationPageState extends State<ApplicationPage>
     return new MaterialApp(
       theme: new ThemeData(primaryColor: GloableConfig.colorPrimary),
       home: Scaffold(
-        appBar: new AppBar(
-          title: new Text(title),
-        ),
+        appBar: _searchbar.build(context),
         body: new PageView(
 //          physics: NeverScrollableScrollPhysics(),
-          children: <Widget>[HomePage(), ClassifyPage(), MinePage()],
-          controller: pageController,
+          children: <Widget>[HomePage(), ProjectPage(), TreePage(), MinePage()],
+          controller: _pageController,
           onPageChanged: onPageChanged,
         ),
         bottomNavigationBar: new BottomNavigationBar(
           items: _bottomTabs,
-          currentIndex: page,
+          currentIndex: _page,
           fixedColor: GloableConfig.colorPrimary,
           type: BottomNavigationBarType.fixed,
           onTap: onTap,
@@ -70,22 +89,25 @@ class _ApplicationPageState extends State<ApplicationPage>
   }
 
   void onTap(int index) {
-    pageController.animateToPage(index,
+    _pageController.animateToPage(index,
         duration: const Duration(milliseconds: 300), curve: Curves.ease);
   }
 
   void onPageChanged(int page) {
     setState(() {
-      this.page = page;
+      this._page = page;
       switch (page) {
         case 0:
-          title = GloableConfig.homeTab;
+          _titleTxt = GloableConfig.homeTab;
           break;
         case 1:
-          title = GloableConfig.classyTab;
+          _titleTxt = GloableConfig.projectTab;
           break;
         case 2:
-          title = GloableConfig.mineTab;
+          _titleTxt = GloableConfig.treeTab;
+          break;
+        case 3:
+          _titleTxt = GloableConfig.mineTab;
           break;
       }
     });

@@ -5,7 +5,8 @@ class GloableConfig {
   static Color colorPrimary = Colors.red;
 
   ///导航
-  static String homeTab = "首页";
-  static String classyTab = "分类";
-  static String mineTab = "我的";
+  static String homeTab = "博文";
+  static String projectTab = "项目";
+  static String treeTab = "体系";
+  static String mineTab = "我";
 }

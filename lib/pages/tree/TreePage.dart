@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ClassifyPage extends StatefulWidget {
+class TreePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new _ClassifyPageState();
+    return new _TreePageState();
   }
 }
 
-class _ClassifyPageState extends State<ClassifyPage> {
+class _TreePageState extends State<TreePage> {
   @override
   Widget build(BuildContext context) {
     return new Center(
-      child: new Text("类别"),
+      child: new Text("体系"),
     );
   }
 }
