@@ -1,11 +1,11 @@
-import 'RootModel.dart';
-import 'HomeBannerItemModel.dart';
+import 'package:wanandroid/model/RootModel.dart';
+import 'package:wanandroid/model/homebanner/HomeBannerItemModel.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'HomeBannerModel.g.dart';
+part 'package:wanandroid/model/homebanner/HomeBannerModel.g.dart';
 
 @JsonSerializable()
-class HomeBannerModel extends RootModel<HomeBannerItemModel> {
+class HomeBannerModel extends RootModel<List<HomeBannerItemModel>> {
   HomeBannerModel(
       List<HomeBannerItemModel> data, int errorcode, String errormsg)
       : super(data, errorcode, errormsg);

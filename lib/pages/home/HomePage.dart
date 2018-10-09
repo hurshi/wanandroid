@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:wanandroid/model/HomeBannerModel.dart';
+import 'package:wanandroid/model/homebanner/HomeBannerModel.dart';
 import 'package:wanandroid/api/CommonService.dart';
-import 'package:wanandroid/model/HomeBannerItemModel.dart';
+import 'package:wanandroid/model/homebanner/HomeBannerItemModel.dart';
 import 'package:wanandroid/widget/BannerView.dart';
+import 'package:wanandroid/model/homelist/HomeListModel.dart';
+import 'package:wanandroid/model/homelist/HomeListDataItemModel.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,23 +14,38 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<HomeBannerItemModel> _bannerListData;
+  List<HomeBannerItemModel> _bannerData;
+  List<HomeListDataItemModel> _listData;
+  int _listDataPage = 0;
 
   @override
   void initState() {
     super.initState();
-    loadBannerData();
+    _loadBannerData();
+    _loadListData(_listDataPage);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (null == _bannerListData || _bannerListData.length <= 0) {
-      return new Center(
-        child: new Text("loading"),
+    return ListView.builder(
+        itemCount: ((null == _listData) ? 0 : _listData.length) + 1,
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return _buildBanner();
+          } else {
+            return _buildListViewItemLayout(index - 1);
+          }
+        });
+  }
+
+  Widget _buildBanner() {
+    if (null == _bannerData || _bannerData.length <= 0) {
+      return Center(
+        child: Text("loading"),
       );
     } else
       return BannerView<HomeBannerItemModel>(
-        data: _bannerListData,
+        data: _bannerData,
         buildShowView: (index, data) {
           HomeBannerItemModel bean = data;
           return Image.network(bean.imagePath);
@@ -36,13 +53,58 @@ class _HomePageState extends State<HomePage> {
       );
   }
 
-  void loadBannerData() {
+  Widget _buildListViewItemLayout(int index) {
+    if (null == _listData ||
+        _listData.length <= 0 ||
+        index < 0 ||
+        index >= _listData.length) {
+      return Container();
+    }
+    HomeListDataItemModel item = _listData[index];
+    return Card(
+      margin: new EdgeInsets.all(2.0),
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: _buildListViewItem(item),
+      ),
+    );
+  }
+
+  Widget _buildListViewItem(HomeListDataItemModel item) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          item.title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+          textAlign: TextAlign.left,
+        ),
+        Text(
+          "作者:${item.author} 分类:${item.superChapterName}/${item.chapterName} 时间:${item.niceDate}",
+          textAlign: TextAlign.left,
+        )
+      ],
+    );
+  }
+
+  void _loadBannerData() {
     CommonService().getBanner((HomeBannerModel _bean) {
       if (_bean.data.length > 0) {
         setState(() {
-          _bannerListData = _bean.data;
+          _bannerData = _bean.data;
         });
       }
     });
+  }
+
+  void _loadListData(int page) {
+    CommonService().getHomeListData((HomeListModel _bean) {
+      if (_bean.data.datas.length > 0) {
+        setState(() {
+          _listData = _bean.data.datas;
+        });
+      }
+    }, page);
   }
 }

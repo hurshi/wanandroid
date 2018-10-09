@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'Api.dart';
-import 'package:wanandroid/model/HomeBannerModel.dart';
+import 'package:wanandroid/model/homebanner/HomeBannerModel.dart';
+import 'package:wanandroid/model/homelist/HomeListModel.dart';
 
 class CommonService {
 //  void getData(
@@ -19,6 +20,12 @@ class CommonService {
   void getBanner(Function callback) async {
     await Dio().get(Api.HOME_BANNER).then((response) {
       callback(HomeBannerModel.fromJson(response.data));
+    });
+  }
+
+  void getHomeListData(Function callback, int page) async {
+    await Dio().get("${Api.HOME_LIST}$page/json").then((response) {
+      callback(HomeListModel.fromJson(response.data));
     });
   }
 }

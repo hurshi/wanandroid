@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'HomeBannerItemModel.g.dart';
+part 'package:wanandroid/model/homebanner/HomeBannerItemModel.g.dart';
 
 @JsonSerializable()
 class HomeBannerItemModel {

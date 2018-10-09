@@ -15,7 +15,6 @@ class BannerView<T> extends StatefulWidget {
   final int delayTime; //秒
   //滑动需要秒数
   final int scrollTime; //毫秒
-  final double height;
   final List<T> data;
   final BuildShowView buildShowView;
 
@@ -25,8 +24,7 @@ class BannerView<T> extends StatefulWidget {
       @required this.buildShowView,
       this.onBannerClickListener,
       this.delayTime = 3,
-      this.scrollTime = 200,
-      this.height = 200.0})
+      this.scrollTime = 200})
       : super(key: key);
 
   @override
@@ -71,8 +69,9 @@ class BannerViewState extends State<BannerView> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQueryData.fromWindow(ui.window).size.width;
-    return new SizedBox(
-        height: widget.height,
+    return Container(
+        height: screenWidth * 500 / 900,
+        width: screenWidth,
         child: widget.data.length == 0
             ? null
             : new GestureDetector(
