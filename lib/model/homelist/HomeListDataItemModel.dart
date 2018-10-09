@@ -56,4 +56,8 @@ class HomeListDataItemModel {
 
   factory HomeListDataItemModel.fromJson(Map<String, dynamic> json) =>
       _$HomeListDataItemModelFromJson(json);
+
+  Map<String, dynamic> toJson() {
+    return _$HomeListDataItemModelToJson(this);
+  }
 }

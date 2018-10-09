@@ -60,28 +60,54 @@ class _HomePageState extends State<HomePage> {
       return Container();
     }
     HomeListDataItemModel item = _listData[index];
-    return Card(
-      margin: new EdgeInsets.all(2.0),
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: _buildListViewItem(item),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(5.0, 2.5, 5.0, 2.5),
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
+          child: _buildListViewItem(item),
+        ),
       ),
     );
   }
 
   Widget _buildListViewItem(HomeListDataItemModel item) {
+    print(">>> ${item.toJson()}");
+    var widget = (null != item.envelopePic && item.envelopePic.isNotEmpty)
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Expanded(
+                child: _buildItemLeftSide(item),
+              ),
+              Container(
+                width: 30.0,
+                child: Image.network(item.envelopePic),
+              )
+            ],
+          )
+        : _buildItemLeftSide(item);
+
+    return widget;
+  }
+
+  Widget _buildItemLeftSide(HomeListDataItemModel item) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
+        Padding(
+          padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
+          child: Text(item.author),
+        ),
         Text(
           item.title,
           style: TextStyle(fontWeight: FontWeight.bold),
           textAlign: TextAlign.left,
         ),
-        Text(
-          "作者:${item.author} 分类:${item.superChapterName}/${item.chapterName} 时间:${item.niceDate}",
-          textAlign: TextAlign.left,
+        Padding(
+          padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+          child: Text("${item.niceDate}  ${item.superChapterName}"),
         )
       ],
     );
