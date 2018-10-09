@@ -47,8 +47,7 @@ class _HomePageState extends State<HomePage> {
       return BannerView<HomeBannerItemModel>(
         data: _bannerData,
         buildShowView: (index, data) {
-          HomeBannerItemModel bean = data;
-          return Image.network(bean.imagePath);
+          return Image.network((data as HomeBannerItemModel).imagePath);
         },
       );
   }
