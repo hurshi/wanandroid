@@ -30,7 +30,7 @@ class _ApplicationPageState extends State<ApplicationPage>
         title: Text(GloableConfig.projectTab),
         backgroundColor: GloableConfig.colorPrimary),
     new BottomNavigationBarItem(
-        icon: Icon(Icons.color_lens),
+        icon: Icon(Icons.developer_board),
         title: Text(GloableConfig.treeTab),
         backgroundColor: GloableConfig.colorPrimary),
     new BottomNavigationBarItem(
@@ -55,6 +55,7 @@ class _ApplicationPageState extends State<ApplicationPage>
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       title: new Text(_titleTxt),
+      centerTitle: true,
       actions: <Widget>[_searchbar.getSearchAction(context)],
     );
   }
