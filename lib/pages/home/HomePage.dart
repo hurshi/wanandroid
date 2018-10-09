@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
     } else
       return BannerView<HomeBannerItemModel>(
         data: _bannerData,
+        delayTime: 10,
         buildShowView: (index, data) {
           return Image.network((data as HomeBannerItemModel).imagePath);
         },
