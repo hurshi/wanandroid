@@ -6,9 +6,8 @@ import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/model/project/ProjectClassifyModel.dart';
 import 'package:wanandroid/model/project/ProjectClassifyItemModel.dart';
 import 'package:wanandroid/bean/ProjectClassifyItemBean.dart';
-
+import 'package:wanandroid/widget/Loading.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
-
 import 'package:wanandroid/api/Api.dart';
 
 class ProjectPage extends StatefulWidget {
@@ -29,31 +28,26 @@ class _ProjectPageState extends State<ProjectPage> {
 
   @override
   Widget build(BuildContext context) {
-    return _list.length <= 0
-        ? _buildEmpty()
-        : DefaultTabController(
-            length: _list.length,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                TabBar(
-                  labelColor: GlobalConfig.colorPrimary,
-                  isScrollable: true,
-                  unselectedLabelColor: Colors.black45,
-                  indicatorColor: GlobalConfig.colorPrimary,
-                  tabs: _buildTabs(),
-                ),
-                Expanded(
-                  child: TabBarView(children: _buildPages()),
-                ),
-              ],
-            ),
-          );
-  }
-
-  Widget _buildEmpty() {
-    return Center(
-      child: Text("Loading"),
+    if (_list.length <= 0) {
+      return Loading();
+    }
+    return DefaultTabController(
+      length: _list.length,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          TabBar(
+            labelColor: GlobalConfig.colorPrimary,
+            isScrollable: true,
+            unselectedLabelColor: Colors.black45,
+            indicatorColor: GlobalConfig.colorPrimary,
+            tabs: _buildTabs(),
+          ),
+          Expanded(
+            child: TabBarView(children: _buildPages()),
+          ),
+        ],
+      ),
     );
   }
 
@@ -68,8 +62,14 @@ class _ProjectPageState extends State<ProjectPage> {
   }
 
   Widget _buildSinglePage(ProjectClassifyItemBean bean) {
-    return Center(
-      child: Text(bean?.projectClassifyItemModel?.name),
+    return ItemListPage(
+      request: (page) {
+        return CommonService().getProjectListData((bean
+                    .projectClassifyItemModel.url ==
+                null)
+            ? ("${Api.PROJECT_LIST}$page/json?cid=${bean.projectClassifyItemModel.id}")
+            : ("${bean.projectClassifyItemModel.url}$page/json"));
+      },
     );
   }
 

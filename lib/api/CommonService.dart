@@ -23,7 +23,7 @@ class CommonService {
     return await Dio().get("${Api.HOME_LIST}$page/json");
   }
 
-  Future<Response> getProjectListData(int page) async {
-    return await Dio().get("${Api.HOME_LIST}$page/json");
+  Future<Response> getProjectListData(String url) async {
+    return await Dio().get(url);
   }
 }

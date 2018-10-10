@@ -6,6 +6,7 @@ import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
 import 'package:wanandroid/model/list_item/BlogListModel.dart';
 import 'package:wanandroid/pages/web/Web.dart';
+import 'package:wanandroid/widget/Loading.dart';
 
 typedef Future<Response> RequestData(int page);
 
@@ -23,24 +24,26 @@ class ItemListPage extends StatefulWidget {
 
 class _ItemListPageState extends State<ItemListPage> {
   List<BlogListDataItemModel> _listData = List();
-  int _listDataPage = 0;
+  int _listDataPage = -1;
   ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    _loadListData(_listDataPage);
+    _loadNextPage();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 1) {
-        _listDataPage++;
-        _loadListData(_listDataPage);
+        _loadNextPage();
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_listData.length <= 0) {
+      return Loading();
+    }
     return RefreshIndicator(
       color: GlobalConfig.colorPrimary,
       onRefresh: _handleRefresh,
@@ -136,16 +139,30 @@ class _ItemListPageState extends State<ItemListPage> {
   }
 
   Future<Null> _handleRefresh() async {
-    _listDataPage = 0;
+    _listDataPage = -1;
     _listData.clear();
-    await _loadListData(_listDataPage);
+    await _loadNextPage();
+  }
+
+  Future<Null> _loadNextPage() async {
+    _listDataPage++;
+    var result = await _loadListData(_listDataPage);
+    //至少加载8个，如果初始化加载不足，则加载下一页,如果使用递归的话需要考虑中止操作
+    if (_listData.length < 8) {
+      _listDataPage++;
+      result = await _loadListData(_listDataPage);
+    }
+    return result;
   }
 
   Future<Null> _loadListData(int page) {
     return widget.request(page).then((response) {
-      setState(() {
-        _listData.addAll(BlogListModel.fromJson(response.data).data.datas);
-      });
+      var newList = BlogListModel.fromJson(response.data).data.datas;
+      if (null != newList && newList.length > 0) {
+        setState(() {
+          _listData.addAll(newList);
+        });
+      }
     });
   }
 }

@@ -5,4 +5,5 @@ class Api {
       "http://wanandroid.com/article/listproject/";
   static final String PROJECT_CLASSIFY =
       "http://www.wanandroid.com/project/tree/json";
+  static final String PROJECT_LIST = "http://www.wanandroid.com/project/list/";
 }
