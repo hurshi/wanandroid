@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui' as ui;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -28,12 +29,12 @@ class BannerView<T> extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => new BannerViewState();
+  State<StatefulWidget> createState() => BannerViewState();
 }
 
 class BannerViewState extends State<BannerView> {
 //  double.infinity
-  final pageController = new PageController(initialPage: IntegerMax ~/ 2);
+  final pageController = PageController(initialPage: IntegerMax ~/ 2);
   Timer timer;
 
   BannerViewState() {
@@ -48,12 +49,11 @@ class BannerViewState extends State<BannerView> {
 
   resetTimer() {
     clearTimer();
-    timer = new Timer.periodic(new Duration(seconds: widget.delayTime),
-        (Timer timer) {
+    timer = Timer.periodic(Duration(seconds: widget.delayTime), (Timer timer) {
       if (pageController.positions.isNotEmpty) {
         var i = pageController.page.toInt() + 1;
         pageController.animateToPage(i == 3 ? 0 : i,
-            duration: new Duration(milliseconds: widget.scrollTime),
+            duration: Duration(milliseconds: widget.scrollTime),
             curve: Curves.linear);
       }
     });
@@ -74,7 +74,7 @@ class BannerViewState extends State<BannerView> {
         width: screenWidth,
         child: widget.data.length == 0
             ? null
-            : new GestureDetector(
+            : GestureDetector(
                 onTap: () {
 //            print(pageController.page);
 //            print(pageController.page.round());
@@ -94,7 +94,7 @@ class BannerViewState extends State<BannerView> {
                 onTapCancel: () {
                   resetTimer();
                 },
-                child: new PageView.builder(
+                child: PageView.builder(
                   controller: pageController,
                   physics: const PageScrollPhysics(
                       parent: const ClampingScrollPhysics()),

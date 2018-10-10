@@ -8,7 +8,7 @@ import 'package:wanandroid/widget/BannerView.dart';
 class HomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new _HomePageState();
+    return _HomePageState();
   }
 }
 

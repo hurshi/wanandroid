@@ -4,7 +4,7 @@ import 'package:wanandroid/pages/home/HomePage.dart';
 import 'package:wanandroid/pages/tree/TreePage.dart';
 import 'package:wanandroid/pages/mine/MinePage.dart';
 import 'package:wanandroid/pages/project/ProjectPage.dart';
-import 'package:wanandroid/widget/SearchBar.dart';
+import 'package:flutter_search_bar/flutter_search_bar.dart';
 
 class ApplicationPage extends StatefulWidget {
   @override
@@ -21,19 +21,19 @@ class _ApplicationPageState extends State<ApplicationPage>
   PageController _pageController;
 
   final List<BottomNavigationBarItem> _bottomTabs = <BottomNavigationBarItem>[
-    new BottomNavigationBarItem(
+    BottomNavigationBarItem(
         icon: Icon(Icons.assignment),
         title: Text(GlobalConfig.homeTab),
         backgroundColor: GlobalConfig.colorPrimary),
-    new BottomNavigationBarItem(
+    BottomNavigationBarItem(
         icon: Icon(Icons.branding_watermark),
         title: Text(GlobalConfig.projectTab),
         backgroundColor: GlobalConfig.colorPrimary),
-    new BottomNavigationBarItem(
+    BottomNavigationBarItem(
         icon: Icon(Icons.developer_board),
         title: Text(GlobalConfig.treeTab),
         backgroundColor: GlobalConfig.colorPrimary),
-    new BottomNavigationBarItem(
+    BottomNavigationBarItem(
         icon: Icon(Icons.assignment_ind),
         title: Text(GlobalConfig.mineTab),
         backgroundColor: GlobalConfig.colorPrimary),
@@ -42,7 +42,7 @@ class _ApplicationPageState extends State<ApplicationPage>
   @override
   void initState() {
     super.initState();
-    _pageController = new PageController(initialPage: this._page);
+    _pageController = PageController(initialPage: this._page);
     _searchbar = SearchBar(
       setState: setState,
       onSubmitted: print,
@@ -54,7 +54,7 @@ class _ApplicationPageState extends State<ApplicationPage>
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      title: new Text(_titleTxt),
+      title: Text(_titleTxt),
       centerTitle: true,
       actions: <Widget>[_searchbar.getSearchAction(context)],
     );
@@ -68,17 +68,17 @@ class _ApplicationPageState extends State<ApplicationPage>
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      theme: new ThemeData(primaryColor: GlobalConfig.colorPrimary),
+    return MaterialApp(
+      theme: ThemeData(primaryColor: GlobalConfig.colorPrimary),
       home: Scaffold(
         appBar: _searchbar.build(context),
-        body: new PageView(
+        body: PageView(
 //          physics: NeverScrollableScrollPhysics(),
           children: <Widget>[HomePage(), ProjectPage(), TreePage(), MinePage()],
           controller: _pageController,
           onPageChanged: onPageChanged,
         ),
-        bottomNavigationBar: new BottomNavigationBar(
+        bottomNavigationBar: BottomNavigationBar(
           items: _bottomTabs,
           currentIndex: _page,
           fixedColor: GlobalConfig.colorPrimary,
