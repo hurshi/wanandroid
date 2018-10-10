@@ -7,6 +7,7 @@ import 'package:wanandroid/widget/BannerView.dart';
 import 'package:wanandroid/model/homelist/HomeListModel.dart';
 import 'package:wanandroid/model/homelist/HomeListDataItemModel.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
+import 'package:wanandroid/pages/web/Web.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage> {
             } else if (index - 1 >= _listData.length) {
               return _buildLoadMoreItem();
             } else {
-              return _buildListViewItemLayout(index - 1);
+              return _buildListViewItemLayout(context, index - 1);
             }
           }),
     );
@@ -70,7 +71,7 @@ class _HomePageState extends State<HomePage> {
       );
   }
 
-  Widget _buildListViewItemLayout(int index) {
+  Widget _buildListViewItemLayout(BuildContext context, int index) {
     if (null == _listData ||
         _listData.length <= 0 ||
         index < 0 ||
@@ -78,12 +79,17 @@ class _HomePageState extends State<HomePage> {
       return Container();
     }
     HomeListDataItemModel item = _listData[index];
-    return Padding(
-      padding: EdgeInsets.fromLTRB(5.0, 2.5, 5.0, 2.5),
-      child: Card(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
-          child: _buildListViewItem(item),
+    return GestureDetector(
+      onTap: () {
+        Web().open(context, item.link, item.title);
+      },
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(5.0, 2.5, 5.0, 2.5),
+        child: Card(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
+            child: _buildListViewItem(item),
+          ),
         ),
       ),
     );
