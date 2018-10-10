@@ -1,17 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'HomeListDataItemTagModel.dart';
+part of 'BlogListDataItemTagModel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-HomeListDataItemTagModel _$HomeListDataItemTagModelFromJson(
+BlogListDataItemTagModel _$BlogListDataItemTagModelFromJson(
     Map<String, dynamic> json) {
-  return HomeListDataItemTagModel(
+  return BlogListDataItemTagModel(
       json['name'] as String, json['url'] as String);
 }
 
-Map<String, dynamic> _$HomeListDataItemTagModelToJson(
-        HomeListDataItemTagModel instance) =>
+Map<String, dynamic> _$BlogListDataItemTagModelToJson(
+        BlogListDataItemTagModel instance) =>
     <String, dynamic>{'name': instance.name, 'url': instance.url};

@@ -1,18 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'HomeListDataModel.dart';
+part of 'BlogListDataModel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-HomeListDataModel _$HomeListDataModelFromJson(Map<String, dynamic> json) {
-  return HomeListDataModel(
+BlogListDataModel _$BlogListDataModelFromJson(Map<String, dynamic> json) {
+  return BlogListDataModel(
       json['curpage'] as int,
       (json['datas'] as List)
           ?.map((e) => e == null
               ? null
-              : HomeListDataItemModel.fromJson(e as Map<String, dynamic>))
+              : BlogListDataItemModel.fromJson(e as Map<String, dynamic>))
           ?.toList(),
       json['offset'] as int,
       json['over'] as bool,
@@ -21,7 +21,7 @@ HomeListDataModel _$HomeListDataModelFromJson(Map<String, dynamic> json) {
       json['total'] as int);
 }
 
-Map<String, dynamic> _$HomeListDataModelToJson(HomeListDataModel instance) =>
+Map<String, dynamic> _$BlogListDataModelToJson(BlogListDataModel instance) =>
     <String, dynamic>{
       'curpage': instance.curpage,
       'datas': instance.datas,

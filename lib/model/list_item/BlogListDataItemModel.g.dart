@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'HomeListDataItemModel.dart';
+part of 'BlogListDataItemModel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-HomeListDataItemModel _$HomeListDataItemModelFromJson(
+BlogListDataItemModel _$BlogListDataItemModelFromJson(
     Map<String, dynamic> json) {
-  return HomeListDataItemModel(
+  return BlogListDataItemModel(
       json['apkLink'] as String,
       json['author'] as String,
       json['chapterId'] as int,
@@ -29,7 +29,7 @@ HomeListDataItemModel _$HomeListDataItemModelFromJson(
       (json['tags'] as List)
           ?.map((e) => e == null
               ? null
-              : HomeListDataItemTagModel.fromJson(e as Map<String, dynamic>))
+              : BlogListDataItemTagModel.fromJson(e as Map<String, dynamic>))
           ?.toList(),
       json['title'] as String,
       json['type'] as int,
@@ -38,8 +38,8 @@ HomeListDataItemModel _$HomeListDataItemModelFromJson(
       json['zan'] as int);
 }
 
-Map<String, dynamic> _$HomeListDataItemModelToJson(
-        HomeListDataItemModel instance) =>
+Map<String, dynamic> _$BlogListDataItemModelToJson(
+        BlogListDataItemModel instance) =>
     <String, dynamic>{
       'apkLink': instance.apkLink,
       'author': instance.author,
