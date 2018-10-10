@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     return ItemListPage(
       header: _buildBanner(),
       request: (page) {
-        return CommonService().getHomeListData(page);
+        return CommonService().getArticleListData(page);
       },
     );
   }

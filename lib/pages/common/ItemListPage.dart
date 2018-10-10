@@ -1,11 +1,11 @@
 import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
-import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
-import 'package:wanandroid/pages/web/Web.dart';
+import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
 import 'package:wanandroid/model/list_item/BlogListModel.dart';
+import 'package:wanandroid/pages/web/Web.dart';
 
 typedef Future<Response> RequestData(int page);
 
@@ -17,7 +17,7 @@ class ItemListPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return new _ItemListPageState();
+    return _ItemListPageState();
   }
 }
 
