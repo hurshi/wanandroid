@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class GloableConfig {
+class GlobalConfig {
   ///颜色
   static Color colorPrimary = Colors.red;
 

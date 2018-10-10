@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/model/homebanner/HomeBannerModel.dart';
 import 'package:wanandroid/api/CommonService.dart';
@@ -5,6 +6,7 @@ import 'package:wanandroid/model/homebanner/HomeBannerItemModel.dart';
 import 'package:wanandroid/widget/BannerView.dart';
 import 'package:wanandroid/model/homelist/HomeListModel.dart';
 import 'package:wanandroid/model/homelist/HomeListDataItemModel.dart';
+import 'package:wanandroid/common/GlobalConfig.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,27 +17,42 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<HomeBannerItemModel> _bannerData;
-  List<HomeListDataItemModel> _listData;
+  List<HomeListDataItemModel> _listData = List();
   int _listDataPage = 0;
+  ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     _loadBannerData();
     _loadListData(_listDataPage);
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 1) {
+        _listDataPage++;
+        _loadListData(_listDataPage);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: ((null == _listData) ? 0 : _listData.length) + 1,
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return _buildBanner();
-          } else {
-            return _buildListViewItemLayout(index - 1);
-          }
-        });
+    return RefreshIndicator(
+      color: GlobalConfig.colorPrimary,
+      onRefresh: _handleRefresh,
+      child: ListView.builder(
+          itemCount: ((null == _listData) ? 0 : _listData.length) + 2,
+          controller: _scrollController,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return _buildBanner();
+            } else if (index - 1 >= _listData.length) {
+              return _buildLoadMoreItem();
+            } else {
+              return _buildListViewItemLayout(index - 1);
+            }
+          }),
+    );
   }
 
   Widget _buildBanner() {
@@ -73,7 +90,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildListViewItem(HomeListDataItemModel item) {
-    print(">>> ${item.toJson()}");
     var widget = (null != item.envelopePic && item.envelopePic.isNotEmpty)
         ? Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -114,6 +130,15 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget _buildLoadMoreItem() {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Text("loading ..."),
+      ),
+    );
+  }
+
   void _loadBannerData() {
     CommonService().getBanner((HomeBannerModel _bean) {
       if (_bean.data.length > 0) {
@@ -124,11 +149,17 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void _loadListData(int page) {
-    CommonService().getHomeListData((HomeListModel _bean) {
+  Future<Null> _handleRefresh() async {
+    _listDataPage = 0;
+    _listData.clear();
+    await _loadListData(_listDataPage);
+  }
+
+  Future<Null> _loadListData(int page) {
+    return CommonService().getHomeListData((HomeListModel _bean) {
       if (_bean.data.datas.length > 0) {
         setState(() {
-          _listData = _bean.data.datas;
+          _listData.addAll(_bean.data.datas);
         });
       }
     }, page);

@@ -16,27 +16,27 @@ class ApplicationPage extends StatefulWidget {
 class _ApplicationPageState extends State<ApplicationPage>
     with SingleTickerProviderStateMixin {
   int _page = 0;
-  String _titleTxt = GloableConfig.homeTab;
+  String _titleTxt = GlobalConfig.homeTab;
   SearchBar _searchbar;
   PageController _pageController;
 
   final List<BottomNavigationBarItem> _bottomTabs = <BottomNavigationBarItem>[
     new BottomNavigationBarItem(
         icon: Icon(Icons.assignment),
-        title: Text(GloableConfig.homeTab),
-        backgroundColor: GloableConfig.colorPrimary),
+        title: Text(GlobalConfig.homeTab),
+        backgroundColor: GlobalConfig.colorPrimary),
     new BottomNavigationBarItem(
         icon: Icon(Icons.branding_watermark),
-        title: Text(GloableConfig.projectTab),
-        backgroundColor: GloableConfig.colorPrimary),
+        title: Text(GlobalConfig.projectTab),
+        backgroundColor: GlobalConfig.colorPrimary),
     new BottomNavigationBarItem(
         icon: Icon(Icons.developer_board),
-        title: Text(GloableConfig.treeTab),
-        backgroundColor: GloableConfig.colorPrimary),
+        title: Text(GlobalConfig.treeTab),
+        backgroundColor: GlobalConfig.colorPrimary),
     new BottomNavigationBarItem(
         icon: Icon(Icons.assignment_ind),
-        title: Text(GloableConfig.mineTab),
-        backgroundColor: GloableConfig.colorPrimary),
+        title: Text(GlobalConfig.mineTab),
+        backgroundColor: GlobalConfig.colorPrimary),
   ];
 
   @override
@@ -69,7 +69,7 @@ class _ApplicationPageState extends State<ApplicationPage>
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      theme: new ThemeData(primaryColor: GloableConfig.colorPrimary),
+      theme: new ThemeData(primaryColor: GlobalConfig.colorPrimary),
       home: Scaffold(
         appBar: _searchbar.build(context),
         body: new PageView(
@@ -81,7 +81,7 @@ class _ApplicationPageState extends State<ApplicationPage>
         bottomNavigationBar: new BottomNavigationBar(
           items: _bottomTabs,
           currentIndex: _page,
-          fixedColor: GloableConfig.colorPrimary,
+          fixedColor: GlobalConfig.colorPrimary,
           type: BottomNavigationBarType.fixed,
           onTap: onTap,
         ),
@@ -99,16 +99,16 @@ class _ApplicationPageState extends State<ApplicationPage>
       this._page = page;
       switch (page) {
         case 0:
-          _titleTxt = GloableConfig.homeTab;
+          _titleTxt = GlobalConfig.homeTab;
           break;
         case 1:
-          _titleTxt = GloableConfig.projectTab;
+          _titleTxt = GlobalConfig.projectTab;
           break;
         case 2:
-          _titleTxt = GloableConfig.treeTab;
+          _titleTxt = GlobalConfig.treeTab;
           break;
         case 3:
-          _titleTxt = GloableConfig.mineTab;
+          _titleTxt = GlobalConfig.mineTab;
           break;
       }
     });
