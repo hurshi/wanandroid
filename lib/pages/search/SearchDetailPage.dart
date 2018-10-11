@@ -20,26 +20,12 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
   @override
   void initState() {
     super.initState();
-    _searchbar = SearchBar(
-      setState: setState,
-      onSubmitted: print,
-      showClearButton: true,
-      closeOnSubmit: false,
-      hintText: loadingMsg,
-      clearOnSubmit: false,
-      onChanged: (String s) {
-        setState(() {
-          _key = s;
+    _initSearchBar();
+    _itemListPage = ItemListPage(
+        emptyMsg: "It's empty.",
+        request: (page) {
+          return CommonService().getSearchListData(_key, page);
         });
-        print(">>> onChanged --------------");
-        _itemListPage.handleRefresh();
-      },
-    );
-
-    _itemListPage = ItemListPage(request: (page) {
-      print(">>> --------------  refresh body");
-      return CommonService().getSearchListData(_key, page);
-    });
   }
 
   @override
@@ -47,6 +33,25 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
     return Scaffold(
       appBar: _searchbar.build(context),
       body: _itemListPage,
+    );
+  }
+
+  void _initSearchBar() {
+    var _controller = TextEditingController();
+    _controller.addListener(() {
+      setState(() {
+        _key = _controller.value.text;
+      });
+      _itemListPage.handleRefresh();
+    });
+    _searchbar = SearchBar(
+      setState: setState,
+      onSubmitted: print,
+      showClearButton: true,
+      closeOnSubmit: false,
+      hintText: loadingMsg,
+      clearOnSubmit: false,
+      controller: _controller,
     );
   }
 }
