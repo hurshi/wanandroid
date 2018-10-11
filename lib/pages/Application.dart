@@ -4,7 +4,7 @@ import 'package:wanandroid/pages/home/HomePage.dart';
 import 'package:wanandroid/pages/tree/TreePage.dart';
 import 'package:wanandroid/pages/mine/MinePage.dart';
 import 'package:wanandroid/pages/project/ProjectPage.dart';
-import 'package:flutter_search_bar/flutter_search_bar.dart';
+import 'package:wanandroid/common/Router.dart';
 
 class ApplicationPage extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _ApplicationPageState extends State<ApplicationPage>
     with SingleTickerProviderStateMixin {
   int _page = 0;
   String _titleTxt = GlobalConfig.homeTab;
-  SearchBar _searchbar;
+
   PageController _pageController;
 
   final List<BottomNavigationBarItem> _bottomTabs = <BottomNavigationBarItem>[
@@ -43,21 +43,6 @@ class _ApplicationPageState extends State<ApplicationPage>
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: this._page);
-    _searchbar = SearchBar(
-      setState: setState,
-      onSubmitted: print,
-      inBar: true,
-      showClearButton: true,
-      buildDefaultAppBar: buildAppBar,
-    );
-  }
-
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      title: Text(_titleTxt),
-      centerTitle: true,
-      actions: <Widget>[_searchbar.getSearchAction(context)],
-    );
   }
 
   @override
@@ -71,7 +56,19 @@ class _ApplicationPageState extends State<ApplicationPage>
     return MaterialApp(
       theme: ThemeData(primaryColor: GlobalConfig.colorPrimary),
       home: Scaffold(
-        appBar: _searchbar.build(context),
+        appBar: AppBar(
+          title: Text(_titleTxt),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                Router().openSearch(context);
+              },
+            )
+          ],
+        ),
+//        appBar: _searchbar.build(context),
         body: PageView(
 //          physics: NeverScrollableScrollPhysics(),
           children: <Widget>[HomePage(), ProjectPage(), TreePage(), MinePage()],

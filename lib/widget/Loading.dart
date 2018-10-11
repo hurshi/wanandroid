@@ -4,6 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Loading extends StatefulWidget {
+  final String msg;
+
+  Loading({this.msg});
+
   @override
   State<StatefulWidget> createState() => new _LoadingState();
 }
@@ -12,7 +16,7 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text("Loading..."),
+      child: Text(null != widget.msg ? widget.msg : "Loading..."),
     );
   }
 }

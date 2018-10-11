@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
 import 'package:wanandroid/model/list_item/BlogListModel.dart';
-import 'package:wanandroid/pages/web/Web.dart';
+import 'package:wanandroid/common/Router.dart';
 import 'package:wanandroid/widget/Loading.dart';
 
 typedef Future<Response> RequestData(int page);
@@ -13,12 +13,19 @@ typedef Future<Response> RequestData(int page);
 class ItemListPage extends StatefulWidget {
   final Widget header;
   final RequestData request;
+  final String emptyMsg;
 
-  ItemListPage({this.header, this.request});
+  final _ItemListPageState _itemListPageState = _ItemListPageState();
+
+  ItemListPage({this.header, @required this.request, this.emptyMsg});
+
+  void handleRefresh() {
+    _itemListPageState.handleRefresh();
+  }
 
   @override
   State<StatefulWidget> createState() {
-    return _ItemListPageState();
+    return _itemListPageState;
   }
 }
 
@@ -46,21 +53,26 @@ class _ItemListPageState extends State<ItemListPage> {
     }
     return RefreshIndicator(
       color: GlobalConfig.colorPrimary,
-      onRefresh: _handleRefresh,
-      child: ListView.builder(
-          itemCount: ((null == _listData) ? 0 : _listData.length) +
-              (null == widget.header ? 1 : 2),
-          controller: _scrollController,
-          itemBuilder: (context, index) {
-            if (index == 0 && null != widget.header) {
-              return widget.header;
-            } else if (index - (null == widget.header ? 0 : 1) >=
-                _listData.length) {
-              return _buildLoadMoreItem();
-            } else {
-              return _buildListViewItemLayout(context, index - 1);
-            }
-          }),
+      onRefresh: handleRefresh,
+      child: (_listData.length > 1)
+          ? (ListView.builder(
+              itemCount: ((null == _listData) ? 0 : _listData.length) +
+                  (null == widget.header ? 1 : 2),
+              controller: _scrollController,
+              itemBuilder: (context, index) {
+                print(">>> build list index=$index length=${_listData.length}");
+                if (index == 0 && null != widget.header) {
+                  return widget.header;
+                } else if (index - (null == widget.header ? 0 : 1) >=
+                    _listData.length) {
+                  return _buildLoadMoreItem();
+                } else {
+                  return _buildListViewItemLayout(context, index - 1);
+                }
+              }))
+          : (Loading(
+              msg: (widget.emptyMsg == null) ? "not found" : widget.emptyMsg,
+            )),
     );
   }
 
@@ -74,7 +86,7 @@ class _ItemListPageState extends State<ItemListPage> {
     BlogListDataItemModel item = _listData[index];
     return GestureDetector(
       onTap: () {
-        Web().open(context, item.link, item.title);
+        Router().openWeb(context, item.link, item.title);
       },
       child: Padding(
         padding: EdgeInsets.fromLTRB(5.0, 2.5, 5.0, 2.5),
@@ -138,9 +150,10 @@ class _ItemListPageState extends State<ItemListPage> {
     );
   }
 
-  Future<Null> _handleRefresh() async {
+  Future<Null> handleRefresh() async {
     _listDataPage = -1;
     _listData.clear();
+    print("list length after refresh is ${_listData.length}");
     await _loadNextPage();
   }
 
@@ -159,10 +172,9 @@ class _ItemListPageState extends State<ItemListPage> {
     return widget.request(page).then((response) {
       var newList = BlogListModel.fromJson(response.data).data.datas;
       if (null != newList && newList.length > 0) {
-        setState(() {
-          _listData.addAll(newList);
-        });
+        _listData.addAll(newList);
       }
+      setState(() {});
     });
   }
 }

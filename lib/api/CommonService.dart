@@ -26,4 +26,11 @@ class CommonService {
   Future<Response> getProjectListData(String url) async {
     return await Dio().get(url);
   }
+
+  Future<Response> getSearchListData(String key, int page) async {
+    FormData formData = new FormData.from({
+      "k": "$key",
+    });
+    return await Dio().post("${Api.SEARCH_LIST}$page/json", data: formData);
+  }
 }
