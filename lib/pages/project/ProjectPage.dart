@@ -16,8 +16,14 @@ class ProjectPage extends StatefulWidget {
   }
 }
 
-class _ProjectPageState extends State<ProjectPage> {
+class _ProjectPageState extends State<ProjectPage>
+    with AutomaticKeepAliveClientMixin {
   List<ProjectClassifyItemModel> _list = List();
+  var _maxCachePageNums = 5;
+  var _cachedPageNum = 0;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -62,12 +68,22 @@ class _ProjectPageState extends State<ProjectPage> {
 
   Widget _buildSinglePage(ProjectClassifyItemModel bean) {
     return ItemListPage(
+      keepAlive: _keepAlive(),
       request: (page) {
         return CommonService().getProjectListData((bean.url == null)
             ? ("${Api.PROJECT_LIST}$page/json?cid=${bean.id}")
             : ("${bean.url}$page/json"));
       },
     );
+  }
+
+  bool _keepAlive() {
+    if (_cachedPageNum < _maxCachePageNums) {
+      _cachedPageNum++;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   List<Widget> _buildPages() {

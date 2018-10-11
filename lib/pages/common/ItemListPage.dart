@@ -14,10 +14,15 @@ class ItemListPage extends StatefulWidget {
   final Widget header;
   final RequestData request;
   final String emptyMsg;
+  final bool keepAlive;
 
   _ItemListPageState _itemListPageState;
 
-  ItemListPage({this.header, @required this.request, this.emptyMsg});
+  ItemListPage(
+      {this.header,
+      @required this.request,
+      this.emptyMsg,
+      this.keepAlive = false});
 
   void handleRefresh() {
     _itemListPageState.handleRefresh();
@@ -30,11 +35,18 @@ class ItemListPage extends StatefulWidget {
   }
 }
 
-class _ItemListPageState extends State<ItemListPage> {
+class _ItemListPageState extends State<ItemListPage>
+    with AutomaticKeepAliveClientMixin {
   List<BlogListDataItemModel> _listData = List();
   int _listDataPage = -1;
   ScrollController _scrollController = ScrollController();
   var _haveMoreData = true;
+
+  @override
+  bool get wantKeepAlive {
+    print(">>> wantKeepAlive");
+    return widget.keepAlive;
+  }
 
   @override
   void initState() {

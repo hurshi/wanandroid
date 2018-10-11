@@ -12,8 +12,12 @@ class HomePage extends StatefulWidget {
   }
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   List<HomeBannerItemModel> _bannerData;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
