@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:wanandroid/pages/common/ItemListPage.dart';
-import 'package:wanandroid/api/CommonService.dart';
-import 'package:wanandroid/model/project/ProjectClassifyModel.dart';
-import 'package:wanandroid/model/project/ProjectClassifyItemModel.dart';
-import 'package:wanandroid/bean/ProjectClassifyItemBean.dart';
-import 'package:wanandroid/widget/Loading.dart';
-import 'package:wanandroid/common/GlobalConfig.dart';
+import 'package:flutter/material.dart';
 import 'package:wanandroid/api/Api.dart';
+import 'package:wanandroid/api/CommonService.dart';
+import 'package:wanandroid/common/GlobalConfig.dart';
+import 'package:wanandroid/model/project/ProjectClassifyItemModel.dart';
+import 'package:wanandroid/model/project/ProjectClassifyModel.dart';
+import 'package:wanandroid/pages/common/ItemListPage.dart';
+import 'package:wanandroid/widget/Loading.dart';
 
 class ProjectPage extends StatefulWidget {
   @override
@@ -18,7 +17,7 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage> {
-  List<ProjectClassifyItemBean> _list = List();
+  List<ProjectClassifyItemModel> _list = List();
 
   @override
   void initState() {
@@ -55,20 +54,18 @@ class _ProjectPageState extends State<ProjectPage> {
     return _list?.map(_buildSingleTab)?.toList();
   }
 
-  Widget _buildSingleTab(ProjectClassifyItemBean bean) {
+  Widget _buildSingleTab(ProjectClassifyItemModel bean) {
     return Tab(
-      text: bean?.projectClassifyItemModel?.name,
+      text: bean?.name,
     );
   }
 
-  Widget _buildSinglePage(ProjectClassifyItemBean bean) {
+  Widget _buildSinglePage(ProjectClassifyItemModel bean) {
     return ItemListPage(
       request: (page) {
-        return CommonService().getProjectListData((bean
-                    .projectClassifyItemModel.url ==
-                null)
-            ? ("${Api.PROJECT_LIST}$page/json?cid=${bean.projectClassifyItemModel.id}")
-            : ("${bean.projectClassifyItemModel.url}$page/json"));
+        return CommonService().getProjectListData((bean.url == null)
+            ? ("${Api.PROJECT_LIST}$page/json?cid=${bean.id}")
+            : ("${bean.url}$page/json"));
       },
     );
   }
@@ -91,9 +88,7 @@ class _ProjectPageState extends State<ProjectPage> {
         setState(() {
           _loadNewestProjects();
           _bean.data.forEach((_projectClassifyItemModel) {
-            _list.add(ProjectClassifyItemBean(
-                currentPage: 0,
-                projectClassifyItemModel: _projectClassifyItemModel));
+            _list.add(_projectClassifyItemModel);
           });
         });
       }
@@ -102,10 +97,6 @@ class _ProjectPageState extends State<ProjectPage> {
 
   void _loadNewestProjects() {
     _list.insert(
-        0,
-        ProjectClassifyItemBean(
-            currentPage: 0,
-            projectClassifyItemModel: ProjectClassifyItemModel(
-                name: "最新项目", url: Api.PROJECT_NEWEST)));
+        0, ProjectClassifyItemModel(name: "最新项目", url: Api.PROJECT_NEWEST));
   }
 }

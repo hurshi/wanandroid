@@ -33,7 +33,7 @@ class _ItemListPageState extends State<ItemListPage> {
   List<BlogListDataItemModel> _listData = List();
   int _listDataPage = -1;
   ScrollController _scrollController = ScrollController();
-  var haveMoreData = true;
+  var _haveMoreData = true;
 
   @override
   void initState() {
@@ -49,9 +49,12 @@ class _ItemListPageState extends State<ItemListPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_listData.length <= (haveMoreData ? 1 : 0)) {
+    if (_listData.length <= (_haveMoreData ? 1 : 0)) {
       return Loading(
-        msg: (widget.emptyMsg == null) ? "not found" : widget.emptyMsg,
+        msg: (widget.emptyMsg == null)
+            ? ("not found")
+//            ? (_haveMoreData ? "loading" : "not found")
+            : widget.emptyMsg,
       );
     }
     return RefreshIndicator(
@@ -60,7 +63,7 @@ class _ItemListPageState extends State<ItemListPage> {
       child: ListView.builder(
           itemCount: ((null == _listData) ? 0 : _listData.length) +
               (null == widget.header ? 0 : 1) +
-              (haveMoreData ? 1 : 0),
+              (_haveMoreData ? 1 : 0),
           controller: _scrollController,
           itemBuilder: (context, index) {
             if (index == 0 && null != widget.header) {
@@ -169,13 +172,13 @@ class _ItemListPageState extends State<ItemListPage> {
   }
 
   Future<Null> _loadListData(int page) {
-    haveMoreData = true;
+    _haveMoreData = true;
     return widget.request(page).then((response) {
       var newList = BlogListModel.fromJson(response.data).data.datas;
       if (null != newList && newList.length > 0) {
         _listData.addAll(newList);
       } else {
-        haveMoreData = false;
+        _haveMoreData = false;
       }
     });
   }
