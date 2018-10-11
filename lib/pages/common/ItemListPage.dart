@@ -43,10 +43,7 @@ class _ItemListPageState extends State<ItemListPage>
   var _haveMoreData = true;
 
   @override
-  bool get wantKeepAlive {
-    print(">>> wantKeepAlive");
-    return widget.keepAlive;
-  }
+  bool get wantKeepAlive => widget.keepAlive;
 
   @override
   void initState() {
@@ -73,6 +70,7 @@ class _ItemListPageState extends State<ItemListPage>
       color: GlobalConfig.colorPrimary,
       onRefresh: handleRefresh,
       child: ListView.builder(
+          physics: AlwaysScrollableScrollPhysics(),
           itemCount: ((null == _listData) ? 0 : _listData.length) +
               (null == widget.header ? 0 : 1) +
               (_haveMoreData ? 1 : 0),
