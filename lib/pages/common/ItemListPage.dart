@@ -15,7 +15,7 @@ class ItemListPage extends StatefulWidget {
   final RequestData request;
   final String emptyMsg;
 
-  final _ItemListPageState _itemListPageState = _ItemListPageState();
+  _ItemListPageState _itemListPageState;
 
   ItemListPage({this.header, @required this.request, this.emptyMsg});
 
@@ -25,6 +25,7 @@ class ItemListPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
+    _itemListPageState = _ItemListPageState();
     return _itemListPageState;
   }
 }
@@ -52,8 +53,7 @@ class _ItemListPageState extends State<ItemListPage> {
     if (_listData.length <= (_haveMoreData ? 1 : 0)) {
       return Loading(
         msg: (widget.emptyMsg == null)
-            ? ("not found")
-//            ? (_haveMoreData ? "loading" : "not found")
+            ? (_haveMoreData ? "loading" : "not found")
             : widget.emptyMsg,
       );
     }
