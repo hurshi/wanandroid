@@ -128,7 +128,8 @@ class _ItemListPageState extends State<ItemListPage> {
           child: Text(item.author),
         ),
         Text(
-          item.title,
+          //去掉html中的高亮
+          item.title.replaceAll(RegExp("(<em[^>]*>)|(</em>)"), ""),
           style: TextStyle(fontWeight: FontWeight.bold),
           textAlign: TextAlign.left,
         ),
