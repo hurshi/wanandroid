@@ -7,7 +7,7 @@ import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/model/project/ProjectClassifyItemModel.dart';
 import 'package:wanandroid/model/project/ProjectClassifyModel.dart';
 import 'package:wanandroid/pages/common/ItemListPage.dart';
-import 'package:wanandroid/widget/Loading.dart';
+import 'package:wanandroid/widget/EmptyHolder.dart';
 
 class ProjectPage extends StatefulWidget {
   @override
@@ -34,7 +34,7 @@ class _ProjectPageState extends State<ProjectPage>
   @override
   Widget build(BuildContext context) {
     if (_list.length <= 0) {
-      return Loading();
+      return EmptyHolder();
     }
     return DefaultTabController(
       length: _list.length,

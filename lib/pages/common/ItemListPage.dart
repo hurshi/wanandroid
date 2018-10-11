@@ -6,7 +6,7 @@ import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
 import 'package:wanandroid/model/list_item/BlogListModel.dart';
 import 'package:wanandroid/common/Router.dart';
-import 'package:wanandroid/widget/Loading.dart';
+import 'package:wanandroid/widget/EmptyHolder.dart';
 
 typedef Future<Response> RequestData(int page);
 
@@ -60,7 +60,7 @@ class _ItemListPageState extends State<ItemListPage>
   @override
   Widget build(BuildContext context) {
     if (_listData.length <= (_haveMoreData ? 1 : 0)) {
-      return Loading(
+      return EmptyHolder(
         msg: (widget.emptyMsg == null)
             ? (_haveMoreData ? "loading" : "not found")
             : widget.emptyMsg,

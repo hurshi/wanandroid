@@ -3,16 +3,16 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class Loading extends StatefulWidget {
+class EmptyHolder extends StatefulWidget {
   final String msg;
 
-  Loading({this.msg});
+  EmptyHolder({this.msg});
 
   @override
-  State<StatefulWidget> createState() => new _LoadingState();
+  State<StatefulWidget> createState() => new _EmptyHolderState();
 }
 
-class _LoadingState extends State<Loading> {
+class _EmptyHolderState extends State<EmptyHolder> {
   @override
   Widget build(BuildContext context) {
     return Center(

@@ -1,9 +1,12 @@
+import 'dart:ui' as ui;
+
+import 'package:banner/banner.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/model/homebanner/HomeBannerItemModel.dart';
 import 'package:wanandroid/model/homebanner/HomeBannerModel.dart';
 import 'package:wanandroid/pages/common/ItemListPage.dart';
-import 'package:wanandroid/widget/BannerView.dart';
+import 'package:wanandroid/common/Router.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -28,26 +31,36 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return ItemListPage(
-      header: _buildBanner(),
+      header: _buildBanner(context),
       request: (page) {
         return CommonService().getArticleListData(page);
       },
     );
   }
 
-  Widget _buildBanner() {
+  Widget _buildBanner(BuildContext context) {
     if (null == _bannerData || _bannerData.length <= 0) {
       return Center(
         child: Text("loading"),
       );
-    } else
-      return BannerView<HomeBannerItemModel>(
-        data: _bannerData,
-        delayTime: 10,
-        buildShowView: (index, data) {
-          return Image.network((data as HomeBannerItemModel).imagePath);
-        },
+    } else {
+      double screenWidth = MediaQueryData.fromWindow(ui.window).size.width;
+      return Container(
+        height: screenWidth * 500 / 900,
+        width: screenWidth,
+        child: BannerView(
+          data: _bannerData,
+          delayTime: 10,
+          onBannerClickListener: (int index, dynamic itemData) {
+            HomeBannerItemModel item = itemData;
+            Router().openWeb(context, item.url, item.title);
+          },
+          buildShowView: (index, data) {
+            return Image.network((data as HomeBannerItemModel).imagePath);
+          },
+        ),
       );
+    }
   }
 
   void _loadBannerData() {
