@@ -82,7 +82,8 @@ class _ItemListPageState extends State<ItemListPage>
                 _listData.length) {
               return _buildLoadMoreItem();
             } else {
-              return _buildListViewItemLayout(context, index - 1);
+              return _buildListViewItemLayout(
+                  context, index - (null == widget.header ? 0 : 1));
             }
           }),
     );
