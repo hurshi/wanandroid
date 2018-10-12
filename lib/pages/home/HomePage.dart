@@ -7,6 +7,7 @@ import 'package:wanandroid/model/homebanner/HomeBannerItemModel.dart';
 import 'package:wanandroid/model/homebanner/HomeBannerModel.dart';
 import 'package:wanandroid/pages/common/ItemListPage.dart';
 import 'package:wanandroid/common/Router.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -56,7 +57,11 @@ class _HomePageState extends State<HomePage>
             Router().openWeb(context, item.url, item.title);
           },
           buildShowView: (index, data) {
-            return Image.network((data as HomeBannerItemModel).imagePath);
+            return CachedNetworkImage(
+              fadeInDuration: Duration(milliseconds: 0),
+              fadeOutDuration: Duration(milliseconds: 0),
+              imageUrl: (data as HomeBannerItemModel).imagePath,
+            );
           },
         ),
       );

@@ -7,6 +7,7 @@ import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
 import 'package:wanandroid/model/list_item/BlogListModel.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 typedef Future<Response> RequestData(int page);
 
@@ -123,7 +124,11 @@ class _ItemListPageState extends State<ItemListPage>
               ),
               Container(
                 width: 30.0,
-                child: Image.network(item.envelopePic),
+                child: CachedNetworkImage(
+                  fadeInDuration: Duration(milliseconds: 0),
+                  fadeOutDuration: Duration(milliseconds: 0),
+                  imageUrl: item.envelopePic,
+                ),
               )
             ],
           )
