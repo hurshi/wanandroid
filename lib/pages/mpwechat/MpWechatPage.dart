@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:wanandroid/model/mpwechat/MpWechatModel.dart';
 import 'package:wanandroid/api/CommonService.dart';
-import 'package:wanandroid/widget/EmptyHolder.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
-import 'package:wanandroid/pages/common/ItemListPage.dart';
-import 'package:wanandroid/api/Api.dart';
+import 'package:wanandroid/model/mpwechat/MpWechatModel.dart';
+import 'package:wanandroid/widget/EmptyHolder.dart';
+
+import 'MpWechatSinglePage.dart';
 
 class MpWechatPage extends StatefulWidget {
   @override
@@ -46,7 +46,7 @@ class _MpWechatPageState extends State<MpWechatPage>
             tabs: _buildTabs(),
           ),
           Expanded(
-            child: TabBarView(children: _buildPages()),
+            child: TabBarView(children: _buildPages(context)),
           ),
         ],
       ),
@@ -57,23 +57,18 @@ class _MpWechatPageState extends State<MpWechatPage>
     return _list?.map(_buildSingleTab)?.toList();
   }
 
-  List<Widget> _buildPages() {
-    return _list?.map(_buildSinglePage)?.toList();
+  List<Widget> _buildPages(BuildContext context) {
+    return _list?.map((_bean) {
+      return MpWechatSinglePage(
+        keepAlive: _keepAlive(),
+        model: _bean,
+      );
+    })?.toList();
   }
 
   Widget _buildSingleTab(MpWechatModel _bean) {
     return Tab(
       text: _bean?.name,
-    );
-  }
-
-  Widget _buildSinglePage(MpWechatModel _bean) {
-    return ItemListPage(
-      keepAlive: _keepAlive(),
-      request: (page) {
-        return CommonService()
-            .getMpWechatListData("${Api.MP_WECHAT_LIST}${_bean.id}/$page/json");
-      },
     );
   }
 
