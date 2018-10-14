@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:wanandroid/model/homebanner/HomeBannerModel.dart';
+import 'package:wanandroid/model/mpwechat/MpWechatModel.dart';
 import 'package:wanandroid/model/project/ProjectClassifyModel.dart';
 import 'package:wanandroid/model/tree/TreeModel.dart';
 
@@ -18,6 +19,20 @@ class CommonService {
     Dio().get(Api.PROJECT_CLASSIFY).then((response) {
       callback(ProjectClassifyModel.fromJson(response.data));
     });
+  }
+
+  void getMpWechatNames(Function callback) async {
+    Dio().get(Api.MP_WECHAT_NAMES).then((response) {
+      callback((response.data as List)
+          ?.map((e) => e == null
+              ? null
+              : MpWechatModel.fromJson(e as Map<String, dynamic>))
+          ?.toList());
+    });
+  }
+
+  Future<Response> getMpWechatListData(String url) async {
+    return await Dio().get(url);
   }
 
   void getTrees(Function callback) async {

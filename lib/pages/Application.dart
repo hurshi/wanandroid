@@ -3,6 +3,7 @@ import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/pages/home/HomePage.dart';
 import 'package:wanandroid/pages/tree/TreePage.dart';
 import 'package:wanandroid/pages/mine/MinePage.dart';
+import 'package:wanandroid/pages/mpwechat/MpWechatPage.dart';
 import 'package:wanandroid/pages/project/ProjectPage.dart';
 import 'package:wanandroid/common/Router.dart';
 
@@ -17,7 +18,6 @@ class _ApplicationPageState extends State<ApplicationPage>
     with SingleTickerProviderStateMixin {
   int _page = 0;
   String _titleTxt = GlobalConfig.homeTab;
-
   PageController _pageController;
 
   final List<BottomNavigationBarItem> _bottomTabs = <BottomNavigationBarItem>[
@@ -28,6 +28,10 @@ class _ApplicationPageState extends State<ApplicationPage>
     BottomNavigationBarItem(
         icon: Icon(Icons.branding_watermark),
         title: Text(GlobalConfig.projectTab),
+        backgroundColor: GlobalConfig.colorPrimary),
+    BottomNavigationBarItem(
+        icon: Icon(Icons.color_lens),
+        title: Text(GlobalConfig.mpWechatTab),
         backgroundColor: GlobalConfig.colorPrimary),
     BottomNavigationBarItem(
         icon: Icon(Icons.developer_board),
@@ -68,10 +72,15 @@ class _ApplicationPageState extends State<ApplicationPage>
             )
           ],
         ),
-//        appBar: _searchbar.build(context),
         body: PageView(
 //          physics: NeverScrollableScrollPhysics(),
-          children: <Widget>[HomePage(), ProjectPage(), TreePage(), MinePage()],
+          children: <Widget>[
+            HomePage(),
+            ProjectPage(),
+            MpWechatPage(),
+            TreePage(),
+            MinePage()
+          ],
           controller: _pageController,
           onPageChanged: onPageChanged,
         ),
@@ -102,9 +111,12 @@ class _ApplicationPageState extends State<ApplicationPage>
           _titleTxt = GlobalConfig.projectTab;
           break;
         case 2:
-          _titleTxt = GlobalConfig.treeTab;
+          _titleTxt = GlobalConfig.mpWechatTab;
           break;
         case 3:
+          _titleTxt = GlobalConfig.treeTab;
+          break;
+        case 4:
           _titleTxt = GlobalConfig.mineTab;
           break;
       }

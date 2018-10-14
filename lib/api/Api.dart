@@ -10,4 +10,7 @@ class Api {
   static final String TREES_LIST = "http://www.wanandroid.com/tree/json";
   static final String TREES_DETAIL_LIST =
       "http://www.wanandroid.com/article/list/";
+  static final String MP_WECHAT_NAMES =
+      "http://wanandroid.com/wxarticle/chapters/json";
+  static final String MP_WECHAT_LIST = "http://wanandroid.com/wxarticle/list/";
 }
