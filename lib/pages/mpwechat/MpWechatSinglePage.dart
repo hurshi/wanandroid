@@ -12,38 +12,33 @@ class MpWechatSinglePage extends StatefulWidget {
   MpWechatSinglePage({this.keepAlive, this.model});
 
   @override
-  State<StatefulWidget> createState() {
-    return _MpWechatSinglePageState();
-  }
+  State<StatefulWidget> createState() => _MpWechatSinglePageState();
 }
 
-class _MpWechatSinglePageState extends State<MpWechatSinglePage>
-    with AutomaticKeepAliveClientMixin {
+class _MpWechatSinglePageState extends State<MpWechatSinglePage> {
+  SearchBar _searchbar;
   String _key = "";
   ItemListPage _itemListPage;
-
-  @override
-  bool get wantKeepAlive => widget.keepAlive;
+  String loadingMsg = "搜索本公众号里面的历史文章";
 
   @override
   void initState() {
     super.initState();
+
     _itemListPage = ItemListPage(
-//      header: _buildSearchView(_itemListPage, _key),
-      keepAlive: widget.keepAlive,
-      request: (page) {
-        print(">>> call request page=$page key=$_key");
-        return CommonService().getMpWechatListData(
-            "${Api.MP_WECHAT_LIST}${widget.model.id}/$page/json?k=$_key");
-      },
-    );
+        emptyMsg: "臣妾搜不到呀",
+        request: (page) {
+          return CommonService().getMpWechatListData(
+              "${Api.MP_WECHAT_LIST}${widget.model.id}/$page/json?k=$_key");
+        });
+    _initSearchBar();
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _buildSearchView(context),
+        _searchbar.build(context),
         Expanded(
           child: _itemListPage,
         )
@@ -51,26 +46,28 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
     );
   }
 
-  Widget _buildSearchView(BuildContext context) {
-//    var _controller = TextEditingController();
-//    _controller.addListener(() {
-//      _key = _controller.value.text;
-//      _itemListPage.handleRefresh();
-//    });
-    return SearchBar(
+  void _initSearchBar() {
+    var _controller = TextEditingController();
+    _controller.addListener(() {
+      if (_key != _controller.value.text) {
+        _key = _controller.value.text;
+        _itemListPage.handleRefresh();
+      }
+    });
+    _searchbar = SearchBar(
       setState: setState,
       onSubmitted: print,
       showClearButton: true,
       closeOnSubmit: false,
-      textColor: Colors.black,
-      hintText: "搜索本公众号内的文章",
+      hintText: loadingMsg,
       clearOnSubmit: false,
       showBackButton: false,
-      bgColor: Colors.white,
+      autoShowKeyboard: false,
       clearButtonColor: Colors.black87,
       clearButtonDisablesColor: Colors.black45,
-      autoShowKeyboard: false,
-//      controller: _controller,
-    ).build(context);
+      textColor: Colors.black,
+      bgColor: Colors.white,
+      controller: _controller,
+    );
   }
 }

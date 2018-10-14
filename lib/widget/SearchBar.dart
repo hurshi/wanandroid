@@ -107,14 +107,6 @@ class SearchBar {
   /// title is always a [TextField] with the key 'SearchBarTextField', and various text stylings based on [inBar]. This is also where [onSubmitted] has its listener registered.
   ///
   AppBar buildSearchBar(BuildContext context) {
-    ThemeData theme = Theme.of(context);
-    FocusNode _focusNode = FocusNode();
-
-//    Color barColor = theme.primaryColor;
-//    Color buttonColor = theme.bottomAppBarColor;
-//    Color buttonDisabledColor = theme.bottomAppBarColor.withAlpha(25);
-//    Color textColor = theme.highlightColor;
-
     return new AppBar(
       backgroundColor: bgColor,
       leading: showBackButton
@@ -133,7 +125,7 @@ class SearchBar {
       title: new Directionality(
           textDirection: Directionality.of(context),
           child: new TextField(
-            focusNode: _focusNode,
+//            focusNode: _focusNode,
             key: new Key('SearchBarTextField'),
             keyboardType: TextInputType.text,
             style: new TextStyle(color: textColor, fontSize: 16.0),
@@ -168,9 +160,7 @@ class SearchBar {
                           ? clearButtonColor
                           : clearButtonDisablesColor),
                   onPressed: !_clearActive
-                      ? () {
-                          _focusNode.unfocus();
-                        }
+                      ? null
                       : () {
                           controller.clear();
                         })
