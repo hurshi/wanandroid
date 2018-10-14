@@ -160,7 +160,9 @@ class SearchBar {
                           ? clearButtonColor
                           : clearButtonDisablesColor),
                   onPressed: !_clearActive
-                      ? null
+                      ? () {
+                          FocusScope.of(context).requestFocus(new FocusNode());
+                        }
                       : () {
                           controller.clear();
                         })
