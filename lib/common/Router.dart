@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:wanandroid/pages/web/WebViewPage.dart';
 import 'package:wanandroid/pages/search/SearchDetailPage.dart';
+import 'package:wanandroid/pages/login/LoginPage.dart';
 
 class Router {
   openWeb(BuildContext context, String url, String title) {
@@ -20,6 +21,15 @@ class Router {
         transitionsBuilder: _transitionsBuilder,
         pageBuilder: (BuildContext context, _, __) {
           return SearchDetailPage();
+        }));
+  }
+
+  openLogin(BuildContext context) {
+    Navigator.of(context).push(PageRouteBuilder(
+        opaque: false,
+        transitionsBuilder: _transitionsBuilder,
+        pageBuilder: (BuildContext context, _, __) {
+          return LoginPage();
         }));
   }
 
