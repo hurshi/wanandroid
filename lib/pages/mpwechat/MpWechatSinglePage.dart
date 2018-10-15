@@ -65,7 +65,7 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
       closeOnSubmit: false,
       hintText: loadingMsg,
       clearOnSubmit: false,
-      elevation: 0,
+      elevation: 0.0,
       showBackButton: false,
       autoShowKeyboard: false,
       clearButtonColor: Colors.black87,
