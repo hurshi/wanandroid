@@ -6,6 +6,7 @@ import 'package:wanandroid/common/Sp.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wanandroid/api/Api.dart';
 import 'package:wanandroid/common/Router.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class MinePage extends StatefulWidget {
   @override
