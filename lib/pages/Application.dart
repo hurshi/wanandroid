@@ -5,7 +5,6 @@ import 'package:wanandroid/pages/tree/TreePage.dart';
 import 'package:wanandroid/pages/mine/MinePage.dart';
 import 'package:wanandroid/pages/mpwechat/MpWechatPage.dart';
 import 'package:wanandroid/pages/project/ProjectPage.dart';
-import 'package:wanandroid/common/Router.dart';
 
 class ApplicationPage extends StatefulWidget {
   @override
@@ -60,18 +59,6 @@ class _ApplicationPageState extends State<ApplicationPage>
     return MaterialApp(
       theme: ThemeData(primaryColor: GlobalConfig.colorPrimary),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text(_titleTxt),
-          centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                Router().openSearch(context);
-              },
-            )
-          ],
-        ),
         body: PageView(
 //          physics: NeverScrollableScrollPhysics(),
           children: <Widget>[

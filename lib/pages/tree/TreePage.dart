@@ -32,6 +32,16 @@ class _TreePageState extends State<TreePage>
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(GlobalConfig.treeTab),
+        centerTitle: true,
+      ),
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
     if (null == _treeModel || _treeModel.data.length <= 0) {
       return EmptyHolder();
     }

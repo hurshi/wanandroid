@@ -30,6 +30,16 @@ class _MpWechatPageState extends State<MpWechatPage>
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(GlobalConfig.mpWechatTab),
+        centerTitle: true,
+      ),
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
     if (_list.length <= 0) {
       return EmptyHolder();
     }

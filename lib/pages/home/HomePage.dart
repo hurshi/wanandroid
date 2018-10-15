@@ -8,6 +8,7 @@ import 'package:wanandroid/model/homebanner/HomeBannerModel.dart';
 import 'package:wanandroid/pages/common/ItemListPage.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:wanandroid/common/GlobalConfig.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -31,11 +32,25 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    return ItemListPage(
-      header: _buildBanner(context),
-      request: (page) {
-        return CommonService().getArticleListData(page);
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(GlobalConfig.homeTab),
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              Router().openSearch(context);
+            },
+          )
+        ],
+      ),
+      body: ItemListPage(
+        header: _buildBanner(context),
+        request: (page) {
+          return CommonService().getArticleListData(page);
+        },
+      ),
     );
   }
 

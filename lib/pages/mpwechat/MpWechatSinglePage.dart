@@ -15,11 +15,15 @@ class MpWechatSinglePage extends StatefulWidget {
   State<StatefulWidget> createState() => _MpWechatSinglePageState();
 }
 
-class _MpWechatSinglePageState extends State<MpWechatSinglePage> {
+class _MpWechatSinglePageState extends State<MpWechatSinglePage>
+    with AutomaticKeepAliveClientMixin {
   SearchBar _searchbar;
   String _key = "";
   ItemListPage _itemListPage;
   String loadingMsg = "搜索本公众号里面的历史文章";
+
+  @override
+  bool get wantKeepAlive => widget.keepAlive;
 
   @override
   void initState() {
