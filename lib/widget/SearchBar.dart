@@ -52,6 +52,7 @@ class SearchBar {
   final Color textColor;
 
   final bool autoShowKeyboard;
+  final double elevation;
 
   SearchBar(
       {@required this.setState,
@@ -64,6 +65,7 @@ class SearchBar {
       this.clearOnSubmit = true,
       this.showBackButton = true,
       this.showClearButton = true,
+      this.elevation = 4.0,
       this.autoShowKeyboard = true,
       this.clearButtonColor,
       this.clearButtonDisablesColor,
@@ -108,6 +110,7 @@ class SearchBar {
   ///
   AppBar buildSearchBar(BuildContext context) {
     return new AppBar(
+      elevation: elevation,
       backgroundColor: bgColor,
       leading: showBackButton
           ? IconButton(
