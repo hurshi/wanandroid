@@ -89,6 +89,8 @@ class _ApplicationPageState extends State<ApplicationPage>
   }
 
   void onPageChanged(int page) {
-    setState(() {});
+    setState(() {
+      this._page = page;
+    });
   }
 }

@@ -20,29 +20,21 @@ class User {
   }
 
   void logout() {
-    Sp.putUserName("");
-    Sp.putPassword("");
+    Sp.putUserName(null);
+    Sp.putPassword(null);
     userName = null;
     password = null;
   }
 
   void refreshUserData({Function callback}) {
-    userName = null;
-    password = null;
-    if (null == userName)
-      Sp.getUserName((str) {
-        if (null == str) {
-          this.userName = "";
-        } else {
-          this.userName = str;
-        }
-        if (null != callback) {
-          callback();
-        }
-      });
-    if (null == password)
-      Sp.getPassword((pw) {
-        this.password = pw;
-      });
+    Sp.getPassword((pw) {
+      this.password = pw;
+    });
+    Sp.getUserName((str) {
+      this.userName = str;
+      if (null != callback) {
+        callback();
+      }
+    });
   }
 }
