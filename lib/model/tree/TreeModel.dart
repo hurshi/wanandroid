@@ -6,8 +6,8 @@ part 'TreeModel.g.dart';
 
 @JsonSerializable()
 class TreeModel extends RootModel<List<TreeRootModel>> {
-  TreeModel(List<TreeRootModel> data, int errorcode, String errormsg)
-      : super(data, errorcode, errormsg);
+  TreeModel(List<TreeRootModel> data, int errorCode, String errorMsg)
+      : super(data, errorCode, errorMsg);
 
   factory TreeModel.fromJson(Map<String, dynamic> json) =>
       _$TreeModelFromJson(json);

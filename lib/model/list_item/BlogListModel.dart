@@ -6,8 +6,8 @@ part 'BlogListModel.g.dart';
 
 @JsonSerializable()
 class BlogListModel extends RootModel<BlogListDataModel> {
-  BlogListModel(BlogListDataModel data, int errorcode, String errormsg)
-      : super(data, errorcode, errormsg);
+  BlogListModel(BlogListDataModel data, int errorCode, String errorMsg)
+      : super(data, errorCode, errorMsg);
 
   factory BlogListModel.fromJson(Map<String, dynamic> json) =>
       _$BlogListModelFromJson(json);

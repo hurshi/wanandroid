@@ -1,7 +1,7 @@
 class RootModel<T> {
-  RootModel(this.data, this.errorcode, this.errormsg);
+  RootModel(this.data, this.errorCode, this.errorMsg);
 
   T data;
-  int errorcode;
-  String errormsg;
+  int errorCode;
+  String errorMsg;
 }

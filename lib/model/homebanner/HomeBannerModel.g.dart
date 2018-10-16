@@ -13,13 +13,13 @@ HomeBannerModel _$HomeBannerModelFromJson(Map<String, dynamic> json) {
               ? null
               : HomeBannerItemModel.fromJson(e as Map<String, dynamic>))
           ?.toList(),
-      json['errorcode'] as int,
-      json['errormsg'] as String);
+      json['errorCode'] as int,
+      json['errorMsg'] as String);
 }
 
 Map<String, dynamic> _$HomeBannerModelToJson(HomeBannerModel instance) =>
     <String, dynamic>{
       'data': instance.data,
-      'errorcode': instance.errorcode,
-      'errormsg': instance.errormsg
+      'errorCode': instance.errorCode,
+      'errorMsg': instance.errorMsg
     };

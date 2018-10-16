@@ -11,13 +11,13 @@ BlogListModel _$BlogListModelFromJson(Map<String, dynamic> json) {
       json['data'] == null
           ? null
           : BlogListDataModel.fromJson(json['data'] as Map<String, dynamic>),
-      json['errorcode'] as int,
-      json['errormsg'] as String);
+      json['errorCode'] as int,
+      json['errorMsg'] as String);
 }
 
 Map<String, dynamic> _$BlogListModelToJson(BlogListModel instance) =>
     <String, dynamic>{
       'data': instance.data,
-      'errorcode': instance.errorcode,
-      'errormsg': instance.errormsg
+      'errorCode': instance.errorCode,
+      'errorMsg': instance.errorMsg
     };

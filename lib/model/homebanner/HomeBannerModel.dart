@@ -7,8 +7,8 @@ part 'HomeBannerModel.g.dart';
 @JsonSerializable()
 class HomeBannerModel extends RootModel<List<HomeBannerItemModel>> {
   HomeBannerModel(
-      List<HomeBannerItemModel> data, int errorcode, String errormsg)
-      : super(data, errorcode, errormsg);
+      List<HomeBannerItemModel> data, int errorCode, String errorMsg)
+      : super(data, errorCode, errorMsg);
 
   factory HomeBannerModel.fromJson(Map<String, dynamic> json) =>
       _$HomeBannerModelFromJson(json);

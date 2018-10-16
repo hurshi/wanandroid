@@ -59,4 +59,12 @@ class CommonService {
     });
     return await Dio().post("${Api.SEARCH_LIST}$page/json", data: formData);
   }
+
+  Future<Response> login(String username, String password) async {
+    FormData formData = new FormData.from({
+      "username": "$username",
+      "password": "$password",
+    });
+    return await Dio().post(Api.LOGIN, data: formData);
+  }
 }

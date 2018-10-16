@@ -11,4 +11,20 @@ class Sp {
       callback(prefs.getString(key));
     });
   }
+
+  static putUserName(String value) {
+    put("username", value);
+  }
+
+  static putPassword(String value) {
+    put("password", value);
+  }
+
+  static getUserName(Function callback) {
+    getS("username", callback);
+  }
+
+  static getPassword(Function callback) {
+    getS("password", callback);
+  }
 }

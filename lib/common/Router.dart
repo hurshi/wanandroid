@@ -8,7 +8,6 @@ import 'package:wanandroid/pages/login/LoginPage.dart';
 class Router {
   openWeb(BuildContext context, String url, String title) {
     Navigator.of(context).push(PageRouteBuilder(
-        opaque: false,
         transitionsBuilder: _transitionsBuilder,
         pageBuilder: (BuildContext context, _, __) {
           return WebViewPage(url, title);
@@ -17,28 +16,30 @@ class Router {
 
   openSearch(BuildContext context) {
     Navigator.of(context).push(PageRouteBuilder(
-        opaque: false,
         transitionsBuilder: _transitionsBuilder,
         pageBuilder: (BuildContext context, _, __) {
           return SearchDetailPage();
         }));
   }
 
-  openLogin(BuildContext context) {
-    Navigator.of(context).push(PageRouteBuilder(
-        opaque: false,
+  Future<PageRouteBuilder> openLogin(BuildContext context) {
+    return Navigator.of(context).push(PageRouteBuilder(
         transitionsBuilder: _transitionsBuilder,
         pageBuilder: (BuildContext context, _, __) {
           return LoginPage();
         }));
   }
 
+  back(BuildContext context) {
+    Navigator.of(context).pop();
+  }
+
   Widget _transitionsBuilder(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
-    return new FadeTransition(
+    return FadeTransition(
       opacity: animation,
-      child: new FadeTransition(
-        opacity: new Tween<double>(begin: 0.5, end: 1.0).animate(animation),
+      child: FadeTransition(
+        opacity: Tween<double>(begin: 0.5, end: 1.0).animate(animation),
         child: child,
       ),
     );

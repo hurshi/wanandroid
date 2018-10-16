@@ -14,8 +14,7 @@ class Api {
       "http://wanandroid.com/wxarticle/chapters/json";
   static final String MP_WECHAT_LIST = "http://wanandroid.com/wxarticle/list/";
 
-  static final String AVATAR_MALE = "https://avatars.dicebear.com/v2/male/";
-  static final String AVATAR_FEMALE = "https://avatars.dicebear.com/v2/female/";
-  static final String AVATAR_IDENTICON =
-      "https://avatars.dicebear.com/v2/identicon/";
+  static final String AVATAR = "https://api.adorable.io/avatars/200/";
+  static final String AVATAR_LEGO = "https://randomuser.me/api/portraits/lego/";
+  static final String LOGIN = "http://www.wanandroid.com/user/login";
 }

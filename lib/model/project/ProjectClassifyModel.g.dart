@@ -13,14 +13,14 @@ ProjectClassifyModel _$ProjectClassifyModelFromJson(Map<String, dynamic> json) {
               ? null
               : ProjectClassifyItemModel.fromJson(e as Map<String, dynamic>))
           ?.toList(),
-      json['errorcode'] as int,
-      json['errormsg'] as String);
+      json['errorCode'] as int,
+      json['errorMsg'] as String);
 }
 
 Map<String, dynamic> _$ProjectClassifyModelToJson(
         ProjectClassifyModel instance) =>
     <String, dynamic>{
       'data': instance.data,
-      'errorcode': instance.errorcode,
-      'errormsg': instance.errormsg
+      'errorCode': instance.errorCode,
+      'errorMsg': instance.errorMsg
     };

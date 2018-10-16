@@ -7,8 +7,8 @@ part 'ProjectClassifyModel.g.dart';
 @JsonSerializable()
 class ProjectClassifyModel extends RootModel<List<ProjectClassifyItemModel>> {
   ProjectClassifyModel(
-      List<ProjectClassifyItemModel> data, int errorcode, String errormsg)
-      : super(data, errorcode, errormsg);
+      List<ProjectClassifyItemModel> data, int errorCode, String errorMsg)
+      : super(data, errorCode, errorMsg);
 
   factory ProjectClassifyModel.fromJson(Map<String, dynamic> json) =>
       _$ProjectClassifyModelFromJson(json);

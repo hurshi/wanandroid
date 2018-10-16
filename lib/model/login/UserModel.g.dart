@@ -1,23 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'TreeModel.dart';
+part of 'UserModel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-TreeModel _$TreeModelFromJson(Map<String, dynamic> json) {
-  return TreeModel(
-      (json['data'] as List)
-          ?.map((e) => e == null
-              ? null
-              : TreeRootModel.fromJson(e as Map<String, dynamic>))
-          ?.toList(),
+UserModel _$UserModelFromJson(Map<String, dynamic> json) {
+  return UserModel(
+      json['data'] == null
+          ? null
+          : UserDetailModel.fromJson(json['data'] as Map<String, dynamic>),
       json['errorCode'] as int,
       json['errorMsg'] as String);
 }
 
-Map<String, dynamic> _$TreeModelToJson(TreeModel instance) => <String, dynamic>{
+Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'data': instance.data,
       'errorCode': instance.errorCode,
       'errorMsg': instance.errorMsg
