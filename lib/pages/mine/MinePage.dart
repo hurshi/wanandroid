@@ -7,6 +7,8 @@ import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:wanandroid/common/User.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
+import 'package:wanandroid/pages/common/ItemListPage.dart';
+import 'package:wanandroid/api/CommonService.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -33,11 +35,13 @@ class _MinePageState extends State<MinePage> {
     return Column(
       children: <Widget>[
         _buildHead(context),
-        User().isLogin()
-            ? _buildMineBody()
-            : EmptyHolder(
-                msg: "请先登录",
-              ),
+        Expanded(
+          child: User().isLogin()
+              ? _buildMineBody()
+              : EmptyHolder(
+                  msg: "请先登录",
+                ),
+        ),
       ],
     );
   }
@@ -142,6 +146,11 @@ class _MinePageState extends State<MinePage> {
   }
 
   Widget _buildMineBody() {
-    return Text("OKOK，你已经登录啦");
+    return ItemListPage(
+      keepAlive: true,
+      request: (page) {
+        return CommonService().getCollectListData(page);
+      },
+    );
   }
 }

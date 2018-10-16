@@ -5,6 +5,7 @@ import 'package:wanandroid/model/homebanner/HomeBannerModel.dart';
 import 'package:wanandroid/model/mpwechat/MpWechatModel.dart';
 import 'package:wanandroid/model/project/ProjectClassifyModel.dart';
 import 'package:wanandroid/model/tree/TreeModel.dart';
+import 'package:wanandroid/common/User.dart';
 
 import 'Api.dart';
 
@@ -47,6 +48,11 @@ class CommonService {
 
   Future<Response> getArticleListData(int page) async {
     return await Dio().get("${Api.HOME_LIST}$page/json");
+  }
+
+  Future<Response> getCollectListData(int page) async {
+    return await Dio().get("${Api.COLLECTED_ARTICLE}$page/json",
+        options: Options(headers: User().getHeader()));
   }
 
   Future<Response> getProjectListData(String url) async {

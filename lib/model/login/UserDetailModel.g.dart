@@ -9,7 +9,7 @@ part of 'UserDetailModel.dart';
 UserDetailModel _$UserDetailModelFromJson(Map<String, dynamic> json) {
   return UserDetailModel(
       (json['chapterTops'] as List)?.map((e) => e as String)?.toList(),
-      (json['collectIds'] as List)?.map((e) => e as String)?.toList(),
+      (json['collectIds'] as List)?.map((e) => e as int)?.toList(),
       json['email'] as String,
       json['icon'] as String,
       json['id'] as int,

@@ -5,7 +5,7 @@ part 'UserDetailModel.g.dart';
 @JsonSerializable()
 class UserDetailModel {
   List<String> chapterTops;
-  List<String> collectIds;
+  List<int> collectIds;
   String email;
   String icon;
   int id;
