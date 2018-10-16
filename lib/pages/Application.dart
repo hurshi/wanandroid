@@ -69,6 +69,7 @@ class _ApplicationPageState extends State<ApplicationPage>
             TreePage(),
             MinePage()
           ],
+          onPageChanged: onPageChanged,
           controller: _pageController,
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -85,5 +86,9 @@ class _ApplicationPageState extends State<ApplicationPage>
   void onTap(int index) {
     _pageController.animateToPage(index,
         duration: const Duration(milliseconds: 300), curve: Curves.ease);
+  }
+
+  void onPageChanged(int page) {
+    setState(() {});
   }
 }
