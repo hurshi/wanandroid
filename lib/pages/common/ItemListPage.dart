@@ -8,6 +8,7 @@ import 'package:wanandroid/model/list_item/BlogListModel.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:wanandroid/common/StringUtil.dart';
 
 typedef Future<Response> RequestData(int page);
 
@@ -154,7 +155,10 @@ class _ItemListPageState extends State<ItemListPage>
         ),
         Padding(
           padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-          child: Text("${item.niceDate}  ${item.superChapterName}"),
+          child: Text("${item.niceDate}  "
+              "${StringUtil.isNullOrEmpty(item.superChapterName) ? "" : item.superChapterName}"
+              "${(StringUtil.isNullOrEmpty(item.superChapterName) || StringUtil.isNullOrEmpty(item.chapterName)) ? "" : "/"}"
+              "${StringUtil.isNullOrEmpty(item.chapterName) ? "" : item.chapterName}"),
         )
       ],
     );
