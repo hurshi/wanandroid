@@ -1,8 +1,16 @@
+import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/Sp.dart';
+import 'package:wanandroid/model/login/UserModel.dart';
+import 'dart:convert';
+import 'DateUtil.dart';
+import 'dart:async';
 
 class User {
   String userName;
   String password;
+  String cookie;
+  DateTime cookieExpiresTime;
+  Map<String, String> _headerMap;
 
   static final User _singleton = User._internal();
 
@@ -24,6 +32,7 @@ class User {
     Sp.putPassword(null);
     userName = null;
     password = null;
+    _headerMap = null;
   }
 
   void refreshUserData({Function callback}) {
@@ -36,5 +45,65 @@ class User {
         callback();
       }
     });
+    Sp.getCookie((str) {
+      this.cookie = str;
+      _headerMap = null;
+    });
+    Sp.getCookieExpires((str) {
+      if (null != str && str.length > 0) {
+        this.cookieExpiresTime = DateTime.parse(str);
+        //提前3天请求新的cookie
+        if (cookieExpiresTime.isAfter(DateUtil.getDaysAgo(3))) {
+          Timer(Duration(milliseconds: 100), () {
+            autoLogin();
+          });
+        }
+      }
+    });
+  }
+
+  void login({Function callback}) {
+    CommonService().login(userName, password).then((response) {
+      var userModel = UserModel.fromJson(response.data);
+      if (userModel.errorCode == 0) {
+        Sp.putUserName(userModel.data.username);
+        Sp.putPassword(userModel.data.password);
+        String cookie = "";
+        DateTime expires;
+        response.headers.forEach((String name, List<String> values) {
+          if (name == "set-cookie") {
+            cookie = json
+                .encode(values)
+                .replaceAll("\[\"", "")
+                .replaceAll("\"\]", "")
+                .replaceAll("\",\"", "; ");
+            try {
+              expires = DateUtil.formatExpiresTime(cookie);
+            } catch (e) {
+              expires = DateTime.now();
+            }
+          }
+        });
+        Sp.putCookie(cookie);
+        Sp.putCookieExpires(expires.toIso8601String());
+        if (null != callback) callback(true, null);
+      } else {
+        if (null != callback) callback(false, userModel.errorMsg);
+      }
+    });
+  }
+
+  void autoLogin() {
+    if (isLogin()) {
+      login();
+    }
+  }
+
+  Map<String, String> getHeader() {
+    if (null == _headerMap) {
+      _headerMap = Map();
+      _headerMap["Cookie"] = cookie;
+    }
+    return _headerMap;
   }
 }

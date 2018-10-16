@@ -1,12 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:wanandroid/common/Snack.dart';
-import 'package:wanandroid/common/Sp.dart';
-import 'package:wanandroid/model/login/UserModel.dart';
+import 'package:wanandroid/common/User.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage();
@@ -64,18 +62,16 @@ class _LoginPagePageState extends State<LoginPage> {
             _psdStr.length < 6) {
           Snack.show(context, "账号/密码不符合标准");
         } else {
-          CommonService().login(_userNameStr, _psdStr).then((response) {
-            var userModel = UserModel.fromJson(response.data);
-            if (userModel.errorCode != 0) {
-              Snack.show(context, userModel.errorMsg);
-            } else {
-              Sp.putUserName(userModel.data.username);
-              Sp.putPassword(userModel.data.password);
+          User().userName = _userNameStr;
+          User().password = _psdStr;
+          User().login(callback: (bool loginOK, String errorMsg) {
+            if (loginOK) {
               Snack.show(context, "登录成功");
               Timer(Duration(milliseconds: 400), () {
-//                Navigator.pop(context, "back");
                 Router().back(context);
               });
+            } else {
+              Snack.show(context, errorMsg);
             }
           });
         }

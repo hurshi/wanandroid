@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:wanandroid/common/User.dart';
 
 class WebViewPage extends StatefulWidget {
   final String url;
@@ -15,6 +16,7 @@ class _WebViewState extends State<WebViewPage> {
   @override
   Widget build(BuildContext context) {
     return WebviewScaffold(
+//      headers: User().getHeader(),
       url: widget.url,
       appBar: AppBar(
         title: Text(widget.title),

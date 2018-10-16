@@ -20,11 +20,27 @@ class Sp {
     put("password", value);
   }
 
+  static putCookie(String value) {
+    put("cookie", value);
+  }
+
+  static putCookieExpires(String value) {
+    put("expires", value);
+  }
+
   static getUserName(Function callback) {
     getS("username", callback);
   }
 
   static getPassword(Function callback) {
     getS("password", callback);
+  }
+
+  static getCookie(Function callback) {
+    getS("cookie", callback);
+  }
+
+  static getCookieExpires(Function callback) {
+    getS("expires", callback);
   }
 }
