@@ -39,7 +39,7 @@ class _MinePageState extends State<MinePage> {
           child: User().isLogin()
               ? _buildMineBody()
               : EmptyHolder(
-                  msg: "请先登录",
+                  msg: "要查看收藏的文章请先登录哈",
                 ),
         ),
       ],
