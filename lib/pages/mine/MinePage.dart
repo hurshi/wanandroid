@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/api/Api.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/common/Router.dart';
-import 'package:wanandroid/common/Sp.dart';
+import 'package:wanandroid/common/User.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
 
 class MinePage extends StatefulWidget {
@@ -16,28 +16,10 @@ class MinePage extends StatefulWidget {
 }
 
 class _MinePageState extends State<MinePage> {
-  //}with WidgetsBindingObserver {
-  String _userName;
-
-  String _password;
-
-  double screenWidth = MediaQueryData.fromWindow(ui.window).size.width;
-
-//  @override
-//  void initState() {
-//    super.initState();
-//    WidgetsBinding.instance.addObserver(this);
-//  }
-//
-//  @override
-//  void dispose() {
-//    WidgetsBinding.instance.removeObserver(this);
-//    super.dispose();
-//  }
+  double _screenWidth = MediaQueryData.fromWindow(ui.window).size.width;
 
   @override
   Widget build(BuildContext context) {
-    _initData();
     return Scaffold(
       appBar: AppBar(
         title: Text(GlobalConfig.mineTab),
@@ -47,37 +29,11 @@ class _MinePageState extends State<MinePage> {
     );
   }
 
-//  @override
-//  void didChangeAppLifecycleState(AppLifecycleState state) {
-//    super.didChangeAppLifecycleState(state);
-//    print(">>> didChangeAppLifecycleState");
-//    if (AppLifecycleState.resumed == state) {
-//      _userName = null;
-//      _initData();
-//    }
-//  }
-
-  void _initData() {
-    if (null == _userName)
-      Sp.getUserName((str) {
-        if (null == str) {
-          this._userName = "";
-        } else {
-          this._userName = str;
-          setState(() {});
-        }
-      });
-    if (null == _password)
-      Sp.getPassword((pw) {
-        this._password = pw;
-      });
-  }
-
   Widget _buildBody(BuildContext context) {
     return Column(
       children: <Widget>[
         _buildHead(context),
-        isLogined()
+        User().isLogin()
             ? _buildMineBody()
             : EmptyHolder(
                 msg: "请先登录",
@@ -86,19 +42,12 @@ class _MinePageState extends State<MinePage> {
     );
   }
 
-  bool isLogined() {
-    return null != _userName &&
-        _userName.length >= 6 &&
-        null != _password &&
-        _password.length >= 6;
-  }
-
   Widget _buildHead(BuildContext context) {
     return Container(
       decoration: BoxDecoration(color: GlobalConfig.colorPrimary),
       child: GestureDetector(
         onTap: () {
-          if (isLogined())
+          if (User().isLogin())
             _showLogout(context);
           else {
             _toLogin(context);
@@ -122,15 +71,16 @@ class _MinePageState extends State<MinePage> {
 
   void _toLogin(BuildContext context) async {
     await Router().openLogin(context);
-    _userName = null;
-    _initData();
+    User().refreshUserData(callback: () {
+      setState(() {});
+    });
   }
 
   Widget _buildAvatar() {
     return Center(
       child: Container(
-        width: screenWidth / 3,
-        height: screenWidth / 3,
+        width: _screenWidth / 3,
+        height: _screenWidth / 3,
         decoration: BoxDecoration(
           color: const Color(0xffffff),
           image: DecorationImage(
@@ -160,10 +110,10 @@ class _MinePageState extends State<MinePage> {
         RaisedButton(
           child: Text("OK"),
           onPressed: () {
-            Sp.putUserName("");
-            Sp.putPassword("");
-            _userName = null;
-            _initData();
+            User().logout();
+            User().refreshUserData(callback: () {
+              setState(() {});
+            });
             Navigator.pop(context);
           },
         ),
@@ -188,7 +138,7 @@ class _MinePageState extends State<MinePage> {
   }
 
   String getUserName() {
-    return (!isLogined()) ? "Login" : _userName;
+    return (!User().isLogin()) ? "Login" : User().userName;
   }
 
   Widget _buildMineBody() {

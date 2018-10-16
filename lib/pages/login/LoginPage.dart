@@ -72,7 +72,7 @@ class _LoginPagePageState extends State<LoginPage> {
               Sp.putUserName(userModel.data.username);
               Sp.putPassword(userModel.data.password);
               Snack.show(context, "登录成功");
-              Timer(Duration(seconds: 2), () {
+              Timer(Duration(milliseconds: 400), () {
 //                Navigator.pop(context, "back");
                 Router().back(context);
               });
