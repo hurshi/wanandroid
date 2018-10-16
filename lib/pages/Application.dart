@@ -5,6 +5,7 @@ import 'package:wanandroid/pages/tree/TreePage.dart';
 import 'package:wanandroid/pages/mine/MinePage.dart';
 import 'package:wanandroid/pages/mpwechat/MpWechatPage.dart';
 import 'package:wanandroid/pages/project/ProjectPage.dart';
+import 'package:wanandroid/common/User.dart';
 
 class ApplicationPage extends StatefulWidget {
   @override
@@ -16,7 +17,6 @@ class ApplicationPage extends StatefulWidget {
 class _ApplicationPageState extends State<ApplicationPage>
     with SingleTickerProviderStateMixin {
   int _page = 0;
-  String _titleTxt = GlobalConfig.homeTab;
   PageController _pageController;
 
   final List<BottomNavigationBarItem> _bottomTabs = <BottomNavigationBarItem>[
@@ -56,6 +56,7 @@ class _ApplicationPageState extends State<ApplicationPage>
 
   @override
   Widget build(BuildContext context) {
+    User().refreshUserData();
     return MaterialApp(
       theme: ThemeData(primaryColor: GlobalConfig.colorPrimary),
       home: Scaffold(
@@ -69,7 +70,6 @@ class _ApplicationPageState extends State<ApplicationPage>
             MinePage()
           ],
           controller: _pageController,
-          onPageChanged: onPageChanged,
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: _bottomTabs,
@@ -85,28 +85,5 @@ class _ApplicationPageState extends State<ApplicationPage>
   void onTap(int index) {
     _pageController.animateToPage(index,
         duration: const Duration(milliseconds: 300), curve: Curves.ease);
-  }
-
-  void onPageChanged(int page) {
-    setState(() {
-      this._page = page;
-      switch (page) {
-        case 0:
-          _titleTxt = GlobalConfig.homeTab;
-          break;
-        case 1:
-          _titleTxt = GlobalConfig.projectTab;
-          break;
-        case 2:
-          _titleTxt = GlobalConfig.mpWechatTab;
-          break;
-        case 3:
-          _titleTxt = GlobalConfig.treeTab;
-          break;
-        case 4:
-          _titleTxt = GlobalConfig.mineTab;
-          break;
-      }
-    });
   }
 }
