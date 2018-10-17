@@ -5,6 +5,7 @@ import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
 import 'package:wanandroid/fonts/IconF.dart';
 import 'package:wanandroid/widget/BackBtn.dart';
 import 'package:wanandroid/common/CollectUtil.dart';
+import 'dart:async';
 
 class WebViewPage extends StatefulWidget {
   final String url;
@@ -30,13 +31,23 @@ class WebViewPage extends StatefulWidget {
 }
 
 class _WebViewState extends State<WebViewPage> {
+  String toastMsg;
+
   @override
   Widget build(BuildContext context) {
     return WebviewScaffold(
 //      headers: User().getHeader(),
       url: widget.getUrl(),
       appBar: AppBar(
-        title: Text(widget.getTitle()),
+        title: Text(
+          null != toastMsg ? toastMsg : widget.getTitle(),
+          style: null != toastMsg
+              ? TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.amberAccent,
+                )
+              : null,
+        ),
         leading: BackBtn(),
         actions: <Widget>[
           _buildStared(context),
@@ -62,8 +73,14 @@ class _WebViewState extends State<WebViewPage> {
                 widget.articleBean.collect = !widget.articleBean.collect;
               });
             } else {
-              print(">>> error $errorMsg");
-//              Toast.show(context, errorMsg);
+              setState(() {
+                toastMsg = errorMsg;
+              });
+              Timer(Duration(seconds: 2), () {
+                setState(() {
+                  toastMsg = null;
+                });
+              });
             }
           });
         },

@@ -9,7 +9,7 @@ class CollectUtil {
   static updateCollectState(
       BuildContext context, BlogListDataItemModel model, Function callback) {
     if (!User().isLogin()) {
-      callback(false, "收藏操作需要先登录哈");
+      callback(false, "收藏需要先登录哈");
     } else {
       if (model.collect) {
         _exeResponse(_unCollectArticle(model), callback);
