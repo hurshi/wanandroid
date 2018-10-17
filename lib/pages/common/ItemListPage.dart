@@ -101,7 +101,7 @@ class _ItemListPageState extends State<ItemListPage>
     BlogListDataItemModel item = _listData[index];
     return GestureDetector(
       onTap: () {
-        Router().openWeb(context, item.link, item.title);
+        Router().openArticle(context, item);
       },
       child: Padding(
         padding: EdgeInsets.fromLTRB(5.0, 2.5, 5.0, 2.5),

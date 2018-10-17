@@ -6,6 +6,7 @@ import 'package:wanandroid/pages/mine/MinePage.dart';
 import 'package:wanandroid/pages/mpwechat/MpWechatPage.dart';
 import 'package:wanandroid/pages/project/ProjectPage.dart';
 import 'package:wanandroid/common/User.dart';
+import 'package:wanandroid/fonts/IconF.dart';
 
 class ApplicationPage extends StatefulWidget {
   @override
@@ -21,23 +22,23 @@ class _ApplicationPageState extends State<ApplicationPage>
 
   final List<BottomNavigationBarItem> _bottomTabs = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
-        icon: Icon(Icons.assignment),
+        icon: Icon(IconF.ego_blog),
         title: Text(GlobalConfig.homeTab),
         backgroundColor: GlobalConfig.colorPrimary),
     BottomNavigationBarItem(
-        icon: Icon(Icons.branding_watermark),
+        icon: Icon(IconF.project),
         title: Text(GlobalConfig.projectTab),
         backgroundColor: GlobalConfig.colorPrimary),
     BottomNavigationBarItem(
-        icon: Icon(Icons.color_lens),
+        icon: Icon(IconF.weixin),
         title: Text(GlobalConfig.mpWechatTab),
         backgroundColor: GlobalConfig.colorPrimary),
     BottomNavigationBarItem(
-        icon: Icon(Icons.developer_board),
+        icon: Icon(IconF.institutionalframework),
         title: Text(GlobalConfig.treeTab),
         backgroundColor: GlobalConfig.colorPrimary),
     BottomNavigationBarItem(
-        icon: Icon(Icons.assignment_ind),
+        icon: Icon(IconF.wode),
         title: Text(GlobalConfig.mineTab),
         backgroundColor: GlobalConfig.colorPrimary),
   ];
