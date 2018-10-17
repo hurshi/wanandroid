@@ -5,6 +5,7 @@ import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:wanandroid/common/Snack.dart';
 import 'package:wanandroid/common/User.dart';
+import 'package:wanandroid/widget/BackBtn.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage();
@@ -21,6 +22,7 @@ class _LoginPagePageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackBtn(),
         centerTitle: true,
         title: Text("登录"),
       ),

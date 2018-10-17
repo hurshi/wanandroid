@@ -22,7 +22,7 @@ class _ApplicationPageState extends State<ApplicationPage>
 
   final List<BottomNavigationBarItem> _bottomTabs = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
-        icon: Icon(IconF.ego_blog),
+        icon: Icon(IconF.blog),
         title: Text(GlobalConfig.homeTab),
         backgroundColor: GlobalConfig.colorPrimary),
     BottomNavigationBarItem(
@@ -30,15 +30,15 @@ class _ApplicationPageState extends State<ApplicationPage>
         title: Text(GlobalConfig.projectTab),
         backgroundColor: GlobalConfig.colorPrimary),
     BottomNavigationBarItem(
-        icon: Icon(IconF.weixin),
+        icon: Icon(IconF.wechat),
         title: Text(GlobalConfig.mpWechatTab),
         backgroundColor: GlobalConfig.colorPrimary),
     BottomNavigationBarItem(
-        icon: Icon(IconF.institutionalframework),
+        icon: Icon(IconF.tree),
         title: Text(GlobalConfig.treeTab),
         backgroundColor: GlobalConfig.colorPrimary),
     BottomNavigationBarItem(
-        icon: Icon(IconF.wode),
+        icon: Icon(IconF.me),
         title: Text(GlobalConfig.mineTab),
         backgroundColor: GlobalConfig.colorPrimary),
   ];

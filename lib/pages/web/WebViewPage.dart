@@ -3,6 +3,7 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:wanandroid/common/StringUtil.dart';
 import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
 import 'package:wanandroid/fonts/IconF.dart';
+import 'package:wanandroid/widget/BackBtn.dart';
 
 class WebViewPage extends StatefulWidget {
   final String url;
@@ -35,6 +36,7 @@ class _WebViewState extends State<WebViewPage> {
       url: widget.getUrl(),
       appBar: AppBar(
         title: Text(widget.getTitle()),
+        leading: BackBtn(),
         actions: <Widget>[
           _buildStared(),
         ],
@@ -48,7 +50,7 @@ class _WebViewState extends State<WebViewPage> {
     } else
       return IconButton(
         icon: Icon(
-          (widget.articleBean.collect) ? IconF.xihuan_shi : IconF.xihuan_kong,
+          (widget.articleBean.collect) ? IconF.like_fill : IconF.like_stroke,
           color: Colors.white,
         ),
         onPressed: () {

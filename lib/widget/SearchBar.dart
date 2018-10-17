@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:wanandroid/fonts/IconF.dart';
 
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -114,7 +115,7 @@ class SearchBar {
       backgroundColor: bgColor,
       leading: showBackButton
           ? IconButton(
-              icon: const BackButtonIcon(),
+              icon: Icon(IconF.back),
               color: null,
               tooltip: MaterialLocalizations.of(context).backButtonTooltip,
               onPressed: () {
@@ -158,7 +159,7 @@ class SearchBar {
           : <Widget>[
               // Show an icon if clear is not active, so there's no ripple on tap
               new IconButton(
-                  icon: new Icon(Icons.clear,
+                  icon: new Icon(IconF.wrong,
                       color: _clearActive
                           ? clearButtonColor
                           : clearButtonDisablesColor),
