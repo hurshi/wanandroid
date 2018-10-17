@@ -4,6 +4,7 @@ import 'package:wanandroid/common/StringUtil.dart';
 import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
 import 'package:wanandroid/fonts/IconF.dart';
 import 'package:wanandroid/widget/BackBtn.dart';
+import 'package:wanandroid/common/CollectUtil.dart';
 
 class WebViewPage extends StatefulWidget {
   final String url;
@@ -38,13 +39,13 @@ class _WebViewState extends State<WebViewPage> {
         title: Text(widget.getTitle()),
         leading: BackBtn(),
         actions: <Widget>[
-          _buildStared(),
+          _buildStared(context),
         ],
       ),
     );
   }
 
-  Widget _buildStared() {
+  Widget _buildStared(BuildContext context) {
     if (null == widget.articleBean) {
       return Text("");
     } else
@@ -54,8 +55,16 @@ class _WebViewState extends State<WebViewPage> {
           color: Colors.white,
         ),
         onPressed: () {
-          setState(() {
-            widget.articleBean.collect = !widget.articleBean.collect;
+          CollectUtil.updateCollectState(context, widget.articleBean,
+              (bool isOK, String errorMsg) {
+            if (isOK) {
+              setState(() {
+                widget.articleBean.collect = !widget.articleBean.collect;
+              });
+            } else {
+              print(">>> error $errorMsg");
+//              Toast.show(context, errorMsg);
+            }
           });
         },
       );
