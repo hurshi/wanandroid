@@ -73,4 +73,25 @@ class CommonService {
     });
     return await Dio().post(Api.LOGIN, data: formData);
   }
+
+  Future<Response> collectInArticles(int id) async {
+    return await Dio().post("${Api.COLLECT_IN_ARTICLE}$id/json",
+        options: Options(headers: User().getHeader()));
+  }
+
+  Future<Response> unCollectArticle(int id) async {
+    return await Dio().post("${Api.UNCOLLECT_ARTICLE}$id/json",
+        options: Options(headers: User().getHeader()));
+  }
+
+  Future<Response> collectOutArticles(
+      String title, String author, String link) async {
+    FormData formData = new FormData.from({
+      "title": "$title",
+      "author": "$author",
+      "link": "$link",
+    });
+    return await Dio().post(Api.COLLECT_OUT_ARTICLE,
+        data: formData, options: Options(headers: User().getHeader()));
+  }
 }
