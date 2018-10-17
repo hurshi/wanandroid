@@ -9,6 +9,7 @@ import 'package:wanandroid/pages/common/ItemListPage.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
+import 'package:wanandroid/fonts/IconF.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -38,7 +39,7 @@ class _HomePageState extends State<HomePage>
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: Icon(IconF.search),
             onPressed: () {
               Router().openSearch(context);
             },
