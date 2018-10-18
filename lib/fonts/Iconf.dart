@@ -14,6 +14,7 @@ class IconF {
     static const IconData back = const IconData(0xe64a, fontFamily: font_name);
     static const IconData back2 = const IconData(0xe62b, fontFamily: font_name);
     static const IconData blog = const IconData(0xe632, fontFamily: font_name);
+    static const IconData browser = const IconData(0xe79c, fontFamily: font_name);
     static const IconData like_fill = const IconData(0xe65e, fontFamily: font_name);
     static const IconData like_stroke = const IconData(0xe65f, fontFamily: font_name);
     static const IconData me = const IconData(0xe6ff, fontFamily: font_name);

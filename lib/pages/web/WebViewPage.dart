@@ -6,6 +6,7 @@ import 'package:wanandroid/fonts/IconF.dart';
 import 'package:wanandroid/widget/BackBtn.dart';
 import 'package:wanandroid/common/CollectUtil.dart';
 import 'dart:async';
+import 'package:url_launcher/url_launcher.dart';
 
 class WebViewPage extends StatefulWidget {
   final String url;
@@ -51,6 +52,7 @@ class _WebViewState extends State<WebViewPage> {
         leading: BackBtn(),
         actions: <Widget>[
           _buildStared(context),
+          _buildOpenWithBrowser(),
         ],
       ),
     );
@@ -85,5 +87,14 @@ class _WebViewState extends State<WebViewPage> {
           });
         },
       );
+  }
+
+  Widget _buildOpenWithBrowser() {
+    return IconButton(
+      icon: Icon(IconF.browser),
+      onPressed: () {
+        launch(widget.getUrl());
+      },
+    );
   }
 }

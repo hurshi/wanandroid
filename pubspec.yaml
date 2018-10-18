@@ -28,6 +28,7 @@ dependencies:
 #  material_search: ^0.2.8
   shared_preferences: ^0.4.3
   flutter_svg: ^0.6.1+1
+  url_launcher: 4.0.1
 
 
 dev_dependencies:
