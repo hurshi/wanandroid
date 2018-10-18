@@ -1,12 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-import 'package:wanandroid/common/StringUtil.dart';
-import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
-import 'package:wanandroid/fonts/IconF.dart';
-import 'package:wanandroid/widget/BackBtn.dart';
-import 'package:wanandroid/common/CollectUtil.dart';
-import 'dart:async';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wanandroid/common/CollectUtil.dart';
+import 'package:wanandroid/common/StringUtil.dart';
+import 'package:wanandroid/fonts/IconF.dart';
+import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
+import 'package:wanandroid/widget/BackBtn.dart';
 
 class WebViewPage extends StatefulWidget {
   final String url;
@@ -25,6 +26,7 @@ class WebViewPage extends StatefulWidget {
   }
 
   String getTitle() {
+//    return ""; //在标题栏不展示文章title，更加简介
     return (!StringUtil.isNullOrEmpty(title))
         ? title
         : ((null != articleBean) ? articleBean.title : "");
@@ -42,10 +44,11 @@ class _WebViewState extends State<WebViewPage> {
       appBar: AppBar(
         title: Text(
           null != toastMsg ? toastMsg : widget.getTitle(),
+          textAlign: null != toastMsg ? TextAlign.center : TextAlign.start,
           style: null != toastMsg
               ? TextStyle(
                   fontSize: 15.0,
-                  color: Colors.amberAccent,
+                  color: Colors.yellow,
                 )
               : null,
         ),
