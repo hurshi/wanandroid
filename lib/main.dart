@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: '玩安卓',
       theme: new ThemeData(
+        fontFamily: "noto",
         primarySwatch: GlobalConfig.colorPrimary,
       ),
       home: new ApplicationPage(),

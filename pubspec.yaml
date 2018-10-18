@@ -48,6 +48,15 @@ flutter:
         fonts:
           - asset: fonts/iconfont.ttf
 
+      - family: noto
+        fonts:
+#          - asset: fonts/source_han_sans_cn_normal.otf
+          - asset: fonts/NotoSansCJKsc-Thin.otf
+#          - asset: fonts/NotoSansCJKsc-Light.otf
+#          - asset: fonts/NotoSansCJKsc-Light.otf
+#            weight: 700
+
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
