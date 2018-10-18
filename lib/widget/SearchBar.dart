@@ -54,6 +54,8 @@ class SearchBar {
 
   final bool autoShowKeyboard;
   final double elevation;
+  final double textSize;
+  final double clearBtnSize;
 
   SearchBar(
       {@required this.setState,
@@ -62,6 +64,8 @@ class SearchBar {
       this.hintText = 'Search',
       this.bgColor,
       this.textColor,
+      this.textSize = 16.0,
+      this.clearBtnSize = 20.0,
       this.closeOnSubmit = true,
       this.clearOnSubmit = true,
       this.showBackButton = true,
@@ -132,12 +136,12 @@ class SearchBar {
 //            focusNode: _focusNode,
             key: new Key('SearchBarTextField'),
             keyboardType: TextInputType.text,
-            style: new TextStyle(color: textColor, fontSize: 16.0),
+            style: new TextStyle(color: textColor, fontSize: textSize),
             decoration: new InputDecoration(
                 hintText: hintText,
                 hintStyle: new TextStyle(
 //                    color: textColor,
-                    fontSize: 16.0),
+                    fontSize: textSize),
                 border: null),
             onChanged: this.onChanged,
             onSubmitted: (String val) async {
@@ -160,6 +164,7 @@ class SearchBar {
               // Show an icon if clear is not active, so there's no ripple on tap
               new IconButton(
                   icon: new Icon(IconF.wrong,
+                      size: clearBtnSize,
                       color: _clearActive
                           ? clearButtonColor
                           : clearButtonDisablesColor),

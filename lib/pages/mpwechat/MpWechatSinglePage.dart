@@ -42,7 +42,11 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _searchbar.build(context),
+        Card(
+          elevation: 5.0,
+          color: Colors.grey,
+          child: _searchbar.build(context),
+        ),
         Expanded(
           child: _itemListPage,
         )
@@ -61,6 +65,7 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
     _searchbar = SearchBar(
       setState: setState,
       onSubmitted: print,
+      textSize: 13.0,
       showClearButton: true,
       closeOnSubmit: false,
       hintText: loadingMsg,

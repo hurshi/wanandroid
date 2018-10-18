@@ -34,6 +34,7 @@ class _TreePageState extends State<TreePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         title: Text(GlobalConfig.treeTab),
         centerTitle: true,
       ),
@@ -50,12 +51,23 @@ class _TreePageState extends State<TreePage>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          TabBar(
-            labelColor: GlobalConfig.colorPrimary,
-            isScrollable: true,
-            unselectedLabelColor: Colors.black45,
-            indicatorColor: GlobalConfig.colorPrimary,
-            tabs: _buildRootTabs(),
+          Card(
+            elevation: 4.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(0.0)),
+            ),
+            margin: EdgeInsets.all(0.0),
+            color: GlobalConfig.colorPrimary,
+            child: TabBar(
+              labelColor: Colors.white,
+              isScrollable: true,
+              unselectedLabelColor: GlobalConfig.color_white_a80,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicatorPadding: EdgeInsets.only(bottom: 2.0),
+              indicatorWeight: 1.0,
+              indicatorColor: Colors.white,
+              tabs: _buildRootTabs(),
+            ),
           ),
           Expanded(
             child: TabBarView(children: _buildRootPages()),

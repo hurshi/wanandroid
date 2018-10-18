@@ -24,6 +24,7 @@ class _MinePageState extends State<MinePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         title: Text(GlobalConfig.mineTab),
         centerTitle: true,
       ),

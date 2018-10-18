@@ -23,6 +23,13 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
     widget.item.title = widget.item.title
         .replaceAll(RegExp("(<em[^>]*>)|(</em>)"), "")
         .replaceAll("&mdash;", "-");
+
+    widget.item.desc = (null == widget.item.desc)
+        ? ""
+        : widget.item.desc
+            .replaceAll(RegExp("\n{2,}"), "\n")
+            .replaceAll(RegExp("\s{2,}"), " ");
+
     return GestureDetector(
       onTap: () {
         Router().openArticle(context, widget.item);
@@ -30,8 +37,12 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 2.5),
         child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(3.0)),
+          ),
+          elevation: 5.0,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
             child: _buildListViewItem(widget.item),
           ),
         ),
@@ -80,6 +91,13 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
           fontWeight: FontWeight.w500),
       textAlign: TextAlign.left,
     ));
+    if (item.desc.length > item.title.length) {
+      list.add(Text(
+        item.desc,
+        maxLines: 3,
+        style: TextStyle(color: GlobalConfig.color_dark_gray, fontSize: 13.0),
+      ));
+    }
     list.add(Padding(
       padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
       child: Row(

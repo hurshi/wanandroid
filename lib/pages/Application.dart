@@ -60,7 +60,7 @@ class _ApplicationPageState extends State<ApplicationPage>
     User().refreshUserData();
     return Scaffold(
       body: PageView(
-//          physics: NeverScrollableScrollPhysics(),
+        physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           HomePage(),
           ProjectPage(),

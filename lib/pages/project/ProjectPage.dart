@@ -35,6 +35,7 @@ class _ProjectPageState extends State<ProjectPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         title: Text(GlobalConfig.projectTab),
         centerTitle: true,
       ),
@@ -51,12 +52,23 @@ class _ProjectPageState extends State<ProjectPage>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          TabBar(
-            labelColor: GlobalConfig.colorPrimary,
-            isScrollable: true,
-            unselectedLabelColor: Colors.black45,
-            indicatorColor: GlobalConfig.colorPrimary,
-            tabs: _buildTabs(),
+          Card(
+            elevation: 4.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(0.0)),
+            ),
+            margin: EdgeInsets.all(0.0),
+            color: GlobalConfig.colorPrimary,
+            child: TabBar(
+              labelColor: Colors.white,
+              isScrollable: true,
+              unselectedLabelColor: GlobalConfig.color_white_a80,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicatorPadding: EdgeInsets.only(bottom: 2.0),
+              indicatorWeight: 1.0,
+              indicatorColor: Colors.white,
+              tabs: _buildTabs(),
+            ),
           ),
           Expanded(
             child: TabBarView(children: _buildPages()),
