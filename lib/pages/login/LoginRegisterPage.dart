@@ -7,14 +7,14 @@ import 'package:wanandroid/common/Snack.dart';
 import 'package:wanandroid/common/User.dart';
 import 'package:wanandroid/widget/BackBtn.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage();
+class LoginRegisterPage extends StatefulWidget {
+  LoginRegisterPage();
 
   @override
-  State<StatefulWidget> createState() => new _LoginPagePageState();
+  State<StatefulWidget> createState() => new _LoginRegisterPagePageState();
 }
 
-class _LoginPagePageState extends State<LoginPage> {
+class _LoginRegisterPagePageState extends State<LoginRegisterPage> {
   bool isLogin = true;
   TextFormField _userNameInputForm;
   TextFormField _psdInputForm;

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:wanandroid/pages/web/WebViewPage.dart';
 import 'package:wanandroid/pages/search/SearchDetailPage.dart';
-import 'package:wanandroid/pages/login/LoginPage.dart';
+import 'package:wanandroid/pages/login/LoginRegisterPage.dart';
 import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
 
 class Router {
@@ -37,7 +37,7 @@ class Router {
     return Navigator.of(context).push(PageRouteBuilder(
         transitionsBuilder: _transitionsBuilder,
         pageBuilder: (BuildContext context, _, __) {
-          return LoginPage();
+          return LoginRegisterPage();
         }));
   }
 

@@ -125,7 +125,7 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
           )));
     });
     String chapterNameStr =
-        "${(list.length <= 0 ? "" : "  ")}${StringUtil.isNullOrEmpty(item.superChapterName) ? "" : item.superChapterName}"
+        "${(list.length <= 0 ? "分类：" : "  ")}${StringUtil.isNullOrEmpty(item.superChapterName) ? "" : item.superChapterName}"
         "${(StringUtil.isNullOrEmpty(item.superChapterName) || StringUtil.isNullOrEmpty(item.chapterName)) ? "" : "/"}"
         "${StringUtil.isNullOrEmpty(item.chapterName) ? "" : item.chapterName}";
     if (!StringUtil.isNullOrEmpty(chapterNameStr.trim())) {
