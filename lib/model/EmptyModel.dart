@@ -4,8 +4,8 @@ import 'package:wanandroid/model/RootModel.dart';
 part 'EmptyModel.g.dart';
 
 @JsonSerializable()
-class EmptyModel extends RootModel<String> {
-  EmptyModel(String data, int errorCode, String errorMsg)
+class EmptyModel extends RootModel<dynamic> {
+  EmptyModel(dynamic data, int errorCode, String errorMsg)
       : super(data, errorCode, errorMsg);
 
   factory EmptyModel.fromJson(Map<String, dynamic> json) =>

@@ -7,8 +7,8 @@ part of 'EmptyModel.dart';
 // **************************************************************************
 
 EmptyModel _$EmptyModelFromJson(Map<String, dynamic> json) {
-  return EmptyModel(json['data'] as String, json['errorCode'] as int,
-      json['errorMsg'] as String);
+  return EmptyModel(
+      json['data'], json['errorCode'] as int, json['errorMsg'] as String);
 }
 
 Map<String, dynamic> _$EmptyModelToJson(EmptyModel instance) =>

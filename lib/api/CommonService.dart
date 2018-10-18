@@ -11,19 +11,19 @@ import 'Api.dart';
 
 class CommonService {
   void getBanner(Function callback) async {
-    Dio().get(Api.HOME_BANNER).then((response) {
+    Dio().get(Api.HOME_BANNER, options: _getOptions()).then((response) {
       callback(HomeBannerModel.fromJson(response.data));
     });
   }
 
   void getProjectClassify(Function callback) async {
-    Dio().get(Api.PROJECT_CLASSIFY).then((response) {
+    Dio().get(Api.PROJECT_CLASSIFY, options: _getOptions()).then((response) {
       callback(ProjectClassifyModel.fromJson(response.data));
     });
   }
 
   void getMpWechatNames(Function callback) async {
-    Dio().get(Api.MP_WECHAT_NAMES).then((response) {
+    Dio().get(Api.MP_WECHAT_NAMES, options: _getOptions()).then((response) {
       callback((response.data as List)
           ?.map((e) => e == null
               ? null
@@ -33,37 +33,39 @@ class CommonService {
   }
 
   Future<Response> getMpWechatListData(String url) async {
-    return await Dio().get(url);
+    return await Dio().get(url, options: _getOptions());
   }
 
   void getTrees(Function callback) async {
-    Dio().get(Api.TREES_LIST).then((response) {
+    Dio().get(Api.TREES_LIST, options: _getOptions()).then((response) {
       callback(TreeModel.fromJson(response.data));
     });
   }
 
   Future<Response> getTreeItemList(String url) async {
-    return await Dio().get(url);
+    return await Dio().get(url, options: _getOptions());
   }
 
   Future<Response> getArticleListData(int page) async {
-    return await Dio().get("${Api.HOME_LIST}$page/json");
+    return await Dio()
+        .get("${Api.HOME_LIST}$page/json", options: _getOptions());
   }
 
   Future<Response> getCollectListData(int page) async {
-    return await Dio().get("${Api.COLLECTED_ARTICLE}$page/json",
-        options: Options(headers: User().getHeader()));
+    return await Dio()
+        .get("${Api.COLLECTED_ARTICLE}$page/json", options: _getOptions());
   }
 
   Future<Response> getProjectListData(String url) async {
-    return await Dio().get(url);
+    return await Dio().get(url, options: _getOptions());
   }
 
   Future<Response> getSearchListData(String key, int page) async {
     FormData formData = new FormData.from({
       "k": "$key",
     });
-    return await Dio().post("${Api.SEARCH_LIST}$page/json", data: formData);
+    return await Dio().post("${Api.SEARCH_LIST}$page/json",
+        data: formData, options: _getOptions());
   }
 
   Future<Response> login(String username, String password) async {
@@ -75,13 +77,13 @@ class CommonService {
   }
 
   Future<Response> collectInArticles(int id) async {
-    return await Dio().post("${Api.COLLECT_IN_ARTICLE}$id/json",
-        options: Options(headers: User().getHeader()));
+    return await Dio()
+        .post("${Api.COLLECT_IN_ARTICLE}$id/json", options: _getOptions());
   }
 
   Future<Response> unCollectArticle(int id) async {
-    return await Dio().post("${Api.UNCOLLECT_ARTICLE}$id/json",
-        options: Options(headers: User().getHeader()));
+    return await Dio()
+        .post("${Api.UNCOLLECT_ARTICLE}$id/json", options: _getOptions());
   }
 
   Future<Response> collectOutArticles(
@@ -91,7 +93,11 @@ class CommonService {
       "author": "$author",
       "link": "$link",
     });
-    return await Dio().post(Api.COLLECT_OUT_ARTICLE,
-        data: formData, options: Options(headers: User().getHeader()));
+    return await Dio()
+        .post(Api.COLLECT_OUT_ARTICLE, data: formData, options: _getOptions());
+  }
+
+  Options _getOptions() {
+    return Options(headers: User().getHeader());
   }
 }

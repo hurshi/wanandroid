@@ -57,7 +57,7 @@ class _WebViewState extends State<WebViewPage> {
   }
 
   Widget _buildStared(BuildContext context) {
-    if (null == widget.articleBean) {
+    if (null == widget.articleBean || null == widget.articleBean.collect) {
       return Text("");
     } else
       return IconButton(
