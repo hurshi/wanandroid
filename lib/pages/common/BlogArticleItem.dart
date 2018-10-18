@@ -20,8 +20,9 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
   @override
   Widget build(BuildContext context) {
     //去掉html中的高亮
-    widget.item.title =
-        widget.item.title.replaceAll(RegExp("(<em[^>]*>)|(</em>)"), "");
+    widget.item.title = widget.item.title
+        .replaceAll(RegExp("(<em[^>]*>)|(</em>)"), "")
+        .replaceAll("&mdash;", "-");
     return GestureDetector(
       onTap: () {
         Router().openArticle(context, widget.item);
@@ -73,7 +74,10 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
     List<Widget> list = List();
     list.add(Text(
       item.title,
-      style: TextStyle(fontSize: 16.0, color: GlobalConfig.color_black),
+      style: TextStyle(
+          fontSize: 16.0,
+          color: GlobalConfig.color_black,
+          fontWeight: FontWeight.w500),
       textAlign: TextAlign.left,
     ));
     list.add(Padding(
@@ -84,11 +88,12 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
         children: <Widget>[
           Icon(
             IconF.time,
-            size: 15.0,
+            size: 13.0,
             color: GlobalConfig.color_dark_gray,
           ),
           Text(" ${item.niceDate} @${item.author}",
-              style: TextStyle(color: GlobalConfig.color_dark_gray))
+              style: TextStyle(
+                  color: GlobalConfig.color_dark_gray, fontSize: 13.0))
         ],
       ),
     ));

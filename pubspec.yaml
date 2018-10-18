@@ -50,11 +50,7 @@ flutter:
 
       - family: noto
         fonts:
-#          - asset: fonts/source_han_sans_cn_normal.otf
-          - asset: fonts/NotoSansCJKsc-Thin.otf
-#          - asset: fonts/NotoSansCJKsc-Light.otf
-#          - asset: fonts/NotoSansCJKsc-Light.otf
-#            weight: 700
+          - asset: fonts/NotoSansCJKsc-Regular.otf
 
 
   # The following line ensures that the Material Icons font is

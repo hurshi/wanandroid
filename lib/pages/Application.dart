@@ -58,28 +58,25 @@ class _ApplicationPageState extends State<ApplicationPage>
   @override
   Widget build(BuildContext context) {
     User().refreshUserData();
-    return MaterialApp(
-      theme: ThemeData(primaryColor: GlobalConfig.colorPrimary),
-      home: Scaffold(
-        body: PageView(
+    return Scaffold(
+      body: PageView(
 //          physics: NeverScrollableScrollPhysics(),
-          children: <Widget>[
-            HomePage(),
-            ProjectPage(),
-            MpWechatPage(),
-            TreePage(),
-            MinePage()
-          ],
-          onPageChanged: onPageChanged,
-          controller: _pageController,
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: _bottomTabs,
-          currentIndex: _page,
-          fixedColor: GlobalConfig.colorPrimary,
-          type: BottomNavigationBarType.fixed,
-          onTap: onTap,
-        ),
+        children: <Widget>[
+          HomePage(),
+          ProjectPage(),
+          MpWechatPage(),
+          TreePage(),
+          MinePage()
+        ],
+        onPageChanged: onPageChanged,
+        controller: _pageController,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: _bottomTabs,
+        currentIndex: _page,
+        fixedColor: GlobalConfig.colorPrimary,
+        type: BottomNavigationBarType.fixed,
+        onTap: onTap,
       ),
     );
   }

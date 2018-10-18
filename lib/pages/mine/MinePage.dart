@@ -112,7 +112,9 @@ class _MinePageState extends State<MinePage> {
       content: Text("确定退出登录？"),
       actions: <Widget>[
         RaisedButton(
+          elevation: 0.0,
           child: Text("OK"),
+          color: Colors.transparent,
           onPressed: () {
             User().logout();
             User().refreshUserData(callback: () {
@@ -122,6 +124,8 @@ class _MinePageState extends State<MinePage> {
           },
         ),
         RaisedButton(
+          elevation: 0.0,
+          color: Colors.transparent,
           child: Text("No No No"),
           onPressed: () {
             Navigator.pop(context);
