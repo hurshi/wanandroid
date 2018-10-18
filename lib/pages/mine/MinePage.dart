@@ -89,7 +89,9 @@ class _MinePageState extends State<MinePage> {
           color: const Color(0xffffff),
           image: DecorationImage(
             image: CachedNetworkImageProvider(
-                "${Api.AVATAR_LEGO}${getUserName().hashCode.toString().substring(0, 1)}.jpg"),
+//                "${Api.AVATAR_GITHUB}${getUserName().hashCode.toString()}.png"),
+                "${Api.AVATAR_CODING}${getUserName().hashCode % 20 + 1}.png"),
+//                "${Api.AVATAR_LEGO}${getUserName().hashCode.toString().substring(0, 1)}.jpg"),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.all(new Radius.circular(500.0)),
