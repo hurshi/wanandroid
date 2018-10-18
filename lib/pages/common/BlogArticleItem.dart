@@ -129,16 +129,6 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 13.0, color: GlobalConfig.color_dark_gray),
       ));
-//      list.add(StrokeWidget(
-//        strokeWidth: 0.5,
-//        edgeInsets: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-//        color: Colors.transparent,
-//        childWidget: Text(
-//          chapterNameStr,
-//          textAlign: TextAlign.center,
-//          style: TextStyle(fontSize: 11.0, color: GlobalConfig.color_dark_gray),
-//        ),
-//      ));
     }
     return list;
   }

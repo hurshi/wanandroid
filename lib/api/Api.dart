@@ -17,6 +17,7 @@ class Api {
   static final String AVATAR = "https://api.adorable.io/avatars/200/";
   static final String AVATAR_LEGO = "https://randomuser.me/api/portraits/lego/";
   static final String LOGIN = "http://www.wanandroid.com/user/login";
+  static final String REGISTER = "http://www.wanandroid.com/user/register";
   static final String COLLECTED_ARTICLE =
       "http://www.wanandroid.com/lg/collect/list/";
   static final String COLLECT_IN_ARTICLE =

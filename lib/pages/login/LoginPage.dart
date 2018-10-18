@@ -15,6 +15,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPagePageState extends State<LoginPage> {
+  bool isLogin = true;
   TextFormField _userNameInputForm;
   TextFormField _psdInputForm;
 
@@ -24,7 +25,7 @@ class _LoginPagePageState extends State<LoginPage> {
       appBar: AppBar(
         leading: BackBtn(),
         centerTitle: true,
-        title: Text("登录"),
+        title: Text(isLogin ? "登录" : "注册"),
       ),
       body: Builder(builder: (ct) {
         return ListView(
@@ -53,7 +54,7 @@ class _LoginPagePageState extends State<LoginPage> {
       padding: const EdgeInsets.all(8.0),
       color: GlobalConfig.colorPrimary,
       textColor: Colors.white,
-      child: Text("登录"),
+      child: Text(isLogin ? "登录" : "注册并登录"),
       elevation: 4.0,
       onPressed: () {
         var _userNameStr = _userNameInputForm.controller.text;
@@ -66,7 +67,7 @@ class _LoginPagePageState extends State<LoginPage> {
         } else {
           User().userName = _userNameStr;
           User().password = _psdStr;
-          User().login(callback: (bool loginOK, String errorMsg) {
+          var callback = (bool loginOK, String errorMsg) {
             if (loginOK) {
               Snack.show(context, "登录成功");
               Timer(Duration(milliseconds: 400), () {
@@ -75,7 +76,10 @@ class _LoginPagePageState extends State<LoginPage> {
             } else {
               Snack.show(context, errorMsg);
             }
-          });
+          };
+          isLogin
+              ? User().login(callback: callback)
+              : User().register(callback: callback);
         }
       },
     );
@@ -110,10 +114,14 @@ class _LoginPagePageState extends State<LoginPage> {
   Widget _buildRegBtn() {
     return FlatButton(
       child: Text(
-        '注册新账号',
+        isLogin ? '注册新账号' : '直接登录',
         style: TextStyle(fontSize: 15.0, color: Colors.black54),
       ),
-      onPressed: () {},
+      onPressed: () {
+        setState(() {
+          isLogin = !isLogin;
+        });
+      },
     );
   }
 }

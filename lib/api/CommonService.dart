@@ -76,6 +76,15 @@ class CommonService {
     return await Dio().post(Api.LOGIN, data: formData);
   }
 
+  Future<Response> register(String username, String password) async {
+    FormData formData = new FormData.from({
+      "username": "$username",
+      "password": "$password",
+      "repassword": "$password",
+    });
+    return await Dio().post(Api.REGISTER, data: formData);
+  }
+
   Future<Response> collectInArticles(int id) async {
     return await Dio()
         .post("${Api.COLLECT_IN_ARTICLE}$id/json", options: _getOptions());

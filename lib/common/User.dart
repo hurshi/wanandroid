@@ -3,6 +3,7 @@ import 'package:wanandroid/common/Sp.dart';
 import 'package:wanandroid/model/login/UserModel.dart';
 import 'dart:convert';
 import 'DateUtil.dart';
+import 'package:dio/dio.dart';
 import 'dart:async';
 
 class User {
@@ -63,7 +64,17 @@ class User {
   }
 
   void login({Function callback}) {
-    CommonService().login(userName, password).then((response) {
+    _saveUserInfo(CommonService().login(userName, password),
+        callback: callback);
+  }
+
+  void register({Function callback}) {
+    _saveUserInfo(CommonService().register(userName, password),
+        callback: callback);
+  }
+
+  void _saveUserInfo(Future<Response> responseF, {Function callback}) {
+    responseF.then((response) {
       var userModel = UserModel.fromJson(response.data);
       if (userModel.errorCode == 0) {
         Sp.putUserName(userModel.data.username);
