@@ -5,7 +5,7 @@ class GlobalConfig {
   static Color colorPrimary = Colors.red;
   static Color color_tags = Color(0xFF009a61);
   static Color color_black = Color(0xFF000000);
-  static Color color_dark_gray = Color(0xFF5a5a5a);
+  static Color color_dark_gray = Color(0xFF6b6b6b);
 
   ///导航
   static String homeTab = "博文";

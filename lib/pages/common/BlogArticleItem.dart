@@ -95,6 +95,7 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
     var tags = _buildTagsAndDate(item);
     if (tags.length > 0) {
       list.add(Row(
+        textBaseline: TextBaseline.ideographic,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: tags,
@@ -107,11 +108,15 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
     List<Widget> list = List();
     item.tags?.forEach((tag) {
       list.add(StrokeWidget(
+          strokeWidth: 0.5,
           edgeInsets: EdgeInsets.symmetric(horizontal: 2.0, vertical: 0.0),
           color: GlobalConfig.color_tags,
           childWidget: Text(
             tag.name,
-            style: TextStyle(fontSize: 11.0, color: GlobalConfig.color_tags),
+            style: TextStyle(
+                fontSize: 11.0,
+                color: GlobalConfig.color_tags,
+                fontWeight: FontWeight.w100),
           )));
     });
     String chapterNameStr =
@@ -119,14 +124,21 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
         "${(StringUtil.isNullOrEmpty(item.superChapterName) || StringUtil.isNullOrEmpty(item.chapterName)) ? "" : "/"}"
         "${StringUtil.isNullOrEmpty(item.chapterName) ? "" : item.chapterName}";
     if (!StringUtil.isNullOrEmpty(chapterNameStr.trim())) {
-      list.add(StrokeWidget(
-        edgeInsets: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-        color: Colors.transparent,
-        childWidget: Text(
-          chapterNameStr,
-          style: TextStyle(fontSize: 13.0, color: GlobalConfig.color_dark_gray),
-        ),
+      list.add(Text(
+        chapterNameStr,
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 13.0, color: GlobalConfig.color_dark_gray),
       ));
+//      list.add(StrokeWidget(
+//        strokeWidth: 0.5,
+//        edgeInsets: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+//        color: Colors.transparent,
+//        childWidget: Text(
+//          chapterNameStr,
+//          textAlign: TextAlign.center,
+//          style: TextStyle(fontSize: 11.0, color: GlobalConfig.color_dark_gray),
+//        ),
+//      ));
     }
     return list;
   }
