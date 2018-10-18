@@ -6,6 +6,7 @@ import 'package:wanandroid/common/Router.dart';
 import 'package:wanandroid/common/Snack.dart';
 import 'package:wanandroid/common/User.dart';
 import 'package:wanandroid/widget/BackBtn.dart';
+import 'package:wanandroid/widget/ClearableInputField.dart';
 
 class LoginRegisterPage extends StatefulWidget {
   LoginRegisterPage();
@@ -16,8 +17,8 @@ class LoginRegisterPage extends StatefulWidget {
 
 class _LoginRegisterPagePageState extends State<LoginRegisterPage> {
   bool isLogin = true;
-  TextFormField _userNameInputForm;
-  TextFormField _psdInputForm;
+  ClearableInputField _userNameInputForm;
+  ClearableInputField _psdInputForm;
   TextEditingController _userNameController = TextEditingController();
   TextEditingController _psdController = TextEditingController();
 
@@ -88,27 +89,19 @@ class _LoginRegisterPagePageState extends State<LoginRegisterPage> {
   }
 
   Widget _buildUserNameInputForm() {
-    _userNameInputForm = TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      autofocus: true,
+    _userNameInputForm = ClearableInputField(
       controller: _userNameController,
-      decoration: InputDecoration(
-        hintText: '用户名',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-      ),
+      inputType: TextInputType.emailAddress,
+      hintTxt: '用户名',
     );
     return _userNameInputForm;
   }
 
   Widget _buildPsdInputForm() {
-    _psdInputForm = TextFormField(
-      autofocus: true,
-      obscureText: true,
+    _psdInputForm = ClearableInputField(
       controller: _psdController,
-      decoration: InputDecoration(
-        hintText: '密码',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-      ),
+      obscureText: true,
+      hintTxt: '密码',
     );
     return _psdInputForm;
   }
