@@ -18,6 +18,8 @@ class _LoginRegisterPagePageState extends State<LoginRegisterPage> {
   bool isLogin = true;
   TextFormField _userNameInputForm;
   TextFormField _psdInputForm;
+  TextEditingController _userNameController = TextEditingController();
+  TextEditingController _psdController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +59,8 @@ class _LoginRegisterPagePageState extends State<LoginRegisterPage> {
       child: Text(isLogin ? "登录" : "注册并登录"),
       elevation: 4.0,
       onPressed: () {
-        var _userNameStr = _userNameInputForm.controller.text;
-        var _psdStr = _psdInputForm.controller.text;
+        var _userNameStr = _userNameController.text;
+        var _psdStr = _psdController.text;
         if (null == _userNameStr ||
             null == _psdStr ||
             _userNameStr.length < 6 ||
@@ -89,7 +91,7 @@ class _LoginRegisterPagePageState extends State<LoginRegisterPage> {
     _userNameInputForm = TextFormField(
       keyboardType: TextInputType.emailAddress,
       autofocus: true,
-      controller: TextEditingController(),
+      controller: _userNameController,
       decoration: InputDecoration(
         hintText: '用户名',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -102,7 +104,7 @@ class _LoginRegisterPagePageState extends State<LoginRegisterPage> {
     _psdInputForm = TextFormField(
       autofocus: true,
       obscureText: true,
-      controller: TextEditingController(),
+      controller: _psdController,
       decoration: InputDecoration(
         hintText: '密码',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
