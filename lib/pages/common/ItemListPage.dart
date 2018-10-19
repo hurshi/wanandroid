@@ -88,6 +88,7 @@ class _ItemListPageState extends State<ItemListPage>
       color: GlobalConfig.colorPrimary,
       onRefresh: handleRefresh,
       child: Scaffold(
+        resizeToAvoidBottomPadding: false,
         body: ListView.builder(
             physics: AlwaysScrollableScrollPhysics(),
             itemCount: ((null == _listData) ? 0 : _listData.length) +
