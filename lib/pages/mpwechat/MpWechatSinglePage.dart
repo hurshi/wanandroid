@@ -6,6 +6,8 @@ import 'package:wanandroid/pages/common/ItemListPage.dart';
 import 'package:wanandroid/widget/ClearableInputField.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 
+import 'dart:async';
+
 class MpWechatSinglePage extends StatefulWidget {
   final bool keepAlive;
   final MpWechatModel model;
@@ -22,6 +24,7 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
   String _key = "";
   ItemListPage _itemListPage;
   String loadingMsg = "搜索本公众号里面的历史文章";
+  GlobalKey _headKey = GlobalKey();
 
   @override
   bool get wantKeepAlive => widget.keepAlive;
@@ -29,19 +32,17 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
   @override
   void initState() {
     super.initState();
-    _itemListPage = ItemListPage(
-        emptyMsg: "臣妾搜不到呀",
-        request: (page) {
-          return CommonService().getMpWechatListData(
-              "${Api.MP_WECHAT_LIST}${widget.model.id}/$page/json?k=$_key");
-        });
+    Timer(Duration(seconds: 2), () {
+      _itemListPage?.handleScroll(
+          _headKey.currentContext?.findRenderObject()?.paintBounds?.height);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Card(
+    _itemListPage = ItemListPage(
+        header: Card(
+          key: _headKey,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(0.0)),
           ),
@@ -53,11 +54,12 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
             child: getSearchView(),
           ),
         ),
-        Expanded(
-          child: _itemListPage,
-        )
-      ],
-    );
+        emptyMsg: "臣妾搜不到呀",
+        request: (page) {
+          return CommonService().getMpWechatListData(
+              "${Api.MP_WECHAT_LIST}${widget.model.id}/$page/json?k=$_key");
+        });
+    return _itemListPage;
   }
 
   Widget getSearchView() {
@@ -82,21 +84,5 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
             _itemListPage.handleRefresh();
           },
         ));
-//    return ClearableInputField(
-//      hintTxt: loadingMsg,
-//      autoFocus: false,
-//      padding: EdgeInsets.symmetric(horizontal: 5.0),
-//      controller: _controller,
-//      border: OutlineInputBorder(
-//          gapPadding: 0.0,
-//          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-//          borderSide: BorderSide(
-//              style: BorderStyle.none, color: fillColor, width: 0.0)),
-//      fillColor: fillColor,
-//      onchange: (str) {
-//        _key = str;
-//        _itemListPage.handleRefresh();
-//      },
-//    );
   }
 }

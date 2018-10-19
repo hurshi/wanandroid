@@ -30,6 +30,10 @@ class ItemListPage extends StatefulWidget {
     _itemListPageState.handleRefresh();
   }
 
+  void handleScroll(double offset) {
+    _itemListPageState.handleScroll(offset);
+  }
+
   @override
   State<StatefulWidget> createState() {
     _itemListPageState = _ItemListPageState();
@@ -75,9 +79,18 @@ class _ItemListPageState extends State<ItemListPage>
     });
   }
 
+  void handleScroll(double offset) {
+    if (_scrollController.position.pixels <= offset)
+      _scrollController.animateTo(offset,
+          duration: Duration(milliseconds: 200), curve: Curves.fastOutSlowIn);
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (_listData.length <= (_haveMoreData ? 1 : 0)) {
+    var itemCount = ((null == _listData) ? 0 : _listData.length) +
+        (null == widget.header ? 0 : 1) +
+        (_haveMoreData ? 1 : 0);
+    if (itemCount <= 0) {
       return EmptyHolder(
         msg: (widget.emptyMsg == null)
             ? (_haveMoreData ? "loading" : "not found")
@@ -91,9 +104,7 @@ class _ItemListPageState extends State<ItemListPage>
         resizeToAvoidBottomPadding: false,
         body: ListView.builder(
             physics: AlwaysScrollableScrollPhysics(),
-            itemCount: ((null == _listData) ? 0 : _listData.length) +
-                (null == widget.header ? 0 : 1) +
-                (_haveMoreData ? 1 : 0),
+            itemCount: itemCount,
             controller: _scrollController,
             itemBuilder: (context, index) {
               if (index == 0 && null != widget.header) {
