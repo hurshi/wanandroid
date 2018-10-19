@@ -17,7 +17,7 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage>
-    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
+    with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   List<ProjectClassifyItemModel> _list = List();
   var _maxCachePageNums = 5;
   var _cachedPageNum = 0;
@@ -37,23 +37,28 @@ class _ProjectPageState extends State<ProjectPage>
     return Scaffold(
       appBar: AppBar(
         title: Text(GlobalConfig.projectTab),
-        bottom: (null == _tabbarController || _list.length <= 0)
-            ? null
-            : TabBar(
-                controller: _tabbarController,
-                labelColor: Colors.white,
-                isScrollable: true,
-                unselectedLabelColor: GlobalConfig.color_white_a80,
-                indicatorSize: TabBarIndicatorSize.label,
-                indicatorPadding: EdgeInsets.only(bottom: 2.0),
-                indicatorWeight: 1.0,
-                indicatorColor: Colors.white,
-                tabs: _buildTabs(),
-              ),
+        bottom: _buildTabBar(),
         centerTitle: true,
       ),
       body: _buildBody(),
     );
+  }
+
+  PreferredSizeWidget _buildTabBar() {
+    if (_list.length <= 0) {
+      return null;
+    }
+    _tabbarController = TabController(length: _list.length, vsync: this);
+    return TabBar(
+        controller: _tabbarController,
+        labelColor: Colors.white,
+        isScrollable: true,
+        unselectedLabelColor: GlobalConfig.color_white_a80,
+        indicatorSize: TabBarIndicatorSize.label,
+        indicatorPadding: EdgeInsets.only(bottom: 2.0),
+        indicatorWeight: 1.0,
+        indicatorColor: Colors.white,
+        tabs: _buildTabs());
   }
 
   Widget _buildBody() {
@@ -112,7 +117,6 @@ class _ProjectPageState extends State<ProjectPage>
           _bean.data.forEach((_projectClassifyItemModel) {
             _list.add(_projectClassifyItemModel);
           });
-          _tabbarController = TabController(length: _list.length, vsync: this);
         });
       }
     });
