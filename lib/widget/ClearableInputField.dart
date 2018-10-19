@@ -15,6 +15,7 @@ class ClearableInputField extends StatefulWidget {
   final bool obscureText;
   final EdgeInsetsGeometry padding;
   final Color fillColor;
+  final bool showPrefixIcon;
 
   ClearableInputField(
       {this.onchange,
@@ -28,6 +29,7 @@ class ClearableInputField extends StatefulWidget {
       this.controller,
       this.inputType,
       this.padding,
+      this.showPrefixIcon = false,
       this.obscureText = false});
 
   @override
@@ -54,20 +56,23 @@ class _ClearableInputFieldState extends State<ClearableInputField> {
       onChanged: onTextChanged,
       onSubmitted: onSubmit,
       decoration: InputDecoration(
-        contentPadding:
-            (null == widget.padding) ? EdgeInsets.all(20.0) : widget.padding,
-        hintText: widget.hintTxt,
-        hintStyle: widget.hintStyle,
-        fillColor: widget.fillColor,
-        filled: null != widget.fillColor,
-        border: widget.border,
-        errorBorder: widget.border,
-        focusedBorder: widget.border,
-        enabledBorder: widget.border,
-        disabledBorder: widget.border,
-        focusedErrorBorder: widget.border,
-        suffixIcon: _buildDefaultClearIcon(context, _controller),
-      ),
+          contentPadding:
+              (null == widget.padding) ? EdgeInsets.all(0.0) : widget.padding,
+          hintText: widget.hintTxt,
+          hintStyle: widget.hintStyle,
+          fillColor: widget.fillColor,
+          filled: null != widget.fillColor,
+          border: widget.border,
+          labelText: widget.hintTxt,
+          labelStyle: widget.hintStyle,
+          errorBorder: widget.border,
+          focusedBorder: widget.border,
+          enabledBorder: widget.border,
+          disabledBorder: widget.border,
+          focusedErrorBorder: widget.border,
+          suffixIcon: _buildDefaultClearIcon(context, _controller),
+          prefixIcon:
+              widget.showPrefixIcon ? (_buildDefaultPrefixIcon()) : null),
     );
   }
 
@@ -106,5 +111,9 @@ class _ClearableInputFieldState extends State<ClearableInputField> {
       ),
       visible: _showClearIcon,
     );
+  }
+
+  Widget _buildDefaultPrefixIcon() {
+    return Icon(IconF.search, color: Theme.of(context).textTheme.subhead.color);
   }
 }

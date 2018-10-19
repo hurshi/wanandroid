@@ -61,22 +61,42 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
   }
 
   Widget getSearchView() {
-    Color fillColor = Colors.white;
-    return ClearableInputField(
-      hintTxt: loadingMsg,
-      autoFocus: false,
-      padding: EdgeInsets.symmetric(horizontal: 5.0),
-      controller: _controller,
-      border: OutlineInputBorder(
-          gapPadding: 0.0,
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          borderSide: BorderSide(
-              style: BorderStyle.none, color: fillColor, width: 0.0)),
-      fillColor: fillColor,
-      onchange: (str) {
-        _key = str;
-        _itemListPage.handleRefresh();
-      },
-    );
+    var originTheme = Theme.of(context);
+    return Theme(
+        data: originTheme.copyWith(
+          hintColor: GlobalConfig.color_white_a80,
+          textTheme: TextTheme(subhead: TextStyle(color: Colors.white)),
+        ),
+        child: ClearableInputField(
+          hintTxt: loadingMsg,
+          controller: _controller,
+          autoFocus: false,
+          showPrefixIcon: true,
+          border: UnderlineInputBorder(
+            borderSide:
+                BorderSide(color: Colors.white, style: BorderStyle.solid),
+          ),
+          hintStyle: TextStyle(fontSize: 13.0),
+          onchange: (str) {
+            _key = str;
+            _itemListPage.handleRefresh();
+          },
+        ));
+//    return ClearableInputField(
+//      hintTxt: loadingMsg,
+//      autoFocus: false,
+//      padding: EdgeInsets.symmetric(horizontal: 5.0),
+//      controller: _controller,
+//      border: OutlineInputBorder(
+//          gapPadding: 0.0,
+//          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+//          borderSide: BorderSide(
+//              style: BorderStyle.none, color: fillColor, width: 0.0)),
+//      fillColor: fillColor,
+//      onchange: (str) {
+//        _key = str;
+//        _itemListPage.handleRefresh();
+//      },
+//    );
   }
 }
