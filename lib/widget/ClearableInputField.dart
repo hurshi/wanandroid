@@ -14,6 +14,7 @@ class ClearableInputField extends StatefulWidget {
   final TextInputType inputType;
   final bool obscureText;
   final EdgeInsetsGeometry padding;
+  final Color fillColor;
 
   ClearableInputField(
       {this.onchange,
@@ -23,6 +24,7 @@ class ClearableInputField extends StatefulWidget {
       this.textStyle,
       this.hintStyle,
       this.border,
+      this.fillColor,
       this.controller,
       this.inputType,
       this.padding,
@@ -56,7 +58,14 @@ class _ClearableInputFieldState extends State<ClearableInputField> {
             (null == widget.padding) ? EdgeInsets.all(20.0) : widget.padding,
         hintText: widget.hintTxt,
         hintStyle: widget.hintStyle,
+        fillColor: widget.fillColor,
+        filled: null != widget.fillColor,
         border: widget.border,
+        errorBorder: widget.border,
+        focusedBorder: widget.border,
+        enabledBorder: widget.border,
+        disabledBorder: widget.border,
+        focusedErrorBorder: widget.border,
         suffixIcon: _buildDefaultClearIcon(context, _controller),
       ),
     );
@@ -80,8 +89,8 @@ class _ClearableInputFieldState extends State<ClearableInputField> {
 
   Widget _buildDefaultClearIcon(
       BuildContext context, TextEditingController controller) {
-    if (_showClearIcon) {
-      return InkWell(
+    return Visibility(
+      child: InkWell(
         child: Icon(
           IconF.wrong,
           color: Theme.of(context).textTheme.subhead.color,
@@ -94,9 +103,8 @@ class _ClearableInputFieldState extends State<ClearableInputField> {
             _showClearIcon = false;
           });
         },
-      );
-    } else {
-      return null;
-    }
+      ),
+      visible: _showClearIcon,
+    );
   }
 }

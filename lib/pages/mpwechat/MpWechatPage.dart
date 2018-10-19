@@ -51,7 +51,7 @@ class _MpWechatPageState extends State<MpWechatPage>
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Card(
-            elevation: 4.0,
+            elevation: 0.0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(0.0)),
             ),

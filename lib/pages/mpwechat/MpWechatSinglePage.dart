@@ -4,6 +4,7 @@ import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/model/mpwechat/MpWechatModel.dart';
 import 'package:wanandroid/pages/common/ItemListPage.dart';
 import 'package:wanandroid/widget/ClearableInputField.dart';
+import 'package:wanandroid/common/GlobalConfig.dart';
 
 class MpWechatSinglePage extends StatefulWidget {
   final bool keepAlive;
@@ -28,7 +29,6 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
   @override
   void initState() {
     super.initState();
-
     _itemListPage = ItemListPage(
         emptyMsg: "臣妾搜不到呀",
         request: (page) {
@@ -42,10 +42,15 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
     return Column(
       children: <Widget>[
         Card(
-          elevation: 5.0,
-          child: getSearchView(),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(3.0)),
+            borderRadius: BorderRadius.all(Radius.circular(0.0)),
+          ),
+          margin: EdgeInsets.all(0.0),
+          elevation: 4.0,
+          color: GlobalConfig.colorPrimary,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+            child: getSearchView(),
           ),
         ),
         Expanded(
@@ -56,12 +61,18 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
   }
 
   Widget getSearchView() {
+    Color fillColor = Colors.white;
     return ClearableInputField(
       hintTxt: loadingMsg,
       autoFocus: false,
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+      padding: EdgeInsets.symmetric(horizontal: 5.0),
       controller: _controller,
-      border: InputBorder.none,
+      border: OutlineInputBorder(
+          gapPadding: 0.0,
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          borderSide: BorderSide(
+              style: BorderStyle.none, color: fillColor, width: 0.0)),
+      fillColor: fillColor,
       onchange: (str) {
         _key = str;
         _itemListPage.handleRefresh();
