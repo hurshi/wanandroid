@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:wanandroid/api/Api.dart';
+import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/model/mpwechat/MpWechatModel.dart';
 import 'package:wanandroid/pages/common/ItemListPage.dart';
-import 'package:wanandroid/api/Api.dart';
-import 'package:wanandroid/widget/SearchBar.dart';
-import 'package:wanandroid/api/CommonService.dart';
+import 'package:wanandroid/widget/ClearableInputField.dart';
 
 class MpWechatSinglePage extends StatefulWidget {
   final bool keepAlive;
@@ -17,7 +17,7 @@ class MpWechatSinglePage extends StatefulWidget {
 
 class _MpWechatSinglePageState extends State<MpWechatSinglePage>
     with AutomaticKeepAliveClientMixin {
-  SearchBar _searchbar;
+  var _controller = TextEditingController();
   String _key = "";
   ItemListPage _itemListPage;
   String loadingMsg = "搜索本公众号里面的历史文章";
@@ -35,7 +35,6 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
           return CommonService().getMpWechatListData(
               "${Api.MP_WECHAT_LIST}${widget.model.id}/$page/json?k=$_key");
         });
-    _initSearchBar();
   }
 
   @override
@@ -44,8 +43,8 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
       children: <Widget>[
         Card(
           elevation: 5.0,
-          color: Colors.grey,
-          child: _searchbar.build(context),
+          margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 1.0),
+          child: getSearchView(),
         ),
         Expanded(
           child: _itemListPage,
@@ -54,30 +53,15 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
     );
   }
 
-  void _initSearchBar() {
-    var _controller = TextEditingController();
-    _controller.addListener(() {
-      if (_key != _controller.value.text) {
-        _key = _controller.value.text;
-        _itemListPage.handleRefresh();
-      }
-    });
-    _searchbar = SearchBar(
-      setState: setState,
-      onSubmitted: print,
-      textSize: 13.0,
-      showClearButton: true,
-      closeOnSubmit: false,
-      hintText: loadingMsg,
-      clearOnSubmit: false,
-      elevation: 0.0,
-      showBackButton: false,
-      autoShowKeyboard: false,
-      clearButtonColor: Colors.black87,
-      clearButtonDisablesColor: Colors.black45,
-      textColor: Colors.black,
-      bgColor: Color.fromARGB(255, 250, 250, 250),
+  Widget getSearchView() {
+    return ClearableInputField(
+      hintTxt: loadingMsg,
       controller: _controller,
+      border: InputBorder.none,
+      onchange: (str) {
+        _key = str;
+        _itemListPage.handleRefresh();
+      },
     );
   }
 }

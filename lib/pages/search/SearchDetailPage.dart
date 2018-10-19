@@ -50,9 +50,7 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
             controller: _controller,
             border: InputBorder.none,
             onchange: (str) {
-              setState(() {
-                _key = str;
-              });
+              _key = str;
               _itemListPage.handleRefresh();
             },
           )),

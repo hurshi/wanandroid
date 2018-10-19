@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/fonts/IconF.dart';
+import 'package:flutter/services.dart';
 
 class ClearableInputField extends StatefulWidget {
   final ValueChanged onchange;
@@ -30,21 +31,24 @@ class ClearableInputField extends StatefulWidget {
 }
 
 class _ClearableInputFieldState extends State<ClearableInputField> {
-  bool showClearIcon = false;
+  bool _showClearIcon = false;
+  FocusNode _focusNode;
 
   @override
   Widget build(BuildContext context) {
     var _controller = (null == widget.controller)
         ? TextEditingController()
         : widget.controller;
+    _focusNode = FocusNode();
     return TextField(
       obscureText: widget.obscureText,
       keyboardType: widget.inputType,
       autofocus: widget.autoFocus,
+      focusNode: _focusNode,
       controller: _controller,
       style: widget.textStyle,
       onChanged: onTextChanged,
-      onSubmitted: widget.onSubmit,
+      onSubmitted: onSubmit,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.all(20.0),
         hintText: widget.hintTxt,
@@ -56,15 +60,24 @@ class _ClearableInputFieldState extends State<ClearableInputField> {
   }
 
   void onTextChanged(String str) {
-    setState(() {
-      showClearIcon = (str.length <= 0) ? false : true;
-    });
+    bool newState = (str.length <= 0) ? false : true;
+    if (newState != _showClearIcon) {
+      setState(() {
+        _showClearIcon = newState;
+      });
+    }
     widget.onchange(str);
+  }
+
+  void onSubmit(String str) {
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
+//    FocusScope.of(context).requestFocus(new FocusNode());
+    widget.onSubmit(str);
   }
 
   Widget _buildDefaultClearIcon(
       BuildContext context, TextEditingController controller) {
-    if (showClearIcon) {
+    if (_showClearIcon) {
       return InkWell(
         child: Icon(
           IconF.wrong,
@@ -72,8 +85,10 @@ class _ClearableInputFieldState extends State<ClearableInputField> {
         ),
         onTap: () {
           controller.clear();
+          widget.onchange("");
+          FocusScope.of(context).requestFocus(_focusNode);
           setState(() {
-            showClearIcon = false;
+            _showClearIcon = false;
           });
         },
       );
