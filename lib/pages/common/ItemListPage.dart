@@ -97,12 +97,10 @@ class _ItemListPageState extends State<ItemListPage>
             : widget.emptyMsg,
       );
     }
-    return RefreshIndicator(
-      color: GlobalConfig.colorPrimary,
-      onRefresh: handleRefresh,
-      child: Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: ListView.builder(
+    return Scaffold(
+      resizeToAvoidBottomPadding: false,
+      body: RefreshIndicator(
+        child: ListView.builder(
             physics: AlwaysScrollableScrollPhysics(),
             itemCount: itemCount,
             controller: _scrollController,
@@ -117,18 +115,20 @@ class _ItemListPageState extends State<ItemListPage>
                     context, index - (null == widget.header ? 0 : 1));
               }
             }),
-        floatingActionButton: _topFloatBtnShowing
-            ? FloatingActionButton(
-                backgroundColor: Colors.white,
-                foregroundColor: GlobalConfig.colorPrimary,
-                child: Icon(IconF.top),
-                onPressed: () {
-                  _scrollController.animateTo(0.0,
-                      duration: Duration(seconds: 1),
-                      curve: Curves.fastOutSlowIn);
-                })
-            : null,
+        color: GlobalConfig.colorPrimary,
+        onRefresh: handleRefresh,
       ),
+      floatingActionButton: _topFloatBtnShowing
+          ? FloatingActionButton(
+              backgroundColor: Colors.white,
+              foregroundColor: GlobalConfig.colorPrimary,
+              child: Icon(IconF.top),
+              onPressed: () {
+                _scrollController.animateTo(0.0,
+                    duration: Duration(seconds: 1),
+                    curve: Curves.fastOutSlowIn);
+              })
+          : null,
     );
   }
 
