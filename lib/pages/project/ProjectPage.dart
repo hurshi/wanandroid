@@ -17,10 +17,11 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   List<ProjectClassifyItemModel> _list = List();
   var _maxCachePageNums = 5;
   var _cachedPageNum = 0;
+  var _tabbarController;
 
   @override
   bool get wantKeepAlive => true;
@@ -35,8 +36,20 @@ class _ProjectPageState extends State<ProjectPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
         title: Text(GlobalConfig.projectTab),
+        bottom: (null == _tabbarController || _list.length <= 0)
+            ? null
+            : TabBar(
+                controller: _tabbarController,
+                labelColor: Colors.white,
+                isScrollable: true,
+                unselectedLabelColor: GlobalConfig.color_white_a80,
+                indicatorSize: TabBarIndicatorSize.label,
+                indicatorPadding: EdgeInsets.only(bottom: 2.0),
+                indicatorWeight: 1.0,
+                indicatorColor: Colors.white,
+                tabs: _buildTabs(),
+              ),
         centerTitle: true,
       ),
       body: _buildBody(),
@@ -44,38 +57,9 @@ class _ProjectPageState extends State<ProjectPage>
   }
 
   Widget _buildBody() {
-    if (_list.length <= 0) {
-      return EmptyHolder();
-    }
-    return DefaultTabController(
-      length: _list.length,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Card(
-            elevation: 4.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(0.0)),
-            ),
-            margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 4.0),
-            color: GlobalConfig.colorPrimary,
-            child: TabBar(
-              labelColor: Colors.white,
-              isScrollable: true,
-              unselectedLabelColor: GlobalConfig.color_white_a80,
-              indicatorSize: TabBarIndicatorSize.label,
-              indicatorPadding: EdgeInsets.only(bottom: 2.0),
-              indicatorWeight: 1.0,
-              indicatorColor: Colors.white,
-              tabs: _buildTabs(),
-            ),
-          ),
-          Expanded(
-            child: TabBarView(children: _buildPages()),
-          ),
-        ],
-      ),
-    );
+    return (null == _tabbarController || _list.length <= 0)
+        ? EmptyHolder()
+        : TabBarView(controller: _tabbarController, children: _buildPages());
   }
 
   List<Widget> _buildTabs() {
@@ -128,6 +112,7 @@ class _ProjectPageState extends State<ProjectPage>
           _bean.data.forEach((_projectClassifyItemModel) {
             _list.add(_projectClassifyItemModel);
           });
+          _tabbarController = TabController(length: _list.length, vsync: this);
         });
       }
     });
