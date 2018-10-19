@@ -13,6 +13,7 @@ class ClearableInputField extends StatefulWidget {
   final TextEditingController controller;
   final TextInputType inputType;
   final bool obscureText;
+  final EdgeInsetsGeometry padding;
 
   ClearableInputField(
       {this.onchange,
@@ -24,6 +25,7 @@ class ClearableInputField extends StatefulWidget {
       this.border,
       this.controller,
       this.inputType,
+      this.padding,
       this.obscureText = false});
 
   @override
@@ -50,7 +52,8 @@ class _ClearableInputFieldState extends State<ClearableInputField> {
       onChanged: onTextChanged,
       onSubmitted: onSubmit,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(20.0),
+        contentPadding:
+            (null == widget.padding) ? EdgeInsets.all(20.0) : widget.padding,
         hintText: widget.hintTxt,
         hintStyle: widget.hintStyle,
         border: widget.border,

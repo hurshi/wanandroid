@@ -43,8 +43,10 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
       children: <Widget>[
         Card(
           elevation: 5.0,
-          margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 1.0),
           child: getSearchView(),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(3.0)),
+          ),
         ),
         Expanded(
           child: _itemListPage,
@@ -56,6 +58,8 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
   Widget getSearchView() {
     return ClearableInputField(
       hintTxt: loadingMsg,
+      autoFocus: false,
+      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
       controller: _controller,
       border: InputBorder.none,
       onchange: (str) {
