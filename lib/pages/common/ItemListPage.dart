@@ -1,8 +1,9 @@
 import 'dart:async';
-
+import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
+import 'package:wanandroid/fonts/IconF.dart';
 import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
 import 'package:wanandroid/model/list_item/BlogListModel.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
@@ -42,6 +43,8 @@ class _ItemListPageState extends State<ItemListPage>
   int _listDataPage = -1;
   ScrollController _scrollController = ScrollController();
   var _haveMoreData = true;
+  var _topFloatBtnShowing = false;
+  double _screenHeight;
 
   @override
   bool get wantKeepAlive => widget.keepAlive;
@@ -54,6 +57,20 @@ class _ItemListPageState extends State<ItemListPage>
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 1) {
         _loadNextPage();
+      }
+      if (null == _screenHeight || _screenHeight <= 0) {
+        _screenHeight = MediaQueryData.fromWindow(ui.window).size.height;
+      }
+      if (_scrollController.position.pixels >= _screenHeight) {
+        if (_topFloatBtnShowing != true)
+          setState(() {
+            _topFloatBtnShowing = true;
+          });
+      } else {
+        if (_topFloatBtnShowing == true)
+          setState(() {
+            _topFloatBtnShowing = false;
+          });
       }
     });
   }
@@ -70,23 +87,36 @@ class _ItemListPageState extends State<ItemListPage>
     return RefreshIndicator(
       color: GlobalConfig.colorPrimary,
       onRefresh: handleRefresh,
-      child: ListView.builder(
-          physics: AlwaysScrollableScrollPhysics(),
-          itemCount: ((null == _listData) ? 0 : _listData.length) +
-              (null == widget.header ? 0 : 1) +
-              (_haveMoreData ? 1 : 0),
-          controller: _scrollController,
-          itemBuilder: (context, index) {
-            if (index == 0 && null != widget.header) {
-              return widget.header;
-            } else if (index - (null == widget.header ? 0 : 1) >=
-                _listData.length) {
-              return _buildLoadMoreItem();
-            } else {
-              return _buildListViewItemLayout(
-                  context, index - (null == widget.header ? 0 : 1));
-            }
-          }),
+      child: Scaffold(
+        body: ListView.builder(
+            physics: AlwaysScrollableScrollPhysics(),
+            itemCount: ((null == _listData) ? 0 : _listData.length) +
+                (null == widget.header ? 0 : 1) +
+                (_haveMoreData ? 1 : 0),
+            controller: _scrollController,
+            itemBuilder: (context, index) {
+              if (index == 0 && null != widget.header) {
+                return widget.header;
+              } else if (index - (null == widget.header ? 0 : 1) >=
+                  _listData.length) {
+                return _buildLoadMoreItem();
+              } else {
+                return _buildListViewItemLayout(
+                    context, index - (null == widget.header ? 0 : 1));
+              }
+            }),
+        floatingActionButton: _topFloatBtnShowing
+            ? FloatingActionButton(
+                backgroundColor: Colors.white,
+                foregroundColor: GlobalConfig.colorPrimary,
+                child: Icon(IconF.top),
+                onPressed: () {
+                  _scrollController.animateTo(0.0,
+                      duration: Duration(seconds: 1),
+                      curve: Curves.fastOutSlowIn);
+                })
+            : null,
+      ),
     );
   }
 

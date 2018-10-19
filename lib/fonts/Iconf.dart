@@ -24,6 +24,7 @@ class IconF {
     static const IconData search = const IconData(0xe600, fontFamily: font_name);
     static const IconData time = const IconData(0xe66e, fontFamily: font_name);
     static const IconData time2 = const IconData(0xe678, fontFamily: font_name);
+    static const IconData top = const IconData(0xe617, fontFamily: font_name);
     static const IconData tree = const IconData(0xe60e, fontFamily: font_name);
     static const IconData wechat = const IconData(0xe64f, fontFamily: font_name);
     static const IconData wrong = const IconData(0xe629, fontFamily: font_name);
