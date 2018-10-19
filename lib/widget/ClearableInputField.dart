@@ -6,7 +6,8 @@ class ClearableInputField extends StatefulWidget {
   final ValueChanged onSubmit;
   final String hintTxt;
   final bool autoFocus;
-  final TextStyle labelStyle;
+  final TextStyle textStyle;
+  final TextStyle hintStyle;
   final InputBorder border;
   final TextEditingController controller;
   final TextInputType inputType;
@@ -17,7 +18,8 @@ class ClearableInputField extends StatefulWidget {
       this.hintTxt,
       this.autoFocus = true,
       this.onSubmit,
-      this.labelStyle,
+      this.textStyle,
+      this.hintStyle,
       this.border,
       this.controller,
       this.inputType,
@@ -28,33 +30,55 @@ class ClearableInputField extends StatefulWidget {
 }
 
 class _ClearableInputFieldState extends State<ClearableInputField> {
+  bool showClearIcon = false;
+
   @override
   Widget build(BuildContext context) {
-    var controller = (null == widget.controller)
+    var _controller = (null == widget.controller)
         ? TextEditingController()
         : widget.controller;
     return TextField(
       obscureText: widget.obscureText,
       keyboardType: widget.inputType,
       autofocus: widget.autoFocus,
-      controller: controller,
-      onChanged: widget.onchange,
+      controller: _controller,
+      style: widget.textStyle,
+      onChanged: onTextChanged,
       onSubmitted: widget.onSubmit,
       decoration: InputDecoration(
-        labelStyle: widget.labelStyle,
+        contentPadding: EdgeInsets.all(20.0),
         hintText: widget.hintTxt,
+        hintStyle: widget.hintStyle,
         border: widget.border,
-        suffixIcon: _buildDefaultClearIcon(controller),
+        suffixIcon: _buildDefaultClearIcon(context, _controller),
       ),
     );
   }
 
-  Widget _buildDefaultClearIcon(TextEditingController controller) {
-    return InkWell(
-      child: Icon(IconF.wrong),
-      onTap: () {
-        controller.clear();
-      },
-    );
+  void onTextChanged(String str) {
+    setState(() {
+      showClearIcon = (str.length <= 0) ? false : true;
+    });
+    widget.onchange(str);
+  }
+
+  Widget _buildDefaultClearIcon(
+      BuildContext context, TextEditingController controller) {
+    if (showClearIcon) {
+      return InkWell(
+        child: Icon(
+          IconF.wrong,
+          color: Theme.of(context).textTheme.subhead.color,
+        ),
+        onTap: () {
+          controller.clear();
+          setState(() {
+            showClearIcon = false;
+          });
+        },
+      );
+    } else {
+      return null;
+    }
   }
 }

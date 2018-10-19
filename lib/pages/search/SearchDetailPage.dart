@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
-import 'package:wanandroid/pages/common/ItemListPage.dart';
 import 'package:wanandroid/api/CommonService.dart';
-import 'package:wanandroid/widget/SearchBar.dart';
+import 'package:wanandroid/common/GlobalConfig.dart';
+import 'package:wanandroid/pages/common/ItemListPage.dart';
+import 'package:wanandroid/widget/BackBtn.dart';
+import 'package:wanandroid/widget/ClearableInputField.dart';
 
 class SearchDetailPage extends StatefulWidget {
   SearchDetailPage();
@@ -12,15 +13,14 @@ class SearchDetailPage extends StatefulWidget {
 }
 
 class _SearchDetailPageState extends State<SearchDetailPage> {
-  SearchBar _searchbar;
   String _key = "";
   ItemListPage _itemListPage;
   final String loadingMsg = "Search whatever you want";
+  var _controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _initSearchBar();
     _itemListPage = ItemListPage(
         emptyMsg: "It's empty.",
         request: (page) {
@@ -31,27 +31,31 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _searchbar.build(context),
+      appBar: _buildAppbar(context),
       body: _itemListPage,
     );
   }
 
-  void _initSearchBar() {
-    var _controller = TextEditingController();
-    _controller.addListener(() {
-      setState(() {
-        _key = _controller.value.text;
-      });
-      _itemListPage.handleRefresh();
-    });
-    _searchbar = SearchBar(
-      setState: setState,
-      onSubmitted: print,
-      showClearButton: true,
-      closeOnSubmit: false,
-      hintText: loadingMsg,
-      clearOnSubmit: false,
-      controller: _controller,
+  AppBar _buildAppbar(BuildContext context) {
+    var originTheme = Theme.of(context);
+    return AppBar(
+      leading: BackBtn(),
+      title: Theme(
+          data: originTheme.copyWith(
+            hintColor: GlobalConfig.color_white_a80,
+            textTheme: TextTheme(subhead: TextStyle(color: Colors.white)),
+          ),
+          child: ClearableInputField(
+            hintTxt: loadingMsg,
+            controller: _controller,
+            border: InputBorder.none,
+            onchange: (str) {
+              setState(() {
+                _key = str;
+              });
+              _itemListPage.handleRefresh();
+            },
+          )),
     );
   }
 }

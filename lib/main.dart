@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       title: '玩安卓',
       theme: ThemeData(
         fontFamily: "noto",
-        primarySwatch: GlobalConfig.colorPrimary,
+        primaryColor: GlobalConfig.colorPrimary,
       ),
       home: ApplicationPage(),
     );
