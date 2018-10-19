@@ -97,12 +97,25 @@ class _TreePageState extends State<TreePage>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          TabBar(
-            labelColor: GlobalConfig.colorPrimary,
-            isScrollable: true,
-            unselectedLabelColor: Colors.black45,
-            indicatorColor: GlobalConfig.colorPrimary,
-            tabs: _buildSecondTabs(model),
+          Card(
+            elevation: 4.0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(0.0)),
+            ),
+            margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 4.0),
+            color: Colors.white,
+            child: Center(
+              child: TabBar(
+                indicatorSize: TabBarIndicatorSize.label,
+                indicatorPadding: EdgeInsets.only(bottom: 2.0),
+                indicatorWeight: 1.0,
+                labelColor: GlobalConfig.colorPrimary,
+                isScrollable: true,
+                unselectedLabelColor: Colors.black45,
+                indicatorColor: GlobalConfig.colorPrimary,
+                tabs: _buildSecondTabs(model),
+              ),
+            ),
           ),
           Expanded(
             child: TabBarView(children: _buildSecondPages(model)),

@@ -57,7 +57,7 @@ class _ProjectPageState extends State<ProjectPage>
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(0.0)),
             ),
-            margin: EdgeInsets.all(0.0),
+            margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 4.0),
             color: GlobalConfig.colorPrimary,
             child: TabBar(
               labelColor: Colors.white,

@@ -48,27 +48,35 @@ class _MinePageState extends State<MinePage> {
   }
 
   Widget _buildHead(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(color: GlobalConfig.colorPrimary),
-      child: GestureDetector(
-        onTap: () {
-          if (User().isLogin())
-            _showLogout(context);
-          else {
-            _toLogin(context);
-          }
-        },
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 30.0, bottom: 15.0),
-              child: _buildAvatar(),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 30.0),
-              child: _buildUserName(),
-            )
-          ],
+    return Card(
+      elevation: 4.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(0.0)),
+      ),
+      margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 4.0),
+      color: GlobalConfig.colorPrimary,
+      child: Container(
+        decoration: BoxDecoration(color: GlobalConfig.colorPrimary),
+        child: GestureDetector(
+          onTap: () {
+            if (User().isLogin())
+              _showLogout(context);
+            else {
+              _toLogin(context);
+            }
+          },
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 30.0, bottom: 15.0),
+                child: _buildAvatar(),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 30.0),
+                child: _buildUserName(),
+              )
+            ],
+          ),
         ),
       ),
     );
