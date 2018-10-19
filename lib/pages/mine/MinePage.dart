@@ -53,7 +53,7 @@ class _MinePageState extends State<MinePage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(0.0)),
       ),
-      margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 4.0),
+      margin: EdgeInsets.all(0.0),
       color: GlobalConfig.colorPrimary,
       child: Container(
         decoration: BoxDecoration(color: GlobalConfig.colorPrimary),
