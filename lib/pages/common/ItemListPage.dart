@@ -7,7 +7,7 @@ import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
 import 'package:wanandroid/model/list_item/BlogListModel.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
-
+import 'package:wanandroid/fonts/Iconf.dart';
 import 'BlogArticleItem.dart';
 
 typedef Future<Response> RequestData(int page);
@@ -36,7 +36,7 @@ class ItemListPage extends StatefulWidget {
   }
 
   void handleScroll(double offset, {ScrollController controller}) {
-    _itemListPageState?.handleScroll(offset, controller);
+    _itemListPageState?.handleScroll(offset, cer: controller);
   }
 
   @override
@@ -52,7 +52,7 @@ class _ItemListPageState extends State<ItemListPage>
   int _listDataPage = -1;
   var _haveMoreData = true;
   double _screenHeight;
-
+  var _topFloatBtnShowing = false;
   ListView listView;
 
   @override
@@ -64,7 +64,7 @@ class _ItemListPageState extends State<ItemListPage>
     _loadNextPage();
   }
 
-  void handleScroll(double offset, ScrollController cer) {
+  void handleScroll(double offset, {ScrollController cer}) {
     ((null == cer) ? _controller : cer)?.animateTo(offset,
         duration: Duration(milliseconds: 200), curve: Curves.fastOutSlowIn);
   }
@@ -97,7 +97,7 @@ class _ItemListPageState extends State<ItemListPage>
           }
         });
 
-    return NotificationListener<ScrollNotification>(
+    var body = NotificationListener<ScrollNotification>(
       onNotification: onScrollNotification,
       child: RefreshIndicator(
         child: listView,
@@ -105,6 +105,20 @@ class _ItemListPageState extends State<ItemListPage>
         onRefresh: handleRefresh,
       ),
     );
+    return (null == widget.showQuickTop)
+        ? Scaffold(
+            body: body,
+            floatingActionButton: _topFloatBtnShowing
+                ? (FloatingActionButton(
+                    backgroundColor: Colors.white,
+                    foregroundColor: GlobalConfig.colorPrimary,
+                    child: Icon(IconF.top),
+                    onPressed: () {
+                      handleScroll(0.0);
+                    }))
+                : null,
+          )
+        : body;
   }
 
   bool onScrollNotification(ScrollNotification scrollNotification) {
@@ -112,16 +126,26 @@ class _ItemListPageState extends State<ItemListPage>
         scrollNotification.metrics.maxScrollExtent) {
       _loadNextPage();
     }
-    if (null != widget.showQuickTop) {
-      if (null == _screenHeight || _screenHeight <= 0) {
-        _screenHeight = MediaQueryData.fromWindow(ui.window).size.height;
-      }
-      if (scrollNotification.metrics.axisDirection == AxisDirection.down &&
-          _screenHeight >= 10 &&
-          scrollNotification.metrics.pixels >= _screenHeight) {
+    if (null == _screenHeight || _screenHeight <= 0) {
+      _screenHeight = MediaQueryData.fromWindow(ui.window).size.height;
+    }
+    if (scrollNotification.metrics.axisDirection == AxisDirection.down &&
+        _screenHeight >= 10 &&
+        scrollNotification.metrics.pixels >= _screenHeight) {
+      if (null != widget.showQuickTop) {
         widget.showQuickTop(true);
-      } else {
+      } else if (!_topFloatBtnShowing) {
+        setState(() {
+          _topFloatBtnShowing = true;
+        });
+      }
+    } else {
+      if (null != widget.showQuickTop) {
         widget.showQuickTop(false);
+      } else if (_topFloatBtnShowing) {
+        setState(() {
+          _topFloatBtnShowing = false;
+        });
       }
     }
     return false;
