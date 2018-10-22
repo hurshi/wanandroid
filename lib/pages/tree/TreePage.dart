@@ -153,6 +153,7 @@ class _TreePageState extends State<TreePage>
       tabControllerInnerMaps[model.id] =
           TabController(length: model.children.length, vsync: this);
     return TabBarView(
+      key: Key("tb${model.id}"),
       children: _buildPages(model),
       controller: tabControllerInnerMaps[model.id],
     );
