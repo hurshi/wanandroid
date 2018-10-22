@@ -14,10 +14,11 @@ class MpWechatPage extends StatefulWidget {
 }
 
 class _MpWechatPageState extends State<MpWechatPage>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   List<MpWechatModel> _list = List();
   var _maxCachePageNums = 5;
   var _cachedPageNum = 0;
+  TabController _tabController;
 
   @override
   bool get wantKeepAlive => true;
@@ -33,46 +34,28 @@ class _MpWechatPageState extends State<MpWechatPage>
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
-        elevation: 0.0,
         title: Text(GlobalConfig.mpWechatTab),
         centerTitle: true,
+        bottom: _list.length <= 0
+            ? null
+            : TabBar(
+                controller: _tabController,
+                labelColor: Colors.white,
+                isScrollable: true,
+                unselectedLabelColor: GlobalConfig.color_white_a80,
+                indicatorSize: TabBarIndicatorSize.label,
+                indicatorPadding: EdgeInsets.only(bottom: 2.0),
+                indicatorWeight: 1.0,
+                indicatorColor: Colors.white,
+                tabs: _buildTabs(),
+              ),
       ),
-      body: _buildBody(),
-    );
-  }
-
-  Widget _buildBody() {
-    if (_list.length <= 0) {
-      return EmptyHolder();
-    }
-    return DefaultTabController(
-      length: _list.length,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Card(
-            elevation: 4.0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(0.0)),
+      body: _list.length <= 0
+          ? null
+          : TabBarView(
+              children: _buildPages(context),
+              controller: _tabController,
             ),
-            margin: EdgeInsets.all(0.0),
-            color: GlobalConfig.colorPrimary,
-            child: TabBar(
-              labelColor: Colors.white,
-              isScrollable: true,
-              unselectedLabelColor: GlobalConfig.color_white_a80,
-              indicatorSize: TabBarIndicatorSize.label,
-              indicatorPadding: EdgeInsets.only(bottom: 2.0),
-              indicatorWeight: 1.0,
-              indicatorColor: Colors.white,
-              tabs: _buildTabs(),
-            ),
-          ),
-          Expanded(
-            child: TabBarView(children: _buildPages(context)),
-          ),
-        ],
-      ),
     );
   }
 
@@ -109,6 +92,7 @@ class _MpWechatPageState extends State<MpWechatPage>
       if (_l.length > 0) {
         setState(() {
           _list = _l;
+          _tabController = TabController(length: _list.length, vsync: this);
         });
       }
     });

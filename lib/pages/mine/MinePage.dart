@@ -35,7 +35,7 @@ class _MinePageState extends State<MinePage> {
               SliverAppBar(
                 pinned: true,
                 expandedHeight: _screenWidth * 2 / 3,
-                forceElevated: boxIsScrolled,
+                forceElevated: true,
                 flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
                     background: _buildHead(context),
