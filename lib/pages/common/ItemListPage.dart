@@ -4,10 +4,11 @@ import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
+import 'package:wanandroid/fonts/Iconf.dart';
 import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
 import 'package:wanandroid/model/list_item/BlogListModel.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
-import 'package:wanandroid/fonts/Iconf.dart';
+
 import 'BlogArticleItem.dart';
 
 typedef Future<Response> RequestData(int page);
@@ -24,15 +25,17 @@ class ItemListPage extends StatefulWidget {
   _ItemListPageState _itemListPageState;
 
   ItemListPage(
-      {this.header,
+      {Key key,
+      this.header,
       @required this.request,
       this.emptyMsg,
       this.selfControl = true,
       this.showQuickTop,
-      this.keepAlive = false});
+      this.keepAlive = false})
+      : super(key: key);
 
   void handleRefresh() {
-    _itemListPageState.handleRefresh();
+    _itemListPageState?.handleRefresh();
   }
 
   void handleScroll(double offset, {ScrollController controller}) {
@@ -49,6 +52,7 @@ class ItemListPage extends StatefulWidget {
 class _ItemListPageState extends State<ItemListPage>
     with AutomaticKeepAliveClientMixin {
   List<BlogListDataItemModel> _listData = List();
+
   int _listDataPage = -1;
   var _haveMoreData = true;
   double _screenHeight;
@@ -135,17 +139,19 @@ class _ItemListPageState extends State<ItemListPage>
       if (null != widget.showQuickTop) {
         widget.showQuickTop(true);
       } else if (!_topFloatBtnShowing) {
-        setState(() {
-          _topFloatBtnShowing = true;
-        });
+        if (this.mounted)
+          setState(() {
+            _topFloatBtnShowing = true;
+          });
       }
     } else {
       if (null != widget.showQuickTop) {
         widget.showQuickTop(false);
       } else if (_topFloatBtnShowing) {
-        setState(() {
-          _topFloatBtnShowing = false;
-        });
+        if (this.mounted)
+          setState(() {
+            _topFloatBtnShowing = false;
+          });
       }
     }
     return false;
@@ -179,7 +185,7 @@ class _ItemListPageState extends State<ItemListPage>
   bool isLoading = false;
 
   Future<Null> _loadNextPage() async {
-    if (isLoading) {
+    if (isLoading || !this.mounted) {
       return null;
     }
     isLoading = true;
@@ -190,7 +196,7 @@ class _ItemListPageState extends State<ItemListPage>
       _listDataPage++;
       result = await _loadListData(_listDataPage);
     }
-    setState(() {});
+    if (this.mounted) setState(() {});
     isLoading = false;
     return result;
   }
