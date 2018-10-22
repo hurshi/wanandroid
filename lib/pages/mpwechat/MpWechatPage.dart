@@ -87,6 +87,7 @@ class _MpWechatPageState extends State<MpWechatPage>
           child: ClearableInputField(
             hintTxt: "搜索公众号历史文章",
             controller: _controller,
+            autoFocus: true,
             border: InputBorder.none,
             onchange: (str) {
               handleRefreshSearchKey(key: str);
