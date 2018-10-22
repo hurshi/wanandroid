@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:wanandroid/pages/web/WebViewPage.dart';
-import 'package:wanandroid/pages/search/SearchDetailPage.dart';
-import 'package:wanandroid/pages/login/LoginRegisterPage.dart';
 import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
+import 'package:wanandroid/pages/login/LoginRegisterPage.dart';
+import 'package:wanandroid/pages/search/SearchDetailPage.dart';
+import 'package:wanandroid/pages/web/WebViewPage.dart';
 
 class Router {
   openWeb(BuildContext context, String url, String title) {

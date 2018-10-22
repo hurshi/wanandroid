@@ -111,6 +111,7 @@ class _ItemListPageState extends State<ItemListPage>
     );
     return (null == widget.showQuickTop)
         ? Scaffold(
+            resizeToAvoidBottomPadding: false,
             body: body,
             floatingActionButton: _topFloatBtnShowing
                 ? (FloatingActionButton(
