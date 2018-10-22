@@ -33,8 +33,8 @@ class _MpWechatSinglePageState extends State<MpWechatSinglePage>
   void initState() {
     super.initState();
     Timer(Duration(seconds: 2), () {
-      _itemListPage?.handleScroll(
-          _headKey.currentContext?.findRenderObject()?.paintBounds?.height);
+//      _itemListPage?.handleScroll(
+//          _headKey.currentContext?.findRenderObject()?.paintBounds?.height);
     });
   }
 

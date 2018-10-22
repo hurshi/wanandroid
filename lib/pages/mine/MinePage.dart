@@ -3,12 +3,13 @@ import 'dart:ui' as ui;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/api/Api.dart';
+import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:wanandroid/common/User.dart';
-import 'package:wanandroid/widget/EmptyHolder.dart';
+import 'package:wanandroid/fonts/Iconf.dart';
 import 'package:wanandroid/pages/common/ItemListPage.dart';
-import 'package:wanandroid/api/CommonService.dart';
+import 'package:wanandroid/widget/EmptyHolder.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -19,65 +20,58 @@ class MinePage extends StatefulWidget {
 
 class _MinePageState extends State<MinePage> {
   double _screenWidth = MediaQueryData.fromWindow(ui.window).size.width;
+  var _topFloatBtnShowing = false;
+  ItemListPage _itemListPage;
+  ScrollController _controller;
 
   @override
   Widget build(BuildContext context) {
+    _controller = FixedExtentScrollController();
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        title: Text(GlobalConfig.mineTab),
-        centerTitle: true,
-      ),
-      body: _buildBody(context),
-    );
-  }
-
-  Widget _buildBody(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        _buildHead(context),
-        Expanded(
-          child: User().isLogin()
+      body: NestedScrollView(
+          controller: _controller,
+          headerSliverBuilder: (BuildContext context, bool boxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                pinned: true,
+                expandedHeight: _screenWidth * 2 / 3,
+                forceElevated: boxIsScrolled,
+                flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+                    background: _buildHead(context),
+                    title: Text(getUserName())),
+              ),
+            ];
+          },
+          body: User().isLogin()
               ? _buildMineBody()
               : EmptyHolder(
                   msg: "要查看收藏的文章请先登录哈",
-                ),
-        ),
-      ],
+                )),
+      floatingActionButton: _topFloatBtnShowing
+          ? (FloatingActionButton(
+              backgroundColor: Colors.white,
+              foregroundColor: GlobalConfig.colorPrimary,
+              child: Icon(IconF.top),
+              onPressed: () {
+                _itemListPage?.handleScroll(0.0, controller: _controller);
+              }))
+          : null,
     );
   }
 
   Widget _buildHead(BuildContext context) {
-    return Card(
-      elevation: 4.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(0.0)),
-      ),
-      margin: EdgeInsets.all(0.0),
-      color: GlobalConfig.colorPrimary,
-      child: Container(
-        decoration: BoxDecoration(color: GlobalConfig.colorPrimary),
-        child: GestureDetector(
-          onTap: () {
-            if (User().isLogin())
-              _showLogout(context);
-            else {
-              _toLogin(context);
-            }
-          },
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: 30.0, bottom: 15.0),
-                child: _buildAvatar(),
-              ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 30.0),
-                child: _buildUserName(),
-              )
-            ],
-          ),
-        ),
+    return Container(
+      decoration: BoxDecoration(color: GlobalConfig.colorPrimary),
+      child: GestureDetector(
+        onTap: () {
+          if (User().isLogin())
+            _showLogout(context);
+          else {
+            _toLogin(context);
+          }
+        },
+        child: _buildAvatar(),
       ),
     );
   }
@@ -146,26 +140,27 @@ class _MinePageState extends State<MinePage> {
     );
   }
 
-  Widget _buildUserName() {
-    return Center(
-      child: Text(
-        getUserName(),
-        style: TextStyle(
-            fontWeight: FontWeight.w500, color: Colors.white, fontSize: 30.0),
-      ),
-    );
-  }
-
   String getUserName() {
     return (!User().isLogin()) ? "Login" : User().userName;
   }
 
   Widget _buildMineBody() {
-    return ItemListPage(
-      keepAlive: true,
-      request: (page) {
-        return CommonService().getCollectListData(page);
-      },
-    );
+    if (null == _itemListPage) {
+      _itemListPage = ItemListPage(
+        keepAlive: true,
+        selfControl: false,
+        showQuickTop: (show) {
+          if (_topFloatBtnShowing != show) {
+            setState(() {
+              _topFloatBtnShowing = show;
+            });
+          }
+        },
+        request: (page) {
+          return CommonService().getCollectListData(page);
+        },
+      );
+    }
+    return _itemListPage;
   }
 }

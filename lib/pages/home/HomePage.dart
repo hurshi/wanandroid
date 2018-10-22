@@ -21,6 +21,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
   List<HomeBannerItemModel> _bannerData;
+  var _topFloatBtnShowing = false;
+  ItemListPage _itemListPage;
 
   @override
   bool get wantKeepAlive => true;
@@ -33,6 +35,20 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    if (null == _itemListPage && null != _bannerData)
+      _itemListPage = ItemListPage(
+        header: _buildBanner(context),
+        showQuickTop: (show) {
+          if (_topFloatBtnShowing != show) {
+            setState(() {
+              _topFloatBtnShowing = show;
+            });
+          }
+        },
+        request: (page) {
+          return CommonService().getArticleListData(page);
+        },
+      );
     return Scaffold(
       appBar: AppBar(
         title: Text(GlobalConfig.homeTab),
@@ -46,12 +62,16 @@ class _HomePageState extends State<HomePage>
           )
         ],
       ),
-      body: ItemListPage(
-        header: _buildBanner(context),
-        request: (page) {
-          return CommonService().getArticleListData(page);
-        },
-      ),
+      body: _itemListPage,
+      floatingActionButton: _topFloatBtnShowing
+          ? (FloatingActionButton(
+              backgroundColor: Colors.white,
+              foregroundColor: GlobalConfig.colorPrimary,
+              child: Icon(IconF.top),
+              onPressed: () {
+                _itemListPage?.handleScroll(0.0);
+              }))
+          : null,
     );
   }
 
