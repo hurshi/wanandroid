@@ -40,6 +40,7 @@ class ArticleListPage extends StatefulWidget {
 class ArticleListPageState extends State<ArticleListPage>
     with AutomaticKeepAliveClientMixin {
   List<ArticleItemModel> _listData = List();
+  List<int> _listDataId = List();
   GlobalKey<QuickTopFloatBtnState> _quickTopFloatBtnKey = new GlobalKey();
   int _listDataPage = -1;
   var _haveMoreData = true;
@@ -158,6 +159,7 @@ class ArticleListPageState extends State<ArticleListPage>
   Future<Null> handleRefresh() async {
     _listDataPage = -1;
     _listData.clear();
+    _listDataId.clear();
     await _loadNextPage();
   }
 
@@ -195,11 +197,18 @@ class ArticleListPageState extends State<ArticleListPage>
     _haveMoreData = true;
     return widget.request(page).then((response) {
       var newList = ArticleListModel.fromJson(response.data).data.datas;
+      var originListLength = _listData.length;
       if (null != newList && newList.length > 0) {
-        _listData.addAll(newList);
-      } else {
-        _haveMoreData = false;
+//        _listData.addAll(newList);
+        //防止添加进重复数据
+        newList.forEach((item) {
+          if (!_listDataId.contains(item.id)) {
+            _listData.add(item);
+            _listDataId.add(item.id);
+          }
+        });
       }
+      _haveMoreData = originListLength > _listData.length;
     });
   }
 
@@ -207,6 +216,7 @@ class ArticleListPageState extends State<ArticleListPage>
   void dispose() {
     _controller?.dispose();
     _listData?.clear();
+    _listDataId?.clear();
     super.dispose();
   }
 }
