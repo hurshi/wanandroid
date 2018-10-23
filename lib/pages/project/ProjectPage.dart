@@ -21,7 +21,7 @@ class _ProjectPageState extends State<ProjectPage>
   List<ProjectClassifyItemModel> _list = List();
   var _maxCachePageNums = 5;
   var _cachedPageNum = 0;
-  var _tabbarController;
+  TabController _tabbarController;
 
   @override
   bool get wantKeepAlive => true;
@@ -125,5 +125,11 @@ class _ProjectPageState extends State<ProjectPage>
   void _loadNewestProjects() {
     _list.insert(
         0, ProjectClassifyItemModel(name: "最新项目", url: Api.PROJECT_NEWEST));
+  }
+
+  @override
+  void dispose() {
+    _tabbarController?.dispose();
+    super.dispose();
   }
 }

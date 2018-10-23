@@ -169,4 +169,11 @@ class _WeChatPageState extends State<WeChatPage>
       handleRefreshSearchKey();
     });
   }
+
+  @override
+  void dispose() {
+    _tabController?.dispose();
+    _controller?.dispose();
+    super.dispose();
+  }
 }

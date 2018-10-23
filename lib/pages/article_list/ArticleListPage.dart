@@ -223,4 +223,11 @@ class _ArticleListPageState extends State<ArticleListPage>
       }
     });
   }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    _listData?.clear();
+    super.dispose();
+  }
 }

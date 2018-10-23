@@ -119,4 +119,11 @@ class _LoginRegisterPagePageState extends State<LoginRegisterPage> {
       },
     );
   }
+
+  @override
+  void dispose() {
+    _userNameController?.dispose();
+    _psdController?.dispose();
+    super.dispose();
+  }
 }

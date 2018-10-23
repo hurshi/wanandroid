@@ -163,4 +163,10 @@ class _MinePageState extends State<MinePage> {
     }
     return _itemListPage;
   }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
 }

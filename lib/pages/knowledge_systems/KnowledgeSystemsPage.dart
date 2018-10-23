@@ -21,8 +21,8 @@ class _KnowledgeSystemsPageState extends State<KnowledgeSystemsPage>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   double _screenWidth = MediaQueryData.fromWindow(ui.window).size.width;
   KnowledgeSystemsModel _treeModel;
-  TabController tabControllerOutter;
-  Map<int, TabController> tabControllerInnerMaps = Map();
+  TabController _tabControllerOutter;
+  Map<int, TabController> _tabControllerInnerMaps = Map();
   KnowledgeSystemsParentModel _currentTreeRootModel;
 
   @override
@@ -63,11 +63,11 @@ class _KnowledgeSystemsPageState extends State<KnowledgeSystemsPage>
         msg: "Loading",
       );
     }
-    tabControllerOutter =
+    _tabControllerOutter =
         TabController(length: _treeModel?.data?.length, vsync: this);
-    tabControllerOutter.addListener(() {
+    _tabControllerOutter.addListener(() {
       setState(() {
-        _currentTreeRootModel = _treeModel.data[tabControllerOutter.index];
+        _currentTreeRootModel = _treeModel.data[_tabControllerOutter.index];
       });
     });
     return Column(
@@ -76,7 +76,7 @@ class _KnowledgeSystemsPageState extends State<KnowledgeSystemsPage>
       children: <Widget>[
         SizedBox(
           child: TabBar(
-            controller: tabControllerOutter,
+            controller: _tabControllerOutter,
             labelColor: Colors.white,
             isScrollable: true,
             unselectedLabelColor: GlobalConfig.color_white_a80,
@@ -92,7 +92,7 @@ class _KnowledgeSystemsPageState extends State<KnowledgeSystemsPage>
         SizedBox(
           child: TabBarView(
             children: _buildSecondTitle(),
-            controller: tabControllerOutter,
+            controller: _tabControllerOutter,
           ),
           width: _screenWidth,
           height: kToolbarHeight,
@@ -119,11 +119,11 @@ class _KnowledgeSystemsPageState extends State<KnowledgeSystemsPage>
         msg: "Loading",
       );
     }
-    if (null == tabControllerInnerMaps[model.id])
-      tabControllerInnerMaps[model.id] =
+    if (null == _tabControllerInnerMaps[model.id])
+      _tabControllerInnerMaps[model.id] =
           TabController(length: model.children.length, vsync: this);
     return TabBar(
-      controller: tabControllerInnerMaps[model.id],
+      controller: _tabControllerInnerMaps[model.id],
       labelColor: Colors.white,
       isScrollable: true,
       unselectedLabelColor: GlobalConfig.color_white_a80,
@@ -149,13 +149,13 @@ class _KnowledgeSystemsPageState extends State<KnowledgeSystemsPage>
         msg: "Loading",
       );
     }
-    if (null == tabControllerInnerMaps[model.id])
-      tabControllerInnerMaps[model.id] =
+    if (null == _tabControllerInnerMaps[model.id])
+      _tabControllerInnerMaps[model.id] =
           TabController(length: model.children.length, vsync: this);
     return TabBarView(
       key: Key("tb${model.id}"),
       children: _buildPages(model),
-      controller: tabControllerInnerMaps[model.id],
+      controller: _tabControllerInnerMaps[model.id],
     );
   }
 
@@ -180,5 +180,14 @@ class _KnowledgeSystemsPageState extends State<KnowledgeSystemsPage>
         _currentTreeRootModel = _treeModel.data[0];
       });
     });
+  }
+
+  @override
+  void dispose() {
+    _tabControllerOutter?.dispose();
+    _tabControllerInnerMaps?.forEach((_, controller) {
+      controller?.dispose();
+    });
+    super.dispose();
   }
 }

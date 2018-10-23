@@ -56,4 +56,10 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
           )),
     );
   }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
 }
