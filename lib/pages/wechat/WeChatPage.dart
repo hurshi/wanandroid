@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/api/Api.dart';
 import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
+import 'package:wanandroid/common/Pair.dart';
 import 'package:wanandroid/fonts/IconF.dart';
 import 'package:wanandroid/model/wechat/WeChatModel.dart';
 import 'package:wanandroid/pages/article_list/ArticleListPage.dart';
@@ -17,7 +18,8 @@ class WeChatPage extends StatefulWidget {
 class _WeChatPageState extends State<WeChatPage>
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   List<WeChatModel> _list = List();
-  Map<int, ArticleListPage> _itemListPageMap = Map();
+  Map<int, Pair<ArticleListPage, GlobalKey<ArticleListPageState>>>
+      _itemListPageMap = Map();
   TabController _tabController;
   var _controller = TextEditingController();
   String _searchKey = "";
@@ -32,7 +34,7 @@ class _WeChatPageState extends State<WeChatPage>
   @override
   void initState() {
     super.initState();
-    _loadMpWechatNames();
+    _loadWeChatNames();
   }
 
   @override
@@ -99,7 +101,10 @@ class _WeChatPageState extends State<WeChatPage>
 
   void handleRefreshSearchKey({String key}) {
     if (null != key) _searchKey = key;
-    _itemListPageMap[_list[_currentItemIndex].id]?.handleRefresh();
+    _itemListPageMap[_list[_currentItemIndex].id]
+        ?.second
+        ?.currentState
+        ?.handleRefresh();
   }
 
   TabBar _buildSubTitle() {
@@ -129,16 +134,19 @@ class _WeChatPageState extends State<WeChatPage>
   List<Widget> _buildPages(BuildContext context) {
     return _list?.map((_bean) {
       if (!_itemListPageMap.containsKey(_bean.id)) {
-        _itemListPageMap[_bean.id] = ArticleListPage(
-            key: Key("${_bean.id}"),
-            keepAlive: _keepAlive(),
-            emptyMsg: "臣妾搜不到呀",
-            request: (page) {
-              return CommonService().getMpWechatListData(
-                  "${Api.MP_WECHAT_LIST}${_bean.id}/$page/json?k=$_searchKey");
-            });
+        var key = GlobalKey<ArticleListPageState>();
+        _itemListPageMap[_bean.id] = Pair(
+            ArticleListPage(
+                key: key,
+                keepAlive: _keepAlive(),
+                emptyMsg: "臣妾搜不到呀",
+                request: (page) {
+                  return CommonService().getWeChatListData(
+                      "${Api.MP_WECHAT_LIST}${_bean.id}/$page/json?k=$_searchKey");
+                }),
+            key);
       }
-      return _itemListPageMap[_bean.id];
+      return _itemListPageMap[_bean.id].first;
     })?.toList();
   }
 
@@ -151,8 +159,8 @@ class _WeChatPageState extends State<WeChatPage>
     }
   }
 
-  void _loadMpWechatNames() async {
-    CommonService().getMpWechatNames((List<WeChatModel> list) {
+  void _loadWeChatNames() async {
+    CommonService().getWeChatNames((List<WeChatModel> list) {
       if (list.length > 0) {
         setState(() {
           _updateState(list);

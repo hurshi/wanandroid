@@ -21,8 +21,6 @@ class ArticleListPage extends StatefulWidget {
   final ShowQuickTop showQuickTop;
   final bool selfControl;
 
-  _ArticleListPageState _itemListPageState;
-
   ArticleListPage(
       {Key key,
       this.header,
@@ -33,22 +31,13 @@ class ArticleListPage extends StatefulWidget {
       this.keepAlive = false})
       : super(key: key);
 
-  void handleRefresh() {
-    _itemListPageState?.handleRefresh();
-  }
-
-  void handleScroll(double offset, {ScrollController controller}) {
-    _itemListPageState?.handleScroll(offset, cer: controller);
-  }
-
   @override
   State<StatefulWidget> createState() {
-    _itemListPageState = _ArticleListPageState();
-    return _itemListPageState;
+    return ArticleListPageState();
   }
 }
 
-class _ArticleListPageState extends State<ArticleListPage>
+class ArticleListPageState extends State<ArticleListPage>
     with AutomaticKeepAliveClientMixin {
   List<ArticleItemModel> _listData = List();
 
@@ -67,8 +56,8 @@ class _ArticleListPageState extends State<ArticleListPage>
     _loadNextPage();
   }
 
-  void handleScroll(double offset, {ScrollController cer}) {
-    ((null == cer) ? _controller : cer)?.animateTo(offset,
+  void handleScroll(double offset, {ScrollController controller}) {
+    ((null == controller) ? _controller : controller)?.animateTo(offset,
         duration: Duration(milliseconds: 200), curve: Curves.fastOutSlowIn);
   }
 

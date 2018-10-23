@@ -22,7 +22,7 @@ class CommonService {
     });
   }
 
-  void getMpWechatNames(Function callback) async {
+  void getWeChatNames(Function callback) async {
     Dio().get(Api.MP_WECHAT_NAMES, options: _getOptions()).then((response) {
       callback((response.data as List)
           ?.map((e) => e == null
@@ -32,7 +32,7 @@ class CommonService {
     });
   }
 
-  Future<Response> getMpWechatListData(String url) async {
+  Future<Response> getWeChatListData(String url) async {
     return await Dio().get(url, options: _getOptions());
   }
 

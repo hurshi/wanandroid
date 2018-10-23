@@ -14,25 +14,25 @@ class SearchDetailPage extends StatefulWidget {
 
 class _SearchDetailPageState extends State<SearchDetailPage> {
   String _key = "";
-  ArticleListPage _itemListPage;
+  GlobalKey<ArticleListPageState> _itemListPage = new GlobalKey();
   final String loadingMsg = "Search whatever you want";
   var _controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _itemListPage = ArticleListPage(
-        emptyMsg: "It's empty.",
-        request: (page) {
-          return CommonService().getSearchListData(_key, page);
-        });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppbar(context),
-      body: _itemListPage,
+      body: ArticleListPage(
+          key: _itemListPage,
+          emptyMsg: "It's empty.",
+          request: (page) {
+            return CommonService().getSearchListData(_key, page);
+          }),
     );
   }
 
@@ -51,7 +51,7 @@ class _SearchDetailPageState extends State<SearchDetailPage> {
             border: InputBorder.none,
             onchange: (str) {
               _key = str;
-              _itemListPage.handleRefresh();
+              _itemListPage.currentState.handleRefresh();
             },
           )),
     );

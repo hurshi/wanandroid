@@ -22,6 +22,7 @@ class _MinePageState extends State<MinePage> {
   double _screenWidth = MediaQueryData.fromWindow(ui.window).size.width;
   var _topFloatBtnShowing = false;
   ArticleListPage _itemListPage;
+  GlobalKey<ArticleListPageState> _itemListPageKey = new GlobalKey();
   ScrollController _controller;
 
   @override
@@ -54,7 +55,8 @@ class _MinePageState extends State<MinePage> {
               foregroundColor: GlobalConfig.colorPrimary,
               child: Icon(IconF.top),
               onPressed: () {
-                _itemListPage?.handleScroll(0.0, controller: _controller);
+                _itemListPageKey.currentState
+                    ?.handleScroll(0.0, controller: _controller);
               }))
           : null,
     );
@@ -147,6 +149,7 @@ class _MinePageState extends State<MinePage> {
   Widget _buildMineBody() {
     if (null == _itemListPage) {
       _itemListPage = ArticleListPage(
+        key: _itemListPageKey,
         keepAlive: true,
         selfControl: false,
         showQuickTop: (show) {
