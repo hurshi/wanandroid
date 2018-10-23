@@ -4,7 +4,7 @@ import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
-import 'package:wanandroid/fonts/Iconf.dart';
+import 'package:wanandroid/fonts/IconF.dart';
 import 'package:wanandroid/model/article_list/ArticleItemModel.dart';
 import 'package:wanandroid/model/article_list/ArticleListModel.dart';
 import 'package:wanandroid/pages/article_list/ArticleItemPage.dart';

@@ -7,7 +7,7 @@ import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:wanandroid/common/User.dart';
-import 'package:wanandroid/fonts/Iconf.dart';
+import 'package:wanandroid/fonts/IconF.dart';
 import 'package:wanandroid/pages/article_list/ArticleListPage.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
 
