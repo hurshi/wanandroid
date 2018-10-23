@@ -4,11 +4,11 @@ import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
-import 'package:wanandroid/fonts/IconF.dart';
 import 'package:wanandroid/model/article_list/ArticleItemModel.dart';
 import 'package:wanandroid/model/article_list/ArticleListModel.dart';
 import 'package:wanandroid/pages/article_list/ArticleItemPage.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
+import 'package:wanandroid/widget/QuickTopFloatBtn.dart';
 
 typedef Future<Response> RequestData(int page);
 typedef void ShowQuickTop(bool show);
@@ -40,11 +40,10 @@ class ArticleListPage extends StatefulWidget {
 class ArticleListPageState extends State<ArticleListPage>
     with AutomaticKeepAliveClientMixin {
   List<ArticleItemModel> _listData = List();
-
+  GlobalKey<QuickTopFloatBtnState> _quickTopFloatBtnKey = new GlobalKey();
   int _listDataPage = -1;
   var _haveMoreData = true;
   double _screenHeight;
-  var _topFloatBtnShowing = false;
   ListView listView;
 
   @override
@@ -101,15 +100,12 @@ class ArticleListPageState extends State<ArticleListPage>
         ? Scaffold(
             resizeToAvoidBottomPadding: false,
             body: body,
-            floatingActionButton: _topFloatBtnShowing
-                ? (FloatingActionButton(
-                    backgroundColor: Colors.white,
-                    foregroundColor: GlobalConfig.colorPrimary,
-                    child: Icon(IconF.top),
-                    onPressed: () {
-                      handleScroll(0.0);
-                    }))
-                : null,
+            floatingActionButton: QuickTopFloatBtn(
+              key: _quickTopFloatBtnKey,
+              onPressed: () {
+                handleScroll(0.0);
+              },
+            ),
           )
         : body;
   }
@@ -127,20 +123,14 @@ class ArticleListPageState extends State<ArticleListPage>
         scrollNotification.metrics.pixels >= _screenHeight) {
       if (null != widget.showQuickTop) {
         widget.showQuickTop(true);
-      } else if (!_topFloatBtnShowing) {
-        if (this.mounted)
-          setState(() {
-            _topFloatBtnShowing = true;
-          });
+      } else {
+        _quickTopFloatBtnKey.currentState.refreshVisible(true);
       }
     } else {
       if (null != widget.showQuickTop) {
         widget.showQuickTop(false);
-      } else if (_topFloatBtnShowing) {
-        if (this.mounted)
-          setState(() {
-            _topFloatBtnShowing = false;
-          });
+      } else {
+        _quickTopFloatBtnKey.currentState.refreshVisible(false);
       }
     }
     return false;

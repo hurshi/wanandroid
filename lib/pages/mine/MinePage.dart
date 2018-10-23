@@ -7,9 +7,9 @@ import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:wanandroid/common/User.dart';
-import 'package:wanandroid/fonts/IconF.dart';
 import 'package:wanandroid/pages/article_list/ArticleListPage.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
+import 'package:wanandroid/widget/QuickTopFloatBtn.dart';
 
 class MinePage extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class MinePage extends StatefulWidget {
 
 class _MinePageState extends State<MinePage> {
   double _screenWidth = MediaQueryData.fromWindow(ui.window).size.width;
-  var _topFloatBtnShowing = false;
+  GlobalKey<QuickTopFloatBtnState> _quickTopFloatBtnKey = new GlobalKey();
   ArticleListPage _itemListPage;
   GlobalKey<ArticleListPageState> _itemListPageKey = new GlobalKey();
   ScrollController _controller;
@@ -49,16 +49,13 @@ class _MinePageState extends State<MinePage> {
               : EmptyHolder(
                   msg: "要查看收藏的文章请先登录哈",
                 )),
-      floatingActionButton: _topFloatBtnShowing
-          ? (FloatingActionButton(
-              backgroundColor: Colors.white,
-              foregroundColor: GlobalConfig.colorPrimary,
-              child: Icon(IconF.top),
-              onPressed: () {
-                _itemListPageKey.currentState
-                    ?.handleScroll(0.0, controller: _controller);
-              }))
-          : null,
+      floatingActionButton: QuickTopFloatBtn(
+        key: _quickTopFloatBtnKey,
+        onPressed: () {
+          _itemListPageKey.currentState
+              ?.handleScroll(0.0, controller: _controller);
+        },
+      ),
     );
   }
 
@@ -153,11 +150,7 @@ class _MinePageState extends State<MinePage> {
         keepAlive: true,
         selfControl: false,
         showQuickTop: (show) {
-          if (_topFloatBtnShowing != show) {
-            setState(() {
-              _topFloatBtnShowing = show;
-            });
-          }
+          _quickTopFloatBtnKey.currentState.refreshVisible(show);
         },
         request: (page) {
           return CommonService().getCollectListData(page);
