@@ -5,16 +5,16 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/fonts/Iconf.dart';
-import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
-import 'package:wanandroid/model/list_item/BlogListModel.dart';
+import 'package:wanandroid/model/article_list/ArticleItemModel.dart';
+import 'package:wanandroid/model/article_list/ArticleListModel.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
 
-import 'BlogArticleItem.dart';
+import 'ArticleItemPage.dart';
 
 typedef Future<Response> RequestData(int page);
 typedef void ShowQuickTop(bool show);
 
-class ItemListPage extends StatefulWidget {
+class ArticleListPage extends StatefulWidget {
   final Widget header;
   final RequestData request;
   final String emptyMsg;
@@ -22,9 +22,9 @@ class ItemListPage extends StatefulWidget {
   final ShowQuickTop showQuickTop;
   final bool selfControl;
 
-  _ItemListPageState _itemListPageState;
+  _ArticleListPageState _itemListPageState;
 
-  ItemListPage(
+  ArticleListPage(
       {Key key,
       this.header,
       @required this.request,
@@ -44,14 +44,14 @@ class ItemListPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    _itemListPageState = _ItemListPageState();
+    _itemListPageState = _ArticleListPageState();
     return _itemListPageState;
   }
 }
 
-class _ItemListPageState extends State<ItemListPage>
+class _ArticleListPageState extends State<ArticleListPage>
     with AutomaticKeepAliveClientMixin {
-  List<BlogListDataItemModel> _listData = List();
+  List<ArticleItemModel> _listData = List();
 
   int _listDataPage = -1;
   var _haveMoreData = true;
@@ -165,7 +165,7 @@ class _ItemListPageState extends State<ItemListPage>
         index >= _listData.length) {
       return Container();
     }
-    return BlogArticleItem(_listData[index]);
+    return ArticleItemPage(_listData[index]);
   }
 
   Widget _buildLoadMoreItem() {
@@ -216,7 +216,7 @@ class _ItemListPageState extends State<ItemListPage>
   Future<Null> _loadListData(int page) {
     _haveMoreData = true;
     return widget.request(page).then((response) {
-      var newList = BlogListModel.fromJson(response.data).data.datas;
+      var newList = ArticleListModel.fromJson(response.data).data.datas;
       if (null != newList && newList.length > 0) {
         _listData.addAll(newList);
       } else {

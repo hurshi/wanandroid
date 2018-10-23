@@ -1,14 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'BlogListDataItemModel.dart';
+part of 'ArticleItemModel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-BlogListDataItemModel _$BlogListDataItemModelFromJson(
-    Map<String, dynamic> json) {
-  return BlogListDataItemModel(
+ArticleItemModel _$ArticleItemModelFromJson(Map<String, dynamic> json) {
+  return ArticleItemModel(
       json['apkLink'] as String,
       json['author'] as String,
       json['chapterId'] as int,
@@ -29,7 +28,7 @@ BlogListDataItemModel _$BlogListDataItemModelFromJson(
       (json['tags'] as List)
           ?.map((e) => e == null
               ? null
-              : BlogListDataItemTagModel.fromJson(e as Map<String, dynamic>))
+              : ArticleTagModel.fromJson(e as Map<String, dynamic>))
           ?.toList(),
       json['title'] as String,
       json['type'] as int,
@@ -38,8 +37,7 @@ BlogListDataItemModel _$BlogListDataItemModelFromJson(
       json['zan'] as int);
 }
 
-Map<String, dynamic> _$BlogListDataItemModelToJson(
-        BlogListDataItemModel instance) =>
+Map<String, dynamic> _$ArticleItemModelToJson(ArticleItemModel instance) =>
     <String, dynamic>{
       'apkLink': instance.apkLink,
       'author': instance.author,

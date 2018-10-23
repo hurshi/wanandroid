@@ -6,7 +6,7 @@ import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/model/project/ProjectClassifyItemModel.dart';
 import 'package:wanandroid/model/project/ProjectClassifyModel.dart';
-import 'package:wanandroid/pages/common/ItemListPage.dart';
+import 'package:wanandroid/pages/common/ArticleListPage.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
 
 class ProjectPage extends StatefulWidget {
@@ -78,7 +78,7 @@ class _ProjectPageState extends State<ProjectPage>
   }
 
   Widget _buildSinglePage(ProjectClassifyItemModel bean) {
-    return ItemListPage(
+    return ArticleListPage(
       keepAlive: _keepAlive(),
       request: (page) {
         return CommonService().getProjectListData((bean.url == null)

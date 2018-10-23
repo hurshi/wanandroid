@@ -1,18 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'TreeRootModel.dart';
+part of 'KnowledgeSystemsChildModel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-TreeRootModel _$TreeRootModelFromJson(Map<String, dynamic> json) {
-  return TreeRootModel(
-      (json['children'] as List)
-          ?.map((e) => e == null
-              ? null
-              : TreeSecondModel.fromJson(e as Map<String, dynamic>))
-          ?.toList(),
+KnowledgeSystemsChildModel _$KnowledgeSystemsChildModelFromJson(
+    Map<String, dynamic> json) {
+  return KnowledgeSystemsChildModel(
+      (json['children'] as List)?.map((e) => e as String)?.toList(),
       json['courseId'] as int,
       json['id'] as int,
       json['name'] as String,
@@ -21,7 +18,8 @@ TreeRootModel _$TreeRootModelFromJson(Map<String, dynamic> json) {
       json['visible'] as int);
 }
 
-Map<String, dynamic> _$TreeRootModelToJson(TreeRootModel instance) =>
+Map<String, dynamic> _$KnowledgeSystemsChildModelToJson(
+        KnowledgeSystemsChildModel instance) =>
     <String, dynamic>{
       'children': instance.children,
       'courseId': instance.courseId,

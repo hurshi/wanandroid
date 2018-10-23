@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/User.dart';
 import 'package:wanandroid/model/EmptyModel.dart';
-import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
+import 'package:wanandroid/model/article_list/ArticleItemModel.dart';
 
 class CollectUtil {
   static updateCollectState(
-      BuildContext context, BlogListDataItemModel model, Function callback) {
+      BuildContext context, ArticleItemModel model, Function callback) {
     if (!User().isLogin()) {
       callback(false, "收藏需要先登录哈");
     } else {
@@ -30,16 +30,16 @@ class CollectUtil {
     });
   }
 
-  static Future<Response> _collectInnerArticle(BlogListDataItemModel model) {
+  static Future<Response> _collectInnerArticle(ArticleItemModel model) {
     return CommonService().collectInArticles(model.id);
   }
 
-  static Future<Response> _collectOuterArticle(BlogListDataItemModel model) {
+  static Future<Response> _collectOuterArticle(ArticleItemModel model) {
     return CommonService()
         .collectOutArticles(model.title, model.author, model.link);
   }
 
-  static Future<Response> _unCollectArticle(BlogListDataItemModel model) {
+  static Future<Response> _unCollectArticle(ArticleItemModel model) {
     return CommonService().unCollectArticle(model.id);
   }
 }

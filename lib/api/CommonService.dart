@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:wanandroid/model/homebanner/HomeBannerModel.dart';
-import 'package:wanandroid/model/mpwechat/MpWechatModel.dart';
-import 'package:wanandroid/model/project/ProjectClassifyModel.dart';
-import 'package:wanandroid/model/tree/TreeModel.dart';
 import 'package:wanandroid/common/User.dart';
+import 'package:wanandroid/model/homebanner/HomeBannerModel.dart';
+import 'package:wanandroid/model/knowledge_systems/KnowledgeSystemsModel.dart';
+import 'package:wanandroid/model/project/ProjectClassifyModel.dart';
+import 'package:wanandroid/model/wechat/WeChatModel.dart';
 
 import 'Api.dart';
 
@@ -27,7 +27,7 @@ class CommonService {
       callback((response.data as List)
           ?.map((e) => e == null
               ? null
-              : MpWechatModel.fromJson(e as Map<String, dynamic>))
+              : WeChatModel.fromJson(e as Map<String, dynamic>))
           ?.toList());
     });
   }
@@ -38,7 +38,7 @@ class CommonService {
 
   void getTrees(Function callback) async {
     Dio().get(Api.TREES_LIST, options: _getOptions()).then((response) {
-      callback(TreeModel.fromJson(response.data));
+      callback(KnowledgeSystemsModel.fromJson(response.data));
     });
   }
 

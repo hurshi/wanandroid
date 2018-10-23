@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'BlogListModel.dart';
+part of 'ArticleListModel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-BlogListModel _$BlogListModelFromJson(Map<String, dynamic> json) {
-  return BlogListModel(
+ArticleListModel _$ArticleListModelFromJson(Map<String, dynamic> json) {
+  return ArticleListModel(
       json['data'] == null
           ? null
-          : BlogListDataModel.fromJson(json['data'] as Map<String, dynamic>),
+          : ArticleListDataModel.fromJson(json['data'] as Map<String, dynamic>),
       json['errorCode'] as int,
       json['errorMsg'] as String);
 }
 
-Map<String, dynamic> _$BlogListModelToJson(BlogListModel instance) =>
+Map<String, dynamic> _$ArticleListModelToJson(ArticleListModel instance) =>
     <String, dynamic>{
       'data': instance.data,
       'errorCode': instance.errorCode,

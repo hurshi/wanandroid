@@ -6,13 +6,13 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:wanandroid/common/CollectUtil.dart';
 import 'package:wanandroid/common/StringUtil.dart';
 import 'package:wanandroid/fonts/IconF.dart';
-import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
+import 'package:wanandroid/model/article_list/ArticleItemModel.dart';
 import 'package:wanandroid/widget/BackBtn.dart';
 
 class WebViewPage extends StatefulWidget {
   final String url;
   final String title;
-  final BlogListDataItemModel articleBean;
+  final ArticleItemModel articleBean;
 
   WebViewPage({this.url, this.title, this.articleBean});
 

@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:wanandroid/common/StringUtil.dart';
-import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
+import 'package:wanandroid/model/article_list/ArticleItemModel.dart';
 import 'package:wanandroid/widget/StrokeWidget.dart';
 import 'package:wanandroid/fonts/IconF.dart';
 
-class BlogArticleItem extends StatefulWidget {
-  final BlogListDataItemModel item;
+class ArticleItemPage extends StatefulWidget {
+  final ArticleItemModel item;
 
-  BlogArticleItem(this.item);
+  ArticleItemPage(this.item);
 
   @override
-  State<StatefulWidget> createState() => new _BlogArticleItemState();
+  State<StatefulWidget> createState() => new _ArticleItemPageState();
 }
 
-class _BlogArticleItemState extends State<BlogArticleItem> {
+class _ArticleItemPageState extends State<ArticleItemPage> {
   @override
   Widget build(BuildContext context) {
     //去掉html中的高亮
@@ -50,7 +50,7 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
     );
   }
 
-  Widget _buildListViewItem(BlogListDataItemModel item) {
+  Widget _buildListViewItem(ArticleItemModel item) {
     var widget = (null != item.envelopePic && item.envelopePic.isNotEmpty)
         ? Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -73,7 +73,7 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
     return widget;
   }
 
-  Widget _buildItemLeftSide(BlogListDataItemModel item) {
+  Widget _buildItemLeftSide(ArticleItemModel item) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -81,7 +81,7 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
     );
   }
 
-  List<Widget> _buildItemLeftColumns(BlogListDataItemModel item) {
+  List<Widget> _buildItemLeftColumns(ArticleItemModel item) {
     List<Widget> list = List();
     list.add(Text(
       item.title,
@@ -127,7 +127,7 @@ class _BlogArticleItemState extends State<BlogArticleItem> {
     return list;
   }
 
-  List<Widget> _buildTagsAndDate(BlogListDataItemModel item) {
+  List<Widget> _buildTagsAndDate(ArticleItemModel item) {
     List<Widget> list = List();
     item.tags?.forEach((tag) {
       list.add(StrokeWidget(

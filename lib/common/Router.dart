@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wanandroid/model/list_item/BlogListDataItemModel.dart';
+import 'package:wanandroid/model/article_list/ArticleItemModel.dart';
 import 'package:wanandroid/pages/login/LoginRegisterPage.dart';
 import 'package:wanandroid/pages/search/SearchDetailPage.dart';
 import 'package:wanandroid/pages/web/WebViewPage.dart';
@@ -14,7 +14,7 @@ class Router {
         }));
   }
 
-  openArticle(BuildContext context, BlogListDataItemModel item) {
+  openArticle(BuildContext context, ArticleItemModel item) {
     Navigator.of(context).push(PageRouteBuilder(
         transitionsBuilder: _transitionsBuilder,
         pageBuilder: (BuildContext context, _, __) {

@@ -8,7 +8,7 @@ import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:wanandroid/common/User.dart';
 import 'package:wanandroid/fonts/Iconf.dart';
-import 'package:wanandroid/pages/common/ItemListPage.dart';
+import 'package:wanandroid/pages/common/ArticleListPage.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
 
 class MinePage extends StatefulWidget {
@@ -21,7 +21,7 @@ class MinePage extends StatefulWidget {
 class _MinePageState extends State<MinePage> {
   double _screenWidth = MediaQueryData.fromWindow(ui.window).size.width;
   var _topFloatBtnShowing = false;
-  ItemListPage _itemListPage;
+  ArticleListPage _itemListPage;
   ScrollController _controller;
 
   @override
@@ -146,7 +146,7 @@ class _MinePageState extends State<MinePage> {
 
   Widget _buildMineBody() {
     if (null == _itemListPage) {
-      _itemListPage = ItemListPage(
+      _itemListPage = ArticleListPage(
         keepAlive: true,
         selfControl: false,
         showQuickTop: (show) {

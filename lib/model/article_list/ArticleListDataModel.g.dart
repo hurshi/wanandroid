@@ -1,18 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'BlogListDataModel.dart';
+part of 'ArticleListDataModel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-BlogListDataModel _$BlogListDataModelFromJson(Map<String, dynamic> json) {
-  return BlogListDataModel(
+ArticleListDataModel _$ArticleListDataModelFromJson(Map<String, dynamic> json) {
+  return ArticleListDataModel(
       json['curpage'] as int,
       (json['datas'] as List)
           ?.map((e) => e == null
               ? null
-              : BlogListDataItemModel.fromJson(e as Map<String, dynamic>))
+              : ArticleItemModel.fromJson(e as Map<String, dynamic>))
           ?.toList(),
       json['offset'] as int,
       json['over'] as bool,
@@ -21,7 +21,8 @@ BlogListDataModel _$BlogListDataModelFromJson(Map<String, dynamic> json) {
       json['total'] as int);
 }
 
-Map<String, dynamic> _$BlogListDataModelToJson(BlogListDataModel instance) =>
+Map<String, dynamic> _$ArticleListDataModelToJson(
+        ArticleListDataModel instance) =>
     <String, dynamic>{
       'curpage': instance.curpage,
       'datas': instance.datas,

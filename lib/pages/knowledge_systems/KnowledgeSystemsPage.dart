@@ -4,26 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/api/Api.dart';
 import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
-import 'package:wanandroid/model/tree/TreeModel.dart';
-import 'package:wanandroid/model/tree/TreeRootModel.dart';
-import 'package:wanandroid/model/tree/TreeSecondModel.dart';
-import 'package:wanandroid/pages/common/ItemListPage.dart';
+import 'package:wanandroid/model/knowledge_systems/KnowledgeSystemsChildModel.dart';
+import 'package:wanandroid/model/knowledge_systems/KnowledgeSystemsModel.dart';
+import 'package:wanandroid/model/knowledge_systems/KnowledgeSystemsParentModel.dart';
+import 'package:wanandroid/pages/common/ArticleListPage.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
 
-class TreePage extends StatefulWidget {
+class KnowledgeSystemsPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _TreePageState();
+    return _KnowledgeSystemsPageState();
   }
 }
 
-class _TreePageState extends State<TreePage>
+class _KnowledgeSystemsPageState extends State<KnowledgeSystemsPage>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   double _screenWidth = MediaQueryData.fromWindow(ui.window).size.width;
-  TreeModel _treeModel;
+  KnowledgeSystemsModel _treeModel;
   TabController tabControllerOutter;
   Map<int, TabController> tabControllerInnerMaps = Map();
-  TreeRootModel _currentTreeRootModel;
+  KnowledgeSystemsParentModel _currentTreeRootModel;
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _TreePageState extends State<TreePage>
   AppBar _buildTitle() {
     if (null == _appbar && null != _treeModel)
       _appbar = AppBar(
-        title: Text(GlobalConfig.treeTab),
+        title: Text(GlobalConfig.knowledgeSystemsTab),
         centerTitle: true,
         bottom: PreferredSize(
           child: _buildTitleTabs(),
@@ -102,7 +102,7 @@ class _TreePageState extends State<TreePage>
   }
 
   List<Widget> _buildRootTabs() {
-    return _treeModel.data?.map((TreeRootModel model) {
+    return _treeModel.data?.map((KnowledgeSystemsParentModel model) {
       return Tab(
         text: model?.name,
       );
@@ -113,7 +113,7 @@ class _TreePageState extends State<TreePage>
     return _treeModel.data?.map(_buildSingleSecondTitle)?.toList();
   }
 
-  Widget _buildSingleSecondTitle(TreeRootModel model) {
+  Widget _buildSingleSecondTitle(KnowledgeSystemsParentModel model) {
     if (null == model) {
       return EmptyHolder(
         msg: "Loading",
@@ -135,15 +135,15 @@ class _TreePageState extends State<TreePage>
     );
   }
 
-  List<Widget> _buildSecondTabs(TreeRootModel model) {
-    return model.children.map((TreeSecondModel model) {
+  List<Widget> _buildSecondTabs(KnowledgeSystemsParentModel model) {
+    return model.children.map((KnowledgeSystemsChildModel model) {
       return Tab(
         text: model?.name,
       );
     })?.toList();
   }
 
-  Widget _buildBody(TreeRootModel model) {
+  Widget _buildBody(KnowledgeSystemsParentModel model) {
     if (null == model) {
       return EmptyHolder(
         msg: "Loading",
@@ -159,12 +159,12 @@ class _TreePageState extends State<TreePage>
     );
   }
 
-  List<Widget> _buildPages(TreeRootModel model) {
+  List<Widget> _buildPages(KnowledgeSystemsParentModel model) {
     return model.children?.map(_buildSinglePage)?.toList();
   }
 
-  Widget _buildSinglePage(TreeSecondModel model) {
-    return ItemListPage(
+  Widget _buildSinglePage(KnowledgeSystemsChildModel model) {
+    return ArticleListPage(
       key: Key("${model.id}"),
       request: (page) {
         return CommonService().getTreeItemList(
@@ -174,7 +174,7 @@ class _TreePageState extends State<TreePage>
   }
 
   void _loadTreeList() async {
-    CommonService().getTrees((TreeModel _bean) {
+    CommonService().getTrees((KnowledgeSystemsModel _bean) {
       setState(() {
         _treeModel = _bean;
         _currentTreeRootModel = _treeModel.data[0];

@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'BlogListDataItemTagModel.dart';
+import 'ArticleTagModel.dart';
 
-part 'BlogListDataItemModel.g.dart';
+part 'ArticleItemModel.g.dart';
 
 @JsonSerializable()
-class BlogListDataItemModel {
+class ArticleItemModel {
   String apkLink;
   String author;
   int chapterId;
@@ -22,14 +22,14 @@ class BlogListDataItemModel {
   int publishTime;
   int superChapterId;
   String superChapterName;
-  List<BlogListDataItemTagModel> tags;
+  List<ArticleTagModel> tags;
   String title;
   int type;
   int userId;
   int visible;
   int zan;
 
-  BlogListDataItemModel(
+  ArticleItemModel(
       this.apkLink,
       this.author,
       this.chapterId,
@@ -54,10 +54,10 @@ class BlogListDataItemModel {
       this.visible,
       this.zan);
 
-  factory BlogListDataItemModel.fromJson(Map<String, dynamic> json) =>
-      _$BlogListDataItemModelFromJson(json);
+  factory ArticleItemModel.fromJson(Map<String, dynamic> json) =>
+      _$ArticleItemModelFromJson(json);
 
   Map<String, dynamic> toJson() {
-    return _$BlogListDataItemModelToJson(this);
+    return _$ArticleItemModelToJson(this);
   }
 }

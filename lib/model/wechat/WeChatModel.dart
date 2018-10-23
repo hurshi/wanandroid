@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'MpWechatModel.g.dart';
+part 'WeChatModel.g.dart';
 
 @JsonSerializable()
-class MpWechatModel {
+class WeChatModel {
   List<String> children;
   int courseId;
   int id;
@@ -13,13 +13,13 @@ class MpWechatModel {
   bool userControlSetTop;
   int visible;
 
-  MpWechatModel(this.children, this.courseId, this.id, this.name, this.order,
+  WeChatModel(this.children, this.courseId, this.id, this.name, this.order,
       this.parentChapterId, this.userControlSetTop, this.visible);
 
-  factory MpWechatModel.fromJson(Map<String, dynamic> json) =>
-      _$MpWechatModelFromJson(json);
+  factory WeChatModel.fromJson(Map<String, dynamic> json) =>
+      _$WeChatModelFromJson(json);
 
   Map<String, dynamic> toJson() {
-    return _$MpWechatModelToJson(this);
+    return _$WeChatModelToJson(this);
   }
 }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/model/homebanner/HomeBannerItemModel.dart';
 import 'package:wanandroid/model/homebanner/HomeBannerModel.dart';
-import 'package:wanandroid/pages/common/ItemListPage.dart';
+import 'package:wanandroid/pages/common/ArticleListPage.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage>
           )
         ],
       ),
-      body: ItemListPage(
+      body: ArticleListPage(
         header: _buildBanner(context),
         request: (page) {
           return CommonService().getArticleListData(page);

@@ -11,7 +11,7 @@ class GlobalConfig {
   ///导航
   static String homeTab = "博文";
   static String projectTab = "项目";
-  static String treeTab = "体系";
-  static String mpWechatTab = "公众号";
+  static String knowledgeSystemsTab = "体系";
+  static String weChatTab = "公众号";
   static String mineTab = "我";
 }

@@ -1,24 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'MpWechatModel.dart';
+part of 'KnowledgeSystemsParentModel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MpWechatModel _$MpWechatModelFromJson(Map<String, dynamic> json) {
-  return MpWechatModel(
-      (json['children'] as List)?.map((e) => e as String)?.toList(),
+KnowledgeSystemsParentModel _$KnowledgeSystemsParentModelFromJson(
+    Map<String, dynamic> json) {
+  return KnowledgeSystemsParentModel(
+      (json['children'] as List)
+          ?.map((e) => e == null
+              ? null
+              : KnowledgeSystemsChildModel.fromJson(e as Map<String, dynamic>))
+          ?.toList(),
       json['courseId'] as int,
       json['id'] as int,
       json['name'] as String,
       json['order'] as int,
       json['parentChapterId'] as int,
-      json['userControlSetTop'] as bool,
       json['visible'] as int);
 }
 
-Map<String, dynamic> _$MpWechatModelToJson(MpWechatModel instance) =>
+Map<String, dynamic> _$KnowledgeSystemsParentModelToJson(
+        KnowledgeSystemsParentModel instance) =>
     <String, dynamic>{
       'children': instance.children,
       'courseId': instance.courseId,
@@ -26,6 +31,5 @@ Map<String, dynamic> _$MpWechatModelToJson(MpWechatModel instance) =>
       'name': instance.name,
       'order': instance.order,
       'parentChapterId': instance.parentChapterId,
-      'userControlSetTop': instance.userControlSetTop,
       'visible': instance.visible
     };

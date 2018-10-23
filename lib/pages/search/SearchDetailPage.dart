@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
-import 'package:wanandroid/pages/common/ItemListPage.dart';
+import 'package:wanandroid/pages/common/ArticleListPage.dart';
 import 'package:wanandroid/widget/BackBtn.dart';
 import 'package:wanandroid/widget/ClearableInputField.dart';
 
@@ -14,14 +14,14 @@ class SearchDetailPage extends StatefulWidget {
 
 class _SearchDetailPageState extends State<SearchDetailPage> {
   String _key = "";
-  ItemListPage _itemListPage;
+  ArticleListPage _itemListPage;
   final String loadingMsg = "Search whatever you want";
   var _controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _itemListPage = ItemListPage(
+    _itemListPage = ArticleListPage(
         emptyMsg: "It's empty.",
         request: (page) {
           return CommonService().getSearchListData(_key, page);

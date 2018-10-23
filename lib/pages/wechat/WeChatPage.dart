@@ -3,21 +3,21 @@ import 'package:wanandroid/api/Api.dart';
 import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/fonts/Iconf.dart';
-import 'package:wanandroid/model/mpwechat/MpWechatModel.dart';
-import 'package:wanandroid/pages/common/ItemListPage.dart';
+import 'package:wanandroid/model/wechat/WeChatModel.dart';
+import 'package:wanandroid/pages/common/ArticleListPage.dart';
 import 'package:wanandroid/widget/ClearableInputField.dart';
 
-class MpWechatPage extends StatefulWidget {
+class WeChatPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _MpWechatPageState();
+    return _WeChatPageState();
   }
 }
 
-class _MpWechatPageState extends State<MpWechatPage>
+class _WeChatPageState extends State<WeChatPage>
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
-  List<MpWechatModel> _list = List();
-  Map<int, ItemListPage> _itemListPageMap = Map();
+  List<WeChatModel> _list = List();
+  Map<int, ArticleListPage> _itemListPageMap = Map();
   TabController _tabController;
   var _controller = TextEditingController();
   String _searchKey = "";
@@ -51,7 +51,7 @@ class _MpWechatPageState extends State<MpWechatPage>
 
   AppBar _buildNormalAppbar() {
     return AppBar(
-      title: Text(GlobalConfig.mpWechatTab),
+      title: Text(GlobalConfig.weChatTab),
       centerTitle: true,
       actions: <Widget>[
         IconButton(
@@ -119,7 +119,7 @@ class _MpWechatPageState extends State<MpWechatPage>
   }
 
   List<Widget> _buildTabs() {
-    return _list?.map((MpWechatModel _bean) {
+    return _list?.map((WeChatModel _bean) {
       return Tab(
         text: _bean?.name,
       );
@@ -129,7 +129,7 @@ class _MpWechatPageState extends State<MpWechatPage>
   List<Widget> _buildPages(BuildContext context) {
     return _list?.map((_bean) {
       if (!_itemListPageMap.containsKey(_bean.id)) {
-        _itemListPageMap[_bean.id] = ItemListPage(
+        _itemListPageMap[_bean.id] = ArticleListPage(
             key: Key("${_bean.id}"),
             keepAlive: _keepAlive(),
             emptyMsg: "臣妾搜不到呀",
@@ -152,7 +152,7 @@ class _MpWechatPageState extends State<MpWechatPage>
   }
 
   void _loadMpWechatNames() async {
-    CommonService().getMpWechatNames((List<MpWechatModel> list) {
+    CommonService().getMpWechatNames((List<WeChatModel> list) {
       if (list.length > 0) {
         setState(() {
           _updateState(list);
@@ -161,7 +161,7 @@ class _MpWechatPageState extends State<MpWechatPage>
     });
   }
 
-  void _updateState(List<MpWechatModel> list) {
+  void _updateState(List<WeChatModel> list) {
     _list = list;
     _tabController = TabController(length: _list.length, vsync: this);
     _tabController.addListener(() {
