@@ -48,7 +48,8 @@ class _ProjectPageState extends State<ProjectPage>
     if (_list.length <= 0) {
       return null;
     }
-    _tabbarController = TabController(length: _list.length, vsync: this);
+    if (null == _tabbarController)
+      _tabbarController = TabController(length: _list.length, vsync: this);
     return TabBar(
         controller: _tabbarController,
         labelColor: Colors.white,
