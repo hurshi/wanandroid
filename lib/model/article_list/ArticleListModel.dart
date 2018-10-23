@@ -1,6 +1,6 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:wanandroid/model/RootModel.dart';
 import 'package:wanandroid/model/article_list/ArticleListDataModel.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'ArticleListModel.g.dart';
 

@@ -4,7 +4,7 @@ import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/fonts/Iconf.dart';
 import 'package:wanandroid/model/wechat/WeChatModel.dart';
-import 'package:wanandroid/pages/common/ArticleListPage.dart';
+import 'package:wanandroid/pages/article_list/ArticleListPage.dart';
 import 'package:wanandroid/widget/ClearableInputField.dart';
 
 class WeChatPage extends StatefulWidget {

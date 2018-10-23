@@ -7,7 +7,7 @@ import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/model/knowledge_systems/KnowledgeSystemsChildModel.dart';
 import 'package:wanandroid/model/knowledge_systems/KnowledgeSystemsModel.dart';
 import 'package:wanandroid/model/knowledge_systems/KnowledgeSystemsParentModel.dart';
-import 'package:wanandroid/pages/common/ArticleListPage.dart';
+import 'package:wanandroid/pages/article_list/ArticleListPage.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
 
 class KnowledgeSystemsPage extends StatefulWidget {

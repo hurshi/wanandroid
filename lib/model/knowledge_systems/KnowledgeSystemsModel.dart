@@ -1,5 +1,6 @@
-import 'package:wanandroid/model/RootModel.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:wanandroid/model/RootModel.dart';
+
 import 'KnowledgeSystemsParentModel.dart';
 
 part 'KnowledgeSystemsModel.g.dart';

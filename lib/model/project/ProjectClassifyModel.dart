@@ -1,5 +1,5 @@
-import 'package:wanandroid/model/RootModel.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:wanandroid/model/RootModel.dart';
 import 'package:wanandroid/model/project/ProjectClassifyItemModel.dart';
 
 part 'ProjectClassifyModel.g.dart';

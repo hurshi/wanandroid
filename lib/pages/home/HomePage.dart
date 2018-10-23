@@ -1,15 +1,15 @@
 import 'dart:ui' as ui;
 
 import 'package:banner/banner.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/api/CommonService.dart';
+import 'package:wanandroid/common/GlobalConfig.dart';
+import 'package:wanandroid/common/Router.dart';
+import 'package:wanandroid/fonts/IconF.dart';
 import 'package:wanandroid/model/homebanner/HomeBannerItemModel.dart';
 import 'package:wanandroid/model/homebanner/HomeBannerModel.dart';
-import 'package:wanandroid/pages/common/ArticleListPage.dart';
-import 'package:wanandroid/common/Router.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:wanandroid/common/GlobalConfig.dart';
-import 'package:wanandroid/fonts/IconF.dart';
+import 'package:wanandroid/pages/article_list/ArticleListPage.dart';
 
 class HomePage extends StatefulWidget {
   @override

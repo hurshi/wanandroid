@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wanandroid/fonts/IconF.dart';
 
 class StrokeWidget extends StatelessWidget {
   final Color color;

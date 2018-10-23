@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'ArticleTagModel.dart';
 
 part 'ArticleItemModel.g.dart';

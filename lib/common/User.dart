@@ -1,10 +1,11 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/Sp.dart';
 import 'package:wanandroid/model/login/UserModel.dart';
-import 'dart:convert';
 import 'package:wanandroid/utils/DateUtil.dart';
-import 'package:dio/dio.dart';
-import 'dart:async';
 
 class User {
   String userName;

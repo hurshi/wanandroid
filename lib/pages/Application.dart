@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
+import 'package:wanandroid/common/User.dart';
+import 'package:wanandroid/fonts/IconF.dart';
 import 'package:wanandroid/pages/home/HomePage.dart';
 import 'package:wanandroid/pages/knowledge_systems/KnowledgeSystemsPage.dart';
 import 'package:wanandroid/pages/mine/MinePage.dart';
-import 'package:wanandroid/pages/wechat/WeChatPage.dart';
 import 'package:wanandroid/pages/project/ProjectPage.dart';
-import 'package:wanandroid/common/User.dart';
-import 'package:wanandroid/fonts/IconF.dart';
+import 'package:wanandroid/pages/wechat/WeChatPage.dart';
 
 class ApplicationPage extends StatefulWidget {
   @override

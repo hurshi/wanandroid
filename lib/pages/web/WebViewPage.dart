@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wanandroid/utils/CollectUtil.dart';
-import 'package:wanandroid/utils/StringUtil.dart';
 import 'package:wanandroid/fonts/IconF.dart';
 import 'package:wanandroid/model/article_list/ArticleItemModel.dart';
+import 'package:wanandroid/utils/CollectUtil.dart';
+import 'package:wanandroid/utils/StringUtil.dart';
 import 'package:wanandroid/widget/BackBtn.dart';
 
 class WebViewPage extends StatefulWidget {

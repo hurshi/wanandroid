@@ -6,7 +6,7 @@ import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/model/project/ProjectClassifyItemModel.dart';
 import 'package:wanandroid/model/project/ProjectClassifyModel.dart';
-import 'package:wanandroid/pages/common/ArticleListPage.dart';
+import 'package:wanandroid/pages/article_list/ArticleListPage.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
 
 class ProjectPage extends StatefulWidget {

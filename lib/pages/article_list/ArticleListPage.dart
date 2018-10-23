@@ -7,9 +7,8 @@ import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/fonts/Iconf.dart';
 import 'package:wanandroid/model/article_list/ArticleItemModel.dart';
 import 'package:wanandroid/model/article_list/ArticleListModel.dart';
+import 'package:wanandroid/pages/article_list/ArticleItemPage.dart';
 import 'package:wanandroid/widget/EmptyHolder.dart';
-
-import 'ArticleItemPage.dart';
 
 typedef Future<Response> RequestData(int page);
 typedef void ShowQuickTop(bool show);

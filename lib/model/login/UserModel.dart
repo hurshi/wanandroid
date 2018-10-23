@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wanandroid/model/RootModel.dart';
+
 import 'UserDetailModel.dart';
 
 part 'UserModel.g.dart';

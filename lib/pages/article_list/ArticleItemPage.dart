@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/common/Router.dart';
-import 'package:wanandroid/utils/StringUtil.dart';
-import 'package:wanandroid/model/article_list/ArticleItemModel.dart';
-import 'package:wanandroid/widget/StrokeWidget.dart';
 import 'package:wanandroid/fonts/IconF.dart';
+import 'package:wanandroid/model/article_list/ArticleItemModel.dart';
+import 'package:wanandroid/utils/StringUtil.dart';
+import 'package:wanandroid/widget/StrokeWidget.dart';
 
 class ArticleItemPage extends StatefulWidget {
   final ArticleItemModel item;
