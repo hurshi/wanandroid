@@ -39,7 +39,10 @@ class _WebViewState extends State<WebViewPage> {
   @override
   Widget build(BuildContext context) {
     return WebviewScaffold(
-//      headers: User().getHeader(),
+      scrollBar: true,
+      withZoom: true,
+      withLocalStorage: true,
+      withLocalUrl: true,
       url: widget.getUrl(),
       appBar: AppBar(
         title: Text(
