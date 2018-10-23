@@ -5,7 +5,7 @@ import 'package:wanandroid/pages/Application.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   return runApp(MyApp());
 }
 
