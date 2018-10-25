@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 
-class EmptyHolder extends StatefulWidget {
+class EmptyHolder extends StatelessWidget {
   final String msg;
 
   EmptyHolder({this.msg});
 
   @override
-  State<StatefulWidget> createState() => new _EmptyHolderState();
-}
-
-class _EmptyHolderState extends State<EmptyHolder> {
-  @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(null != widget.msg ? widget.msg : "Loading..."),
+      child: Text(null != msg ? msg : "Loading..."),
     );
   }
 }

@@ -37,24 +37,24 @@ class _KnowledgeSystemsPageState extends State<KnowledgeSystemsPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildTitle(),
+      appBar: AppBar(
+        title: Text(GlobalConfig.knowledgeSystemsTab),
+        centerTitle: true,
+        bottom: _buildTitleBottom(),
+      ),
       body: _buildBody(_currentTreeRootModel),
     );
   }
 
-  AppBar _appbar;
+  PreferredSize _appBarBottom;
 
-  AppBar _buildTitle() {
-    if (null == _appbar && null != _treeModel)
-      _appbar = AppBar(
-        title: Text(GlobalConfig.knowledgeSystemsTab),
-        centerTitle: true,
-        bottom: PreferredSize(
-          child: _buildTitleTabs(),
-          preferredSize: Size(_screenWidth, kToolbarHeight * 2),
-        ),
+  PreferredSize _buildTitleBottom() {
+    if (null == _appBarBottom && null != _treeModel)
+      _appBarBottom = PreferredSize(
+        child: _buildTitleTabs(),
+        preferredSize: Size(_screenWidth, kToolbarHeight * 2),
       );
-    return _appbar;
+    return _appBarBottom;
   }
 
   Widget _buildTitleTabs() {

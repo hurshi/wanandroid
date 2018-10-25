@@ -7,32 +7,27 @@ import 'package:wanandroid/model/article_list/ArticleItemModel.dart';
 import 'package:wanandroid/utils/StringUtil.dart';
 import 'package:wanandroid/widget/StrokeWidget.dart';
 
-class ArticleItemPage extends StatefulWidget {
+class ArticleItemPage extends StatelessWidget {
   final ArticleItemModel item;
 
   ArticleItemPage(this.item);
 
   @override
-  State<StatefulWidget> createState() => new _ArticleItemPageState();
-}
-
-class _ArticleItemPageState extends State<ArticleItemPage> {
-  @override
   Widget build(BuildContext context) {
     //去掉html中的高亮
-    widget.item.title = widget.item.title
+    item.title = item.title
         .replaceAll(RegExp("(<em[^>]*>)|(</em>)"), "")
         .replaceAll("&mdash;", "-");
 
-    widget.item.desc = (null == widget.item.desc)
+    item.desc = (null == item.desc)
         ? ""
-        : widget.item.desc
+        : item.desc
             .replaceAll(RegExp("\n{2,}"), "\n")
             .replaceAll(RegExp("\s{2,}"), " ");
 
     return GestureDetector(
       onTap: () {
-        Router().openArticle(context, widget.item);
+        Router().openArticle(context, item);
       },
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 2.5),
@@ -43,7 +38,7 @@ class _ArticleItemPageState extends State<ArticleItemPage> {
           elevation: 5.0,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-            child: _buildListViewItem(widget.item),
+            child: _buildListViewItem(item),
           ),
         ),
       ),
