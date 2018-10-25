@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:wanandroid/api/Api.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/common/Router.dart';
 import 'package:wanandroid/fonts/IconF.dart';
@@ -46,7 +47,9 @@ class ArticleItemPage extends StatelessWidget {
   }
 
   Widget _buildListViewItem(ArticleItemModel item) {
-    var widget = (null != item.envelopePic && item.envelopePic.isNotEmpty)
+    var widget = (null != item.envelopePic &&
+            item.envelopePic.isNotEmpty &&
+            !item.envelopePic.endsWith(Api.DEFAULT_PROJECT_IMG)) //默认图片就不显示了
         ? Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[

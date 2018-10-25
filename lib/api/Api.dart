@@ -29,4 +29,7 @@ class Api {
       "http://www.wanandroid.com/lg/collect/add/json";
   static final String UNCOLLECT_ARTICLE =
       "http://www.wanandroid.com/lg/uncollect_originId/";
+
+  static final String DEFAULT_PROJECT_IMG =
+      "wanandroid.com/resources/image/pc/default_project_img.jpg";
 }
