@@ -119,6 +119,7 @@ class _MinePageState extends State<MinePage> {
           elevation: 0.0,
           child: Text("OK"),
           color: Colors.transparent,
+          textColor: GlobalConfig.colorPrimary,
           onPressed: () {
             User().logout();
             User().refreshUserData(callback: () {
@@ -130,6 +131,7 @@ class _MinePageState extends State<MinePage> {
         RaisedButton(
           elevation: 0.0,
           color: Colors.transparent,
+          textColor: GlobalConfig.colorPrimary,
           child: Text("No No No"),
           onPressed: () {
             Navigator.pop(context);
