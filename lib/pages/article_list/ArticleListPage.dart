@@ -69,7 +69,7 @@ class ArticleListPageState extends State<ArticleListPage>
     if (itemCount <= 0) {
       return EmptyHolder(
         msg: (widget.emptyMsg == null)
-            ? (_haveMoreData ? "loading" : "not found")
+            ? (_haveMoreData ? "Loading" : "not found")
             : widget.emptyMsg,
       );
     }
@@ -151,7 +151,7 @@ class ArticleListPageState extends State<ArticleListPage>
     return Center(
       child: Padding(
         padding: EdgeInsets.all(10.0),
-        child: Text("loading ..."),
+        child: Text("Loading ..."),
       ),
     );
   }

@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage>
   Widget _buildBanner(BuildContext context) {
     if (null == _bannerData || _bannerData.length <= 0) {
       return Center(
-        child: Text("loading"),
+        child: Text("Loading"),
       );
     } else {
       double screenWidth = MediaQueryData.fromWindow(ui.window).size.width;
