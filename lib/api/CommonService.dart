@@ -24,11 +24,12 @@ class CommonService {
 
   void getWeChatNames(Function callback) async {
     Dio().get(Api.MP_WECHAT_NAMES, options: _getOptions()).then((response) {
-      callback((response.data as List)
-          ?.map((e) => e == null
-              ? null
-              : WeChatModel.fromJson(e as Map<String, dynamic>))
-          ?.toList());
+      callback(WeChatModel.fromJson(response.data));
+//      callback((response.data as List)
+//          ?.map((e) => e == null
+//              ? null
+//              : WeChatItemModel.fromJson(e as Map<String, dynamic>))
+//          ?.toList());
     });
   }
 

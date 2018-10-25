@@ -8,24 +8,18 @@ part of 'WeChatModel.dart';
 
 WeChatModel _$WeChatModelFromJson(Map<String, dynamic> json) {
   return WeChatModel(
-      (json['children'] as List)?.map((e) => e as String)?.toList(),
-      json['courseId'] as int,
-      json['id'] as int,
-      json['name'] as String,
-      json['order'] as int,
-      json['parentChapterId'] as int,
-      json['userControlSetTop'] as bool,
-      json['visible'] as int);
+      (json['data'] as List)
+          ?.map((e) => e == null
+              ? null
+              : WeChatItemModel.fromJson(e as Map<String, dynamic>))
+          ?.toList(),
+      json['errorCode'] as int,
+      json['errorMsg'] as String);
 }
 
 Map<String, dynamic> _$WeChatModelToJson(WeChatModel instance) =>
     <String, dynamic>{
-      'children': instance.children,
-      'courseId': instance.courseId,
-      'id': instance.id,
-      'name': instance.name,
-      'order': instance.order,
-      'parentChapterId': instance.parentChapterId,
-      'userControlSetTop': instance.userControlSetTop,
-      'visible': instance.visible
+      'data': instance.data,
+      'errorCode': instance.errorCode,
+      'errorMsg': instance.errorMsg
     };

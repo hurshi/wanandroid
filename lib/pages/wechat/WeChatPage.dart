@@ -4,6 +4,7 @@ import 'package:wanandroid/api/CommonService.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/common/Pair.dart';
 import 'package:wanandroid/fonts/IconF.dart';
+import 'package:wanandroid/model/wechat/WeChatItemModel.dart';
 import 'package:wanandroid/model/wechat/WeChatModel.dart';
 import 'package:wanandroid/pages/article_list/ArticleListPage.dart';
 import 'package:wanandroid/widget/ClearableInputField.dart';
@@ -17,7 +18,7 @@ class WeChatPage extends StatefulWidget {
 
 class _WeChatPageState extends State<WeChatPage>
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
-  List<WeChatModel> _list = List();
+  List<WeChatItemModel> _list = List();
   Map<int, Pair<ArticleListPage, GlobalKey<ArticleListPageState>>>
       _itemListPageMap = Map();
   TabController _tabController;
@@ -124,7 +125,7 @@ class _WeChatPageState extends State<WeChatPage>
   }
 
   List<Widget> _buildTabs() {
-    return _list?.map((WeChatModel _bean) {
+    return _list?.map((WeChatItemModel _bean) {
       return Tab(
         text: _bean?.name,
       );
@@ -160,16 +161,16 @@ class _WeChatPageState extends State<WeChatPage>
   }
 
   void _loadWeChatNames() async {
-    CommonService().getWeChatNames((List<WeChatModel> list) {
-      if (list.length > 0) {
+    CommonService().getWeChatNames((WeChatModel model) {
+      if (model.data.length > 0) {
         setState(() {
-          _updateState(list);
+          _updateState(model.data);
         });
       }
     });
   }
 
-  void _updateState(List<WeChatModel> list) {
+  void _updateState(List<WeChatItemModel> list) {
     _list = list;
     _tabController = TabController(length: _list.length, vsync: this);
     _tabController.addListener(() {
