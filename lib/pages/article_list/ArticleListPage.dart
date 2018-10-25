@@ -208,7 +208,7 @@ class ArticleListPageState extends State<ArticleListPage>
           }
         });
       }
-      _haveMoreData = originListLength > _listData.length;
+      _haveMoreData = originListLength != _listData.length;
     });
   }
 
