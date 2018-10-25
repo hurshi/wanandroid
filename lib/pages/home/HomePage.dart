@@ -65,20 +65,25 @@ class _HomePageState extends State<HomePage>
       return Container(
         height: screenWidth * 500 / 900,
         width: screenWidth,
-        child: BannerView(
-          data: _bannerData,
-          delayTime: 10,
-          onBannerClickListener: (int index, dynamic itemData) {
-            HomeBannerItemModel item = itemData;
-            Router().openWeb(context, item.url, item.title);
-          },
-          buildShowView: (index, data) {
-            return CachedNetworkImage(
-              fadeInDuration: Duration(milliseconds: 0),
-              fadeOutDuration: Duration(milliseconds: 0),
-              imageUrl: (data as HomeBannerItemModel).imagePath,
-            );
-          },
+        child: Card(
+          elevation: 5.0,
+          shape: Border(),
+          margin: EdgeInsets.all(0.0),
+          child: BannerView(
+            data: _bannerData,
+            delayTime: 10,
+            onBannerClickListener: (int index, dynamic itemData) {
+              HomeBannerItemModel item = itemData;
+              Router().openWeb(context, item.url, item.title);
+            },
+            buildShowView: (index, data) {
+              return CachedNetworkImage(
+                fadeInDuration: Duration(milliseconds: 0),
+                fadeOutDuration: Duration(milliseconds: 0),
+                imageUrl: (data as HomeBannerItemModel).imagePath,
+              );
+            },
+          ),
         ),
       );
     }
