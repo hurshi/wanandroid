@@ -3,14 +3,6 @@
 * `WanAndroid`官网：[wanandroid.com](http://wanandroid.com/)
 * `Api`:[`WanAndroid`开放`API`](http://wanandroid.com/blog/show/2)
 
-
-
-### ScreenShots
-![](sources/imgs/Screenshot_blog.png) |![](sources/imgs/Screenshot_blog_top.png) | ![](sources/imgs/Screenshot_search.png) 
-:-------------------------:|:-------------------------:|:-------------------------:
-![](sources/imgs/Screenshot_project.png)  |  ![](sources/imgs/Screenshot_wechat.png) |  ![](sources/imgs/Screenshot_wechat_search.png)
-![](sources/imgs/Screenshot_system.png)  |  ![](sources/imgs/Screenshot_mine.png) |  ![](sources/imgs/Screenshot_login.png)
-
 ### Download
 * `Android`: [APK 下载](https://github.com/hurshi/wanandroid/releases)
 * `iOS`: 不上AppStore要安装到设备比较麻烦，有需要的就自己编译使用吧。(我自己就是在iOS设备上使用的)
@@ -32,12 +24,21 @@
 	In Xcode, open Runner.xcworkspace in wanandroid/ios folder.
 	run...
 	```
+* `Font`:`App`中自定义了字体[NotoSansCJKsc](https://www.google.com/get/noto/)，导致软件增大了15M,若在意的话可以直接移除。
+
+
+### ScreenShots
+![](sources/imgs/Screenshot_blog.png) |![](sources/imgs/Screenshot_blog_top.png) | ![](sources/imgs/Screenshot_search.png) 
+:-------------------------:|:-------------------------:|:-------------------------:
+![](sources/imgs/Screenshot_project.png)  |  ![](sources/imgs/Screenshot_wechat.png) |  ![](sources/imgs/Screenshot_wechat_search.png)
+![](sources/imgs/Screenshot_system.png)  |  ![](sources/imgs/Screenshot_mine.png) |  ![](sources/imgs/Screenshot_login.png)
 
 
 ### Thanks
 * All the dependent libraries [pubspec.ymal](pubspec.yaml)
 * Thanks to [WanAndroid](http://wanandroid.com/)
 * Thanks for sara's [icon](sources/icon.ai) and [iconfont.cn](http://www.iconfont.cn/)
+* Thanks to [NotoSansCJKsc by Google](https://www.google.com/get/noto/)
 
 
 ### License
