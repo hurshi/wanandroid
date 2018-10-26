@@ -20,17 +20,17 @@
 * `Android`:[@ Flutter Android Release Page](https://flutter.io/android-release/)
 	
 	```
-		cd wanandroid/
-		flutter build apk
-		adb install build/app/outputs/apk/release/app-release.apk
+	cd wanandroid/
+	flutter build apk
+	adb install build/app/outputs/apk/release/app-release.apk
 	```
 * `iOS`:[@ Flutter iOS Release Page](https://flutter.io/ios-release/)
 		
 	```
-		cd wanandroid/
-		flutter build ios
-		In Xcode, open Runner.xcworkspace in wanandroid/ios folder.
-		run...
+	cd wanandroid/
+	flutter build ios
+	In Xcode, open Runner.xcworkspace in wanandroid/ios folder.
+	run...
 	```
 
 
