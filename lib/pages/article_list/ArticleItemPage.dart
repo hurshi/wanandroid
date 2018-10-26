@@ -23,6 +23,8 @@ class ArticleItemPage extends StatelessWidget {
     item.desc = (null == item.desc)
         ? ""
         : item.desc
+            .replaceAll(RegExp("(<em[^>]*>)|(</em>)"), "")
+            .replaceAll("&mdash;", "-")
             .replaceAll(RegExp("\n{2,}"), "\n")
             .replaceAll(RegExp("\s{2,}"), " ");
 
