@@ -1,5 +1,9 @@
 # WanAndroid
-* 一款使用Flutter编写的，Material Design风格的[WanAndroid](http://wanandroid.com/)客户端，
+* 一款使用[`Flutter`](https://github.com/flutter/flutter)编写的，[`Material Design`](https://flutter.io/widgets/material/)风格的[`WanAndroid`](http://wanandroid.com/)客户端，
+* `WanAndroid`官网：[wanandroid.com](http://wanandroid.com/)
+* `Api`:[`WanAndroid`开放`API`](http://wanandroid.com/blog/show/2)
+
+
 
 ### ScreenShots
 ![](sources/imgs/Screenshot_blog.png) |![](sources/imgs/Screenshot_blog_top.png) | ![](sources/imgs/Screenshot_search.png) 
@@ -8,9 +12,26 @@
 ![](sources/imgs/Screenshot_system.png)  |  ![](sources/imgs/Screenshot_mine.png) |  ![](sources/imgs/Screenshot_login.png)
 
 ### Download
-* Android: [apk 下载](https://github.com/hurshi/wanandroid/releases)
-* iOS: iOS比较麻烦，需要自己编译使用。(release版比debug版流畅甚多)
+* `Android`: [APK 下载](https://github.com/hurshi/wanandroid/releases)
+* `iOS`: 不上AppStore要安装到设备比较麻烦，有需要的就自己编译使用吧。(我自己就是在iOS设备上使用的)
+* 严重推荐使用`Release`版，要比`Debug`版流畅甚多
 
+### Build
+* `Android`:[@ Flutter Android Release Page](https://flutter.io/android-release/)
+	
+	```
+		cd wanandroid/
+		flutter build apk
+		adb install build/app/outputs/apk/release/app-release.apk
+	```
+* `iOS`:[@ Flutter iOS Release Page](https://flutter.io/ios-release/)
+		
+	```
+		cd wanandroid/
+		flutter build ios
+		In Xcode, open Runner.xcworkspace in wanandroid/ios folder.
+		run...
+	```
 
 
 ### Thanks
@@ -22,7 +43,7 @@
 ### License
 
    ```
-   Copyright 2018 Hurshi1
+   Copyright 2018 Hurshi
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
