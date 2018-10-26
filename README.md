@@ -5,8 +5,8 @@
 
 ### Download
 * `Android`: [APK 下载](https://github.com/hurshi/wanandroid/releases)
-* `iOS`: 不上AppStore要安装到设备比较麻烦，有需要的就自己编译使用吧。(我自己就是在iOS设备上使用的)
-* 严重推荐使用`Release`版，要比`Debug`版流畅甚多
+* `iOS`: 不上AppStore要安装到设备比较麻烦，有需要的就自己编译使用吧。(我自己就是在iOS设备上使用的😁)
+* 严重推荐编译使用`Release`版，要比`Debug`版流畅甚多
 
 ### Build
 * `Android`:[@ Flutter Android Release Page](https://flutter.io/android-release/)
