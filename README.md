@@ -24,7 +24,7 @@
 	In Xcode, open Runner.xcworkspace in wanandroid/ios folder.
 	run...
 	```
-* `Font`:`App`中自定义了字体[NotoSansCJKsc](https://www.google.com/get/noto/)，导致软件增大了15M,若在意的话可以直接移除。
+* `Font`:`App`中自定义了字体[NotoSansCJKsc](https://www.google.com/get/noto/)，导致软件增大了13MB,在意的话可以直接在[pubspec.ymal](pubspec.yaml)中移除。
 
 
 ### ScreenShots
@@ -33,6 +33,10 @@
 ![](sources/imgs/Screenshot_project.png)  |  ![](sources/imgs/Screenshot_wechat.png) |  ![](sources/imgs/Screenshot_wechat_search.png)
 ![](sources/imgs/Screenshot_system.png)  |  ![](sources/imgs/Screenshot_mine.png) |  ![](sources/imgs/Screenshot_login.png)
 
+### 来讲讲踩过的坑
+1. 使用`NestedScrollView`的话，里面的`ListView`不能设置`controller`,需要使用`NotificationListener`，见 [stackoverflow](https://stackoverflow.com/a/51017562)
+2. 在上面的基础上，没有了`controller`如何实现类似于`controller.animateTo()`的功能呢？，答案是直接使用外面那个`NestedScrollView`的`controller`
+3. `TabBarView`中嵌套`TabBarView`,在左右滑动子`TabBarView`的时候，当子`TabBarView`没得滑得时候，自动滑动父`TabBarView`。如何实现，我还没找到合适的方法，知情人士务必告知呀。
 
 ### Thanks
 * All the dependent libraries [pubspec.ymal](pubspec.yaml)
