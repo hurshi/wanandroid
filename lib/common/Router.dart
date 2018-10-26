@@ -7,37 +7,33 @@ import 'package:wanandroid/pages/web/WebViewPage.dart';
 
 class Router {
   openWeb(BuildContext context, String url, String title) {
-    Navigator.of(context).push(PageRouteBuilder(
-        transitionsBuilder: _transitionsBuilder,
-        pageBuilder: (BuildContext context, _, __) {
-          return WebViewPage(url: url, title: title);
-        }));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+      return WebViewPage(url: url, title: title);
+    }));
   }
 
   openArticle(BuildContext context, ArticleItemModel item) {
-    Navigator.of(context).push(PageRouteBuilder(
-        transitionsBuilder: _transitionsBuilder,
-        pageBuilder: (BuildContext context, _, __) {
-          return WebViewPage(
-            articleBean: item,
-          );
-        }));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+      return WebViewPage(
+        articleBean: item,
+      );
+    }));
   }
 
   openSearch(BuildContext context) {
-    Navigator.of(context).push(PageRouteBuilder(
-        transitionsBuilder: _transitionsBuilder,
-        pageBuilder: (BuildContext context, _, __) {
-          return SearchDetailPage();
-        }));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+      return SearchDetailPage();
+    }));
   }
 
   Future<PageRouteBuilder> openLogin(BuildContext context) {
-    return Navigator.of(context).push(PageRouteBuilder(
-        transitionsBuilder: _transitionsBuilder,
-        pageBuilder: (BuildContext context, _, __) {
-          return LoginRegisterPage();
-        }));
+    return Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+      return LoginRegisterPage();
+    }));
   }
 
   back(BuildContext context) {
