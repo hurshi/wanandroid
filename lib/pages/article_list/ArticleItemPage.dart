@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wanandroid/api/Api.dart';
 import 'package:wanandroid/common/GlobalConfig.dart';
 import 'package:wanandroid/common/Router.dart';
@@ -30,6 +31,7 @@ class ArticleItemPage extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
+        SystemChannels.textInput.invokeMethod('TextInput.hide');
         Router().openArticle(context, item);
       },
       child: Padding(
