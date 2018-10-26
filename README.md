@@ -2,9 +2,8 @@
 * 一款使用Flutter编写的，Material Design风格的[WanAndroid](http://wanandroid.com/)客户端，
 
 ### ScreenShots
-              |     |  
+![](sources/imgs/Screenshot_blog.png) |![](sources/imgs/Screenshot_blog_top.png) | ![](sources/imgs/Screenshot_search.png) 
 :-------------------------:|:-------------------------:|:-------------------------:
-![](sources/imgs/Screenshot_blog.png)  |  ![](sources/imgs/Screenshot_blog_top.png) |  ![](sources/imgs/Screenshot_search.png)
 ![](sources/imgs/Screenshot_project.png)  |  ![](sources/imgs/Screenshot_wechat.png) |  ![](sources/imgs/Screenshot_wechat_search.png)
 ![](sources/imgs/Screenshot_system.png)  |  ![](sources/imgs/Screenshot_mine.png) |  ![](sources/imgs/Screenshot_login.png)
 
