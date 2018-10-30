@@ -25,6 +25,7 @@
 	run...
 	```
 * `Font`:`App`中自定义了字体[NotoSansCJKsc](https://www.google.com/get/noto/)，导致软件增大了13MB,在意的话可以直接在[pubspec.ymal](pubspec.yaml)中移除。
+* 编译不通过的可以参考[issue 1](https://github.com/hurshi/wanandroid/issues/1),如果还没解决可以再提哈。
 
 
 ### ScreenShots
