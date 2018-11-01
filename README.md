@@ -9,6 +9,28 @@
 * 严重推荐编译使用`Release`版，要比`Debug`版流畅甚多
 
 ### Build
+* 我的运行环境(2018-11-01)：
+	1. 我本地`flutter`版本是`v0.10.2-pre.130`,在`flutter master branch`,[`flutte sdk-archive`](https://flutter.io/sdk-archive/#macos)
+	2. 如遇到[issue 1](https://github.com/hurshi/wanandroid/issues/1)中的问题，多半是因为版本号的问题，可以将本地`flutter`切换到`master`上去试试看。
+	3. `flutter doctor`
+	
+		```
+		➜  ~ flutter doctor
+		Doctor summary (to see all details, run flutter doctor -v):
+		[✓] Flutter (Channel master, v0.10.2-pre.130, on Mac OS X 10.14.1 ******, locale
+		    zh-Hans-HK)
+		[✓] Android toolchain - develop for Android devices (Android SDK 28.0.3)
+		[✓] iOS toolchain - develop for iOS devices (Xcode 10.1)
+		[✓] Android Studio (version 3.2)
+		[!] IntelliJ IDEA Ultimate Edition (version 2018.2.5)
+		    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+		    ✗ Dart plugin not installed; this adds Dart specific functionality.
+		[✓] VS Code (version 1.28.0)
+		[✓] Connected device (1 available)
+
+		! Doctor found issues in 1 category.
+
+		```
 * `Android`:[@ Flutter Android Release Page](https://flutter.io/android-release/)
 	
 	```
