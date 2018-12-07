@@ -91,7 +91,7 @@ packages:
       name: cached_network_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.0"
+    version: "0.5.1"
   charcode:
     dependency: transitive
     description:
@@ -126,7 +126,7 @@ packages:
       name: cookie_jar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.6"
+    version: "0.0.7"
   crypto:
     dependency: transitive
     description:
@@ -161,7 +161,7 @@ packages:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.6"
+    version: "1.0.9"
   fixnum:
     dependency: transitive
     description:
@@ -180,7 +180,7 @@ packages:
       name: flutter_cache_manager
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.0+1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -192,7 +192,7 @@ packages:
       name: flutter_webview_plugin
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1+2"
+    version: "0.3.0+2"
   front_end:
     dependency: transitive
     description:
@@ -477,7 +477,7 @@ packages:
       name: url_launcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.1"
+    version: "4.0.2"
   utf:
     dependency: transitive
     description:
