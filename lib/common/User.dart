@@ -65,21 +65,24 @@ class User {
   }
 
   void login({Function callback}) {
-    _saveUserInfo(CommonService().login(userName, password),
+    _saveUserInfo(CommonService().login(userName, password), userName, password,
         callback: callback);
   }
 
   void register({Function callback}) {
-    _saveUserInfo(CommonService().register(userName, password),
+    _saveUserInfo(
+        CommonService().register(userName, password), userName, password,
         callback: callback);
   }
 
-  void _saveUserInfo(Future<Response> responseF, {Function callback}) {
+  void _saveUserInfo(
+      Future<Response> responseF, String userName, String password,
+      {Function callback}) {
     responseF.then((response) {
       var userModel = UserModel.fromJson(response.data);
       if (userModel.errorCode == 0) {
-        Sp.putUserName(userModel.data.username);
-        Sp.putPassword(userModel.data.password);
+        Sp.putUserName(userName);
+        Sp.putPassword(password);
         String cookie = "";
         DateTime expires;
         response.headers.forEach((String name, List<String> values) {
