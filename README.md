@@ -9,44 +9,49 @@
 * 严重推荐编译使用`Release`版，要比`Debug`版流畅甚多
 
 ### Build
-* 我的运行环境(2018-11-01)：
-	1. 我本地`flutter`版本是`v0.10.2-pre.130`,在`flutter master branch`,[`flutte sdk-archive`](https://flutter.io/sdk-archive/#macos)
-	2. 如遇到[issue 1](https://github.com/hurshi/wanandroid/issues/1)中的问题，多半是因为版本号的问题，可以将本地`flutter`切换到`master`上去试试看。
-	3. `flutter doctor`
-	
-		```
-		➜  ~ flutter doctor
-		Doctor summary (to see all details, run flutter doctor -v):
-		[✓] Flutter (Channel master, v0.10.2-pre.130, on Mac OS X 10.14.1 ******, locale
-		    zh-Hans-HK)
-		[✓] Android toolchain - develop for Android devices (Android SDK 28.0.3)
-		[✓] iOS toolchain - develop for iOS devices (Xcode 10.1)
-		[✓] Android Studio (version 3.2)
-		[!] IntelliJ IDEA Ultimate Edition (version 2018.2.5)
-		    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
-		    ✗ Dart plugin not installed; this adds Dart specific functionality.
-		[✓] VS Code (version 1.28.0)
-		[✓] Connected device (1 available)
+* 我的运行环境(2019-03-17)：
+  1. 如遇到[issue 1](https://github.com/hurshi/wanandroid/issues/1)中的问题，多半是因为版本号的问题，可以将本地`flutter`切换到`master`上去试试看。
+  2. 我的`flutter doctor`
 
-		! Doctor found issues in 1 category.
+    ```
+    ➜  ~ flutter doctor
+    Doctor summary (to see all details, run flutter doctor -v):
+    [✓] Flutter (Channel master, v1.3.11-pre.37, on Mac OS X 10.14.3 ******, locale
+        zh-Hans-HK)
+    [✓] Android toolchain - develop for Android devices (Android SDK version 28.0.3)
+    [✓] iOS toolchain - develop for iOS devices (Xcode 10.1)
+    [!] Android Studio (version 3.3)
+        ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+        ✗ Dart plugin not installed; this adds Dart specific functionality.
+    [✓] Android Studio
+    [!] IntelliJ IDEA Ultimate Edition (version 2018.2.5)
+        ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+        ✗ Dart plugin not installed; this adds Dart specific functionality.
+    [✓] VS Code (version 1.31.1)
+    [✓] Connected device (3 available)
+    
+    ! Doctor found issues in 2 categories.
+    ```
 
-		```
-* `Android`:[@ Flutter Android Release Page](https://flutter.io/android-release/)
-	
-	```
-	cd wanandroid/
-	flutter build apk
-	adb install build/app/outputs/apk/release/app-release.apk
-	```
-* `iOS`:[@ Flutter iOS Release Page](https://flutter.io/ios-release/)
-		
-	```
-	cd wanandroid/
-	flutter build ios
-	In Xcode, open Runner.xcworkspace in wanandroid/ios folder.
-	run...
-	```
+* **Android**:[@ Flutter Android Release Page](https://flutter.dev/docs/deployment/android)
+
+  1. `cd wanandroid && flutter build apk`
+  2. `adb install build/app/outputs/apk/release/app-release.apk`
+
+* **iOS**:[@ Flutter iOS Release Page](https://flutter.dev/docs/deployment/ios)
+
+  1. `cd wanandroid && flutter build ios`
+
+  2. In Xcode, open Runner.xcworkspace in wanandroid/ios folder.
+
+  3. To ensure that Xcode refreshes the release mode configuration
+
+     In Xcode, go to `Product > Scheme > Edit Scheme`, then edit the "Run" scheme -- change the "Build Configuration" to "Release"  [Detail Link](https://github.com/flutter/flutter/issues/24641#issuecomment-442920402)
+
+  4. Then Run in Xcode
+
 * `Font`:`App`中自定义了字体[NotoSansCJKsc](https://www.google.com/get/noto/)，导致软件增大了13MB,在意的话可以直接在[pubspec.ymal](pubspec.yaml)中移除。
+
 * 编译不通过的可以参考[issue 1](https://github.com/hurshi/wanandroid/issues/1),如果还没解决可以再提哈。
 
 
