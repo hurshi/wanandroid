@@ -17,17 +17,8 @@ class ArticleItemPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //去掉html中的高亮
-    item.title = item.title
-        .replaceAll(RegExp("(<em[^>]*>)|(</em>)"), "")
-        .replaceAll("&mdash;", "-");
-
-    item.desc = (null == item.desc)
-        ? ""
-        : item.desc
-            .replaceAll(RegExp("(<em[^>]*>)|(</em>)"), "")
-            .replaceAll("&mdash;", "-")
-            .replaceAll(RegExp("\n{2,}"), "\n")
-            .replaceAll(RegExp("\s{2,}"), " ");
+    item.title = StringUtil.strClean(item.title);
+    item.desc = (null == item.desc) ? "" : StringUtil.strClean(item.desc);
 
     return GestureDetector(
       onTap: () {
