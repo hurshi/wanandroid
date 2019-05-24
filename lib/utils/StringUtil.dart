@@ -19,6 +19,12 @@ class StringUtil {
         .replaceAll("&permil;", "‰")
         .replaceAll("&lsaquo;", "‹")
         .replaceAll("&rsaquo;", "›")
-        .replaceAll("&euro;", "€");
+        .replaceAll("&euro;", "€")
+        
+        .replaceAll("<p>", "")
+        .replaceAll("</p>", "")
+        .replaceAll("</br>", "\n")
+        .replaceAll("<br>", "\n")
+        ;
   }
 }
