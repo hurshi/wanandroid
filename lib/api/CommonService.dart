@@ -62,7 +62,7 @@ class CommonService {
   }
 
   Future<Response> getSearchListData(String key, int page) async {
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       "k": "$key",
     });
     return await Dio().post("${Api.SEARCH_LIST}$page/json",
@@ -70,7 +70,7 @@ class CommonService {
   }
 
   Future<Response> login(String username, String password) async {
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       "username": "$username",
       "password": "$password",
     });
@@ -78,7 +78,7 @@ class CommonService {
   }
 
   Future<Response> register(String username, String password) async {
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       "username": "$username",
       "password": "$password",
       "repassword": "$password",
@@ -98,7 +98,7 @@ class CommonService {
 
   Future<Response> collectOutArticles(
       String title, String author, String link) async {
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       "title": "$title",
       "author": "$author",
       "link": "$link",
