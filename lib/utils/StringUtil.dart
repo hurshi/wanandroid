@@ -20,11 +20,15 @@ class StringUtil {
         .replaceAll("&lsaquo;", "‹")
         .replaceAll("&rsaquo;", "›")
         .replaceAll("&euro;", "€")
-        
         .replaceAll("<p>", "")
         .replaceAll("</p>", "")
         .replaceAll("</br>", "\n")
         .replaceAll("<br>", "\n")
-        ;
+        .replaceAll("&lt;", "<")
+        .replaceAll("&gt;", ">")
+        .replaceAll("&nbsp;", " ")
+        .replaceAll("&amp;", "&")
+        .replaceAll("&quot;", "\"")
+        .replaceAll("&yen;", "¥");
   }
 }

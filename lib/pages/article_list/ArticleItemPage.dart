@@ -78,10 +78,7 @@ class ArticleItemPage extends StatelessWidget {
     List<Widget> list = List();
     list.add(Text(
       item.title,
-      style: TextStyle(
-          fontSize: 16.0,
-          color: GlobalConfig.color_black,
-          fontWeight: FontWeight.w500),
+      style: TextStyle(fontSize: 16.0, color: GlobalConfig.color_black, fontWeight: FontWeight.w500),
       textAlign: TextAlign.left,
     ));
     if (item.desc.length > item.title.length) {
@@ -91,6 +88,11 @@ class ArticleItemPage extends StatelessWidget {
         style: TextStyle(color: GlobalConfig.color_dark_gray, fontSize: 13.0),
       ));
     }
+    var author = item.author;
+    if (null != author && author.length > 0) {
+      author = "@$author";
+    } else
+      author = "";
     list.add(Padding(
       padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
       child: Row(
@@ -102,9 +104,7 @@ class ArticleItemPage extends StatelessWidget {
             size: 13.0,
             color: GlobalConfig.color_dark_gray,
           ),
-          Text(" ${item.niceDate} @${item.author}",
-              style: TextStyle(
-                  color: GlobalConfig.color_dark_gray, fontSize: 13.0))
+          Text(" ${item.niceDate} $author", style: TextStyle(color: GlobalConfig.color_dark_gray, fontSize: 13.0))
         ],
       ),
     ));
@@ -129,10 +129,7 @@ class ArticleItemPage extends StatelessWidget {
           color: GlobalConfig.color_tags,
           childWidget: Text(
             tag.name,
-            style: TextStyle(
-                fontSize: 11.0,
-                color: GlobalConfig.color_tags,
-                fontWeight: FontWeight.w100),
+            style: TextStyle(fontSize: 11.0, color: GlobalConfig.color_tags, fontWeight: FontWeight.w100),
           )));
     });
     String chapterNameStr =
